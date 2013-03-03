@@ -1,0 +1,48 @@
+{% extends "main.html" %}
+
+
+
+{% block content %}
+ <article class="container">
+      
+    
+<div id="signup" class="accounts-form">
+  <h2>Create your free account</h2>
+
+  <form action="/signup" method="POST" autocomplete="off" class="clearfix" id="auth-form"><div style='display:none'><input type='hidden' name='csrfmiddlewaretoken' value='l3oYcBCSFFv7tOY1ChjvGNbhRhT6jXnh' /></div>
+  	<h3></h3>
+    <div class="all-errors">
+        
+    </div>
+      <div class="input">
+        <input id="id_username" type="text" placeholder="Username" name="username" maxlength="30" />
+        
+      </div>
+      <div class="input">
+        <input id="id_email" type="text" placeholder="Email" name="email" maxlength="75" />
+        
+        <div class="email_suggestion"></div>
+      </div>
+      <div class="input">
+        <input type="password" placeholder="Password" name="password" id="id_password" />
+      
+    </div>
+
+    <div class="actions clearfix">
+        
+            <input type="hidden" name="next" value="/welcome/" />
+        
+        <input type="submit" value="Create account" class="btn btn-green"/>
+    </div>
+</form>
+</div>
+
+<p class="note">Already have an account? <a href="/login/">Log in</a></p>
+
+
+
+      
+    
+       
+    </article> <!-- /container -->
+{% end %}
