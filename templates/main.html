@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0040)file:///C:/Users/lenovo/Desktop/sy1.html -->
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>{% block title %}Share your links with others! {% end %}| Shareit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif]-->
+
+      <link rel="stylesheet" href="../static/css/bootstrap-v2.css" type="text/css">
+  </head>
+  <body class="home home-new  logged-out">
+
+    <nav class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+            <a href="#" class="brand"><img src="../static/images/share.png" alt="Share" width="86" height="46"></a>
+            <div class="nav-collapse">
+              <ul class="nav actions">
+                  <li><a href="/login" data-target="#login-modal" data-link="modal">Log In</a></li>
+                  <li><a href="/signup" data-link="modal" data-target="#signup-modal">Sign Up</a></li>
+              </ul>
+              <!-- <ul class="nav">
+                <li><a href="#">Discover</a></li>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Blog</a></li>
+            </ul> -->
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+    </nav>
+
+{% block content %}
+<article class="container">
+    <div id="landing">
+      <div class="home-discover">
+          <div>
+              <div class="clearfix">
+                  <h2 style="text-align:center">What others are sharing.</h2>
+                  <div class="list-tabs" style="text-align:center; font-size:16px">
+                      <a href="#" class="active">Staff Picks</a> |
+                      <a href="#">Popular</a> |
+                      <a href="#">Recent</a>
+                  </div>
+                  {% set gcnt = 6 %}
+                {% for group in groups %}
+                    {% if gcnt > 0 %}
+                    {% set gcnt = gcnt - 1 %}
+                    <div class="list-widget"> 
+                        <!-- user image -->
+                         <a href="/user/{{group.user.id}}" title="{{ group.user.username }}">
+                            <img src="{{ static_url("images/avatar.png") }}" width="42" height="42" class="avatar" style="float:left"></a>
+                             <!-- list header --> 
+                             <div class="list-head"> 
+                                <h3><a href="/group/{{ group.id }}">{{ group.group_name }}</a></h3> 
+                                <div class="list-meta">by <a href="/user/{{group.user.id}}">{{group.user.username}}</a> - {{ group.follower_count }} followers</div>
+                                 <!-- <a href="" class="list-follow btn" data-api-uri="/api/lists/130354/">Follow</a> -->
+                                  </div> 
+                                  <!-- list --> 
+                                  <ul> 
+                                    {% set cnt = 3 %}
+                                    {% for li in group.links %} 
+                                        {% if cnt > 0 %}
+                                            <li>
+                                             <i class="fav" style="background-image:url();"></i> 
+                                             <div> 
+                                                <a href="/group/{{ group.id }}">{{ li.title }}</a>
+                                             </div> 
+                                            </li> 
+
+                                        {% set cnt = cnt - 1 %}
+                                        {% else %}
+                                            {% break %}
+                                        {% end %}
+                                   
+                                    {% end %}
+                                 <li><a href="/group/{{ group.id }}" class="list-view">View all {{ group.links_count }} clips</a></li> </ul></div>
+                            {% else %}
+                                {% break %}
+                            {% end %}
+                {% end %}
+                 
+            </div>
+        </div>
+    </div>
+</div>
+</article> <!-- /container -->
+{% end %}
+<footer>
+    <p>
+        <a href="#">About us</a>
+        <a href="#">Press</a>
+        <a href="#">Contact</a>
+        <a href="#" target="_blank">Blog</a>
+    </p>
+</footer>
+
+
+</body>
+</html>

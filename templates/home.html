@@ -1,0 +1,14 @@
+ {% extends "base.html" %}
+
+
+
+{% block content %}
+	<ul>
+		{% for group in groups %}
+			{% for l in group.links %}
+			  <li>{{ l.title }}</li>
+			  {% end %}
+		{% end %}
+	</ul>
+{% end %}
+

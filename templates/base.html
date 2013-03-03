@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+    <head>
+        <title>{% block page_title %}Home{% end %}</title>
+       
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <link rel="shortcut icon" href="/favicon.ico">
+        <link rel="stylesheet" href="{{ static_url("css/bootstrap.css") }}">
+        <link rel="stylesheet" href="{{ static_url("css/bootstrap-responsive.css") }}">
+    </head>
+
+    <body>
+        <div class="container">
+            <header>
+                {% block header %} header {% end %}
+            </header>
+
+            {% block content %}{% end %}
+            
+            {% block footer %}
+            <footer>
+                <hr>
+                <ul class="nav">
+                    <li>about</li>
+                    <li></li>
+                </ul>
+            </footer>
+            {% end %}
+
+        </div>
+
