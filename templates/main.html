@@ -6,10 +6,10 @@
     <meta charset="utf-8">
     <title>{% block title %}Share your links with others! {% end %}| Shareit</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% block script %} {% end %}
-    
 
-      <link rel="stylesheet" href=" {{ static_url("css/bootstrap-v2.css") }}" type="text/css">
+    <link rel="stylesheet" href=" {{ static_url("css/bootstrap-v2.css") }}" type="text/css">
+    {% block script %} {% end %}
+    {% block custom_css %} {% end %}
   </head>
   <body class="home home-new  logged-out">
 
