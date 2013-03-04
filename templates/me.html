@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    	<title>me</title>
+    	<meta name="description" content="Share is the best way to collect, share and discover interesting things on the web.">
+		<meta property="og:title" content="Share">
+		<meta property="og:type" content="website">
+		<meta property="og:image" content="{{static_url("images/share.png")}}">
+		<meta property="og:description" content="Share is the best way to collect, share and discover interesting things you find on the web.">
+		<meta property="fb:admins" content="603317924">
+    	<meta charset="utf-8">    
+        <meta name="google-site-verification" content="aTHx0fECngasT9jjBPd1v4U0rASSCH36eobTv3xqzA8">
+    	<meta name="author" content="Share">    
+    
+    	<link rel="stylesheet" href="{{static_url("css/me1.css")}}" type="text/css">
+		<link rel="stylesheet" href="{{static_url("css/me2.css")}}" type="text/css">
+	</head>
+<body class="app">
+	<div class="topbar">
+    	<div class="container"> 
+        <h3 class="logo"><a href="/" class="brand"><img src="{{static_url("images/share.png")}}" alt="Share" width="86" height="46"></a></h3>        
+        
+        <ul class="nav secondary-nav nav-discover"> 
+            <li class="nav-discover"><a href="https://kippt.com/discover/">Discover</a></li>
+        </ul> 
+        <form action="/search" method="get" id="search-form">
+            <input placeholder="Search your clips..." id="search" name="q" type="text"> 
+        </form>
+        <ul class="nav secondary-nav nav-user">
+            <li><a href="#">Discover Friends</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <span><img src="{{static_url("images/me.jpeg")}}" class="avatar" title="{{user.username}}" height="32" width="32"></span>
+                <span class="caret"></span></a>
+                
+                <ul class="dropdown-menu pull-right">
+                    <li class="username">{{user.username}}</li>
+                    
+                    <li><a href="#">Public Profile</a></li>
+                    <li><a href="#">Import</a></li> 
+                    <li><a href="#">Settings</a></li>
+                    <li><a href="#">Logout</a></li> 
+                </ul> 
+            </li>
+            
+        </ul>
+    	</div>
+	</div>
+   
+<div id="body" class="container">
+    <div class="clearfix">    
+		<div id="app">
+			<div class="row">
+    			<div id="sidebar" class="span3">
+        			<ul style="position: relative;" id="lists" class="unstyled">
+            			<li>
+            				<a href="file:///feed" class="list-link" data-link="push">
+            					<i class="icon icon-feed"></i>
+            					Feed
+            				</a>
+            			</li>
+            			<div id="system-lists">
+            				<li id="list-299357" class="list ui-droppable">
+            		
+            					<a href="file:///yybest123/inbox" data-list-slug="inbox" data-list-id="299357" data-link="push">
+            						<i class="icon icon-feed"></i>
+            						
+            						Inbox
+            					</a>
+            		
+            				</li>
+            			</div>
+            
+            			<div id="system-lists">
+            				<li class="list list-all">
+            	
+            					<a href="file:///yybest123/all" class="list-link type-all" data-list-slug="all" data-link="push">
+            						<i class="icon icon-feed"></i>
+            						All Links
+            					</a>
+            	
+            				</li>
+            			</div>
+            			<div class="ui-sortable" id="user-lists">
+                
+            				<li id="list-299358" class="list ui-droppable">
+            					<div class="list-link  owner public">
+            						<a href="file:///yybest123/design" data-list-slug="design" data-list-id="299358" data-link="push">
+            							<span></span>
+            							Group One
+            						</a>
+            					</div>
+            				</li>
+            				<li id="list-299359" class="list ui-droppable">
+            					<div class="list-link  owner public">
+            						<a href="file:///yybest123/awesome" data-list-slug="awesome" data-list-id="299359" data-link="push">
+            							<span></span>
+            							Group Two
+            						</a>
+            					</div>
+            				</li>
+            				<li id="list-299360" class="list ui-droppable">
+            					<div class="list-link  owner public">
+            						<a href="file:///yybest123/great-articles" data-list-slug="great-articles" data-list-id="299360" data-link="push">
+            							<span></span>
+            							Group Three
+            						</a>
+            					</div>
+            				</li>
+            			</div>
+            			<div id="new_list">
+                			<a href="" class="add-list">+ New Group</a>
+            
+        				</div>
+        			</ul>
+    			</div>
+    
+    			<div class="main span9">
+        
+        
+        
+        
+    			</div>
+    
+			</div>
+		</div>
+
+
+    </div>
+
+</div>
+
+</body>
+</html>
