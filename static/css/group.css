@@ -5942,7 +5942,7 @@ a.link {
 .public-share #clip-list .clip .clip-content .clip-title {
     font-family: "proxima-nova","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 18px;
-    width: 560px;
+    width: 500px;
 }
 .public-share #clip-list .clip .clip-content .domain .comment-count a:hover {
     color: #DD390D;
