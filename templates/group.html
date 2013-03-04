@@ -39,7 +39,7 @@
                             <i style="background-image:url('');" class="fav"></i>
                             <span>{{ link.url_domain }}</span>
                             <span>›</span>
-                            <span>added by <a title="{{ group.user.username }}" href="/{{ group.user_id }}">{{ group.user.username }}</a></span>
+                            <span>added by <a title="{{ group.user.username }}" href="/user/{{ group.user_id }}">{{ group.user.username }}</a></span>
                             <span class="comment-count"><a title="Comment" href="#"><i class="icon icon-comment"></i>
                             {% if link.comments_count > 0%}
                             	<strong> {{ link.comments_count }}</strong>
