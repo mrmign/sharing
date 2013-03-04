@@ -33,7 +33,7 @@ class ValidateHandler(BaseHandler):
         
         if user:
             self.render(
-                "app.html",user=user
+                "me.html",user=user
                 )
         else:
             self.render(
