@@ -1,48 +1,73 @@
 {% extends "main.html" %}
 
+{% block script %}
+  <script type="text/javascript">
+    function validate_required(field,alerttxt)
+    {
+      with (field)
+      {
+        if (value==null||value=="")
+          {alert(alerttxt);return false}
+        else {return true}
+      }
+    }
 
+    function validate_email(field,alerttxt)
+    {
+      with (field)
+      {
+        apos=value.indexOf("@")
+        dotpos=value.lastIndexOf(".")
+        if (apos<1||dotpos-apos<2) 
+          {alert(alerttxt);return false}
+        else {return true}
+      }
+    }
+
+    function validate_form(thisform)
+    {
+      with (thisform)
+      {
+        if (validate_required(username,"Username must be filled out!")==false)
+          {username.focus();return false}
+        if (validate_required(email,"Email must be filled out!")==false)
+          {email.focus();return false}
+        if (validate_email(email,"Not a valid e-mail address!")==false)
+          {email.focus();return false}
+        if (validate_required(password,"Password must be filled out!")==false)
+          {password.focus();return false}
+
+      }
+    }
+  </script>
+{% end %}
 
 {% block content %}
- <article class="container">
-      
-    
-<div id="signup" class="accounts-form">
-  <h2>Create your free account</h2>
+  <article class="container">
+    <div id="signup" class="accounts-form">
+      <h2>Create your free account</h2>
 
-  <form action="/signup" method="POST" autocomplete="off" class="clearfix" id="auth-form"><div style='display:none'><input type='hidden' name='csrfmiddlewaretoken' value='l3oYcBCSFFv7tOY1ChjvGNbhRhT6jXnh' /></div>
-  	<h3></h3>
-    <div class="all-errors">
-        
+      <form action="/validate" onsubmit="return validate_form(this)" method="GET" autocomplete="off" class="clearfix" id="auth-form">
+        <div class="all-errors">
+        </div>
+        <div class="input">
+          <input id="id_username" type="text" placeholder="Username" name="username" maxlength="30" />
+        </div>
+        <div class="input">
+          <input id="id_email" type="text" placeholder="Email" name="email" maxlength="75" />
+          
+          <div class="email_suggestion"></div>
+        </div>
+        <div class="input">
+          <input type="password" placeholder="Password" name="password" id="id_password" />
+        </div>
+
+        <div class="actions clearfix">
+          <input type="submit" value="Create account" class="btn btn-green"/>
+        </div>
+      </form>
     </div>
-      <div class="input">
-        <input id="id_username" type="text" placeholder="Username" name="username" maxlength="30" />
-        
-      </div>
-      <div class="input">
-        <input id="id_email" type="text" placeholder="Email" name="email" maxlength="75" />
-        
-        <div class="email_suggestion"></div>
-      </div>
-      <div class="input">
-        <input type="password" placeholder="Password" name="password" id="id_password" />
-      
-    </div>
 
-    <div class="actions clearfix">
-        
-            <input type="hidden" name="next" value="/welcome/" />
-        
-        <input type="submit" value="Create account" class="btn btn-green"/>
-    </div>
-</form>
-</div>
-
-<p class="note">Already have an account? <a href="/login/">Log in</a></p>
-
-
-
-      
-    
-       
-    </article> <!-- /container -->
+    <p class="note">Already have an account? <a href="/login/">Log in</a></p>
+  </article> <!-- /container -->
 {% end %}

@@ -3074,7 +3074,7 @@ footer .follow-buttons>div {
     background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#e65841),color-stop(1,#d73d2c));
     background-image:-webkit-linear-gradient(#e65841,#d73d2c)}
 .home {
-    background:url("../../img/home-bg-lib.jpg") center 80px no-repeat,url("") left 80px repeat-x;
+    background:url("../images/background.jpg") center 80px no-repeat,url("") left 80px repeat-x;
     padding-top:55px}
 .home article.container {
     margin-top:30px}

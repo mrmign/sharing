@@ -1,7 +1,6 @@
 {% extends "main.html" %}
 
 {% block script %}
-
 <script type="text/javascript">
 
 function validate_required(field,alerttxt)
@@ -9,13 +8,13 @@ function validate_required(field,alerttxt)
     with (field)
     {
         if (value==null||value=="")
-            {
-                alert(alerttxt);return false
-            }
+        {
+            alert(alerttxt);return false
+        }
         else 
-            {
-                return true
-            }
+        {
+            return true
+        }
     }
 }
 
@@ -31,46 +30,30 @@ function validate_form(thisform)
         {
             password.focus(); return false
         }
-  }
+    }
 }
 </script>
-
 {% end %}
 {% block content %}
-<article class="container">
-      
-    
-<div id="login" class="accounts-form">
-  
-  <h2>Log in to your account </h2>
-  
-     
-    
-   <form action="/validate" method="POST" id="auth-form" onsubmit="return validate_form(this)" name="login">
-    <h4 class="error_msg">{{ login_msg }}</h4>
-   
-    
-    
-    <div class="all-errors">
-        
+    <article class="container">
+        <div id="login" class="accounts-form">
+          <h2>Log in to your account </h2>
+          <form action="/validate" method="POST" id="auth-form" onsubmit="return validate_form(this)" name="login">
+            <h4 class="error_msg">{{ login_msg }}</h4>
+            <div class="all-errors">
+            </div>
+            <div class="input">
+                <input id="id_username" type="text" name="username" maxlength="75" placeholder="Username or email"  />
+            </div>
+            <div class="input">
+                <input type="password" name="password" id="id_password" placeholder="Password"  />
+            </div>
+            <div class="actions clearfix">
+                <input type="submit" value="Log In" class="btn btn-green"/>
+            </div>
+        </form>
     </div>
-      <div class="input">
-        <input id="id_username" type="text" name="username" maxlength="75" placeholder="Username or email"  />
-        
-      </div>
-      <div class="input">
-        <input type="password" name="password" id="id_password" placeholder="Password"  />
-        
-    </div>
-    <div class="actions clearfix">
-
-    <input type="submit" value="Log In" class="btn btn-green"/>
-
-    </div>
-    </form>
- 
-</div>
-<p class="note"><a href="/accounts/password/reset">Forgot your password?</a> &middot; Need an account? <a href="/signup">Sign up</a> </p>    
+    <p class="note"><a href="/accounts/password/reset">Forgot your password?</a> &middot; Need an account? <a href="/signup">Sign up</a> </p>    
 
     </article>
 {% end %}

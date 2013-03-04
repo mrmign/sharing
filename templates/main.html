@@ -7,19 +7,20 @@
     <title>{% block title %}Share your links with others! {% end %}| Shareit</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block script %} {% end %}
-   
-      <link rel="stylesheet" href="../static/css/bootstrap-v2.css" type="text/css">
+    
+
+      <link rel="stylesheet" href=" {{ static_url("css/bootstrap-v2.css") }}" type="text/css">
   </head>
   <body class="home home-new  logged-out">
 
     <nav class="navbar">
       <div class="navbar-inner">
         <div class="container">
-            <a href="#" class="brand"><img src="../static/images/share.png" alt="Share" width="86" height="46"></a>
+            <a href="/" class="brand"><img src="{{ static_url("images/share.png") }}" alt="Share" width="86" height="46"></a>
             <div class="nav-collapse">
               <ul class="nav actions">
-                  <li><a href="/login" data-target="#login-modal" data-link="modal">Log In</a></li>
-                  <li><a href="/signup" data-link="modal" data-target="#signup-modal">Sign Up</a></li>
+                  <li><a href="/login" >Log In</a></li>
+                  <li><a href="/signup">Sign Up</a></li>
               </ul>
               <!-- <ul class="nav">
                 <li><a href="#">Discover</a></li>
@@ -61,20 +62,20 @@
                                   <ul> 
                                     {% set cnt = 3 %}
                                     {% for li in group.links %} 
-                                        {% if cnt > 0 %}
-                                            <li>
-                                             <i class="fav" style="background-image:url();"></i> 
-                                             <div> 
-                                                <a href="/group/{{ group.id }}">{{ li.title }}</a>
-                                             </div> 
-                                            </li> 
+                                    {% if cnt > 0 %}
+                                    <li>
+                                     <i class="fav" style="background-image:url();"></i> 
+                                     <div> 
+                                      <a href="/group/{{ group.id }}">{{ li.title }}</a>
+                                    </div> 
+                                  </li> 
 
-                                        {% set cnt = cnt - 1 %}
-                                        {% else %}
-                                            {% break %}
-                                        {% end %}
-                                   
-                                    {% end %}
+                                  {% set cnt = cnt - 1 %}
+                                  {% else %}
+                                    {% break %}
+                                  {% end %}
+
+                                  {% end %}
                                  <li><a href="/group/{{ group.id }}" class="list-view">View all {{ group.links_count }} clips</a></li> </ul></div>
                             {% else %}
                                 {% break %}
