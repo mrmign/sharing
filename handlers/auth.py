@@ -8,8 +8,8 @@ from models.database import User
 
 class LoginHandler(BaseHandler):
     def get(self):
-        if self.current_user:
-            print self.current_user.id, self.current_user.username
+        # if self.current_user:
+        #     print self.current_user.id, self.current_user.username
         self.render("login.html",login_msg=" ")
 
     def post(self):
