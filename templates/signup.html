@@ -47,7 +47,7 @@
     <div id="signup" class="accounts-form">
       <h2>Create your free account</h2>
 
-      <form action="/validate" onsubmit="return validate_form(this)" method="GET" autocomplete="off" class="clearfix" id="auth-form">
+      <form action="/signup" onsubmit="return validate_form(this)" method="POST" autocomplete="off" class="clearfix" id="auth-form">
         <div class="all-errors">
         </div>
         <div class="input">
@@ -68,6 +68,6 @@
       </form>
     </div>
 
-    <p class="note">Already have an account? <a href="/login/">Log in</a></p>
+    <p class="note">Already have an account? <a href="/login">Log in</a></p>
   </article> <!-- /container -->
 {% end %}
