@@ -41,14 +41,16 @@ def gettag(content):
 # url = 'https://kippt.com/jg/javascript'
 # url = "https://kippt.com/joel/android-links-from-buffer"
 # url = "https://kippt.com/WebOlymp/jquery-plugins"
-url = "https://kippt.com/claytonnarcis/ios-tools-3rd-party-services"
+# url = "https://kippt.com/claytonnarcis/ios-tools-3rd-party-services"
+url = "https://kippt.com/jg/electronic-music"
+
 # print gethtml(url)
 html = gethtml(url)
 # print gettag(html)
 li = gettag(html)
 
 try:
-	fo = open("/home/arming/code/Sharing/linkvalue4.sql","w")
+	fo = open("linkvalue1-1.sql","w")
 except Exception, e:
 	print e
 sql = 'insert into link(title,url,url_domain,description,created,group_id) '\
@@ -83,7 +85,7 @@ for l in li:
 
 	# print sql.format(title,url,domain,note,date,1)
 	fo.write(sql.format(escape(title.encode("ascii","ignore"), True),url,\
-			domain,escape(note.encode("ascii","ignore"), True), date,4))
+			domain,escape(note.encode("ascii","ignore"), True), date,1))
 
 fo.close()
 print "done!!!"
