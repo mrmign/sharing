@@ -22,3 +22,12 @@ class MyLinksHandler(BaseHandler):
         #     print self.current_user.id, self.current_user.username
         self.render("mylinks.html",links=links,user=self.current_user)
     
+class MeGroupHandler(BaseHandler):
+    def get(self, groupid):
+        group = self.db.get(LinkGroup, int(groupid))
+        print group.links.count()
+        print group.group_name
+        for l in group.links:
+            print l.id
+        # group = AutoReload
+        self.render("megroup.html",group=group,user=self.current_user)
