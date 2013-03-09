@@ -11,6 +11,15 @@ class User(Storm):
 	password = Unicode()
 
 	groups = ReferenceSet("User.id", "LinkGroup.user_id")
+	followings = ReferenceSet("User.id", "Following.user_id")
+
+class Following(Storm):
+	__storm_table__="following"
+	id = Int(primary=True)
+	user_id = Int()
+	follower_id =Int()
+
+	# groups = ReferenceSet("Following.follower_id", "LinkGroup.user_id")
 
 class LinkGroup(Storm):
 	__storm_table__ = "linkgroup"
@@ -46,4 +55,3 @@ class Link(Storm):
 
 _database = create_database("mysql://root:root@localhost:3306/share")
 store = Store(_database)
-

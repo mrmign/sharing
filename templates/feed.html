@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    	<title>me</title>
+		<meta property="og:image" content="{{static_url("images/share.png")}}">
+		<meta property="og:description" content="Share is the best way to collect, share and discover interesting things you find on the web.">
+		<meta property="fb:admins" content="603317924">
+    	<meta charset="utf-8">    
+        <meta name="google-site-verification" content="aTHx0fECngasT9jjBPd1v4U0rASSCH36eobTv3xqzA8">
+    	<meta name="author" content="Share">    
+    
+    	<link rel="stylesheet" href="{{static_url("css/me1.css")}}" type="text/css">
+		<link rel="stylesheet" href="{{static_url("css/me2.css")}}" type="text/css">
+	</head>
+<body class="app">
+	<div class="topbar">
+    	<div class="container"> 
+        <h3 class="logo"><a href="/" class="brand"><img src="{{static_url("images/share.png")}}" alt="Share" width="86" height="46"></a></h3>
+        
+        <ul class="nav secondary-nav nav-discover"> 
+            <li class="nav-discover"><a href="#">Discover</a></li>
+        </ul> 
+        <form action="/search" method="get" id="search-form">
+            <input placeholder="Search your clips..." id="search" name="q" type="text"> 
+        </form>
+        <ul class="nav secondary-nav nav-user">
+            <li><a href="#">Discover Friends</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <span><img src="{{static_url("images/me.jpeg")}}" class="avatar" title="{{user.username}}" height="32" width="32"></span>
+                <span class="caret"></span></a>
+                
+                <ul class="dropdown-menu pull-right">
+                    <li class="username">{{user.username}}</li>
+                    
+                    <li><a href="#">Public Profile</a></li>
+                    <li><a href="#">Import</a></li> 
+                    <li><a href="#">Settings</a></li>
+                    <li><a href="/logout">Logout</a></li> 
+                </ul> 
+            </li>
+            
+        </ul>
+    	</div>
+	</div>
+   
+<div class="container" id="body">
+        <div class="clearfix row" id="app">
+            <div class="span3" id="sidebar">
+                <ul class="unstyled" id="lists" style="position: relative;">
+                    <li><a class="list-link" data-link="push" href="file:///feed">Feed</a></li>
+                    <li><a class="list-link" data-link="push" href="file:///feed">All Links</a></li>
+                    <li style="list-style: none; display: inline">
+                        <div id="system-lists">
+                        groups:
+                        {% for group in user.groups %}
+                            
+                                <ul>
+                                    <li class="list ui-droppable" id="list-299357"><a data-link="push"
+                                    data-list-id="299357" data-list-slug="inbox" href=
+                                    "/me/group/{{group.id}}">{{group.group_name}}</a></li>
+                                </ul>
+                            
+                         {% end %}
+                         </div> 
+                        <div id="new_list">
+                            <a class="add-list" href="">+ New Group</a>
+                        </div>
+                    </li>
+                </ul> 
+            </div>
+
+            <div class="main span9" id="feed" style="display: block;">
+                <h1>Your Feed</h1>
+        
+                <ul class="feed-list">
+                    <li>
+                        <div class="feed-clip feed-item">
+                            <a class="clip-save" data-title="Creative Finder - Illustrator Directory" data-url="http://thecreativefinder.com/" href="#">
+                                Save
+                            </a>
+                            <div class="clip-save-popup">
+                            </div>
+                            <a href="/lenkendall" title="lenkendall">
+                                <img class="avatar" src="https://secure.gravatar.com/avatar/54ca5e58bd3b2a99d2ace0a675fc82eb/?default=https%3A%2F%2Fs3.amazonaws.com%2Fkippt-static%2Fimg%2Fdefault-avatar.jpg&amp;s=160">
+                            </a>
+
+                            <div class="feed-event">
+                                <a href="/lenkendall">
+                                    lenkendall
+                                </a> 
+                                added to list 
+                                <a href="/lenkendall/interneting">
+                                    Interneting
+                                </a> 
+                                <span class="timestamp">
+                                    <abbr class="timeago" title="2013-02-28T12:45:03.000Z">
+                                        5 days ago
+                                    </abbr>
+                                </span>
+                            </div>
+
+                            <div class="feed-content">
+                                <a class="feed-title" href="http://thecreativefinder.com/" target="_blank">     Creative Finder - Illustrator Directory
+                                </a>
+
+                                <div class="notes">
+                                    <a class="clip-link" href="/lenkendall/interneting/clips/11346646">
+                                    </a>
+
+                                    <div class="content">
+                                        Browse online creative portfolios for collaboration,
+                                        content, and inspiration - The Creative Finder
+                                    </div>
+                                </div>
+
+                                <div class="feed-actions">
+                                    <span>
+                                        thecreativefinder.com
+                                    </span> 
+                                    <span>
+                                        <a class="clip-link comment" data-link="push" href="/lenkendall/interneting/clips/11346646"> 
+                                            Comment
+                                        </a>
+                                    </span>
+                                    <span>
+                                        <a class="clip-like liked" href="#"> 
+                                            <span>
+                                                1
+                                            Like
+                                            </span>
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="feed-comments">
+                                <div class="all-comments">
+                                    <a class="clip-link" data-link="push" href="">
+                                        View all 0
+                                        comments
+                                    </a>
+                                </div>
+
+                                <div class="reply">
+                                    <form class="add-comment">
+                                        <img class="avatar" src="https://secure.gravatar.com/avatar/25651b9573802cf7e067537473e18164/?default=https%3A%2F%2Fs3.amazonaws.com%2Fkippt-static%2Fimg%2Fdefault-avatar.jpg&amp;s=160"width="32"> <input placeholder="Leave a comment..." type="text">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+   
+</div>
+<script src="{{static_url("js/jquery.js")}}"></script>
+<script src="{{static_url("js/bootstrap.min.js")}}"></script>
+</body>
+</html>

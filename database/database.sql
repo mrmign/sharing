@@ -9,6 +9,13 @@ CREATE TABLE user (
 	password varchar(100) NOT NULL 
 );
 
+DROP TABLE IF EXISTS following;
+CREATE TABLE following (
+	id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	user_id int NOT NULL REFERENCES user(id),
+	follower_id int NOT NULL REFERENCES user(id)
+);
+
 DROP TABLE IF EXISTS linkgroup;
 CREATE TABLE linkgroup (
 	id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
