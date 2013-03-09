@@ -1,0 +1,130 @@
+{% extends "me.html" %}
+
+{% block content %}
+<div id="clips" style="display: block;">
+	<div class="clearfix">
+    	<div id="list-info">
+			<h3 class="name" title="{{group.group_name}}}">
+    			{{group.group_name}}
+   				 <small>
+   				 	<a href="#" target="_blank" title="View the public list">
+   				 		Public
+   				 	</a>
+   				 </small>
+			</h3>
+			<ul class="list-actions unstyled">
+    			<li class="btn-group">
+        			<a class="btn dropdown-toggle settings" data-toggle="dropdown" href="#">
+            			<i>
+            			</i>
+            			<span class="caret">
+            			</span>
+        			</a>
+        			<ul class="dropdown-menu pull-right">
+            			<li>
+            				<a href="#" class="rss" title="List RSS feed">
+            					RSS
+            				</a>
+            			</li>
+            			<li>
+            				<a href="#" class="edit">
+            					Edit
+            				</a>
+            			</li>
+            			<li>
+            				<a href="#" class="delete">
+            					Delete
+            				</a>
+            			</li>
+        			</ul>
+    			</li>
+    			<li>
+    				<a href="#" class="share btn">
+    					<i>
+    					</i>
+    					Invite
+    				</a>
+    			</li>
+    		</ul>
+    	</div>
+    	<div id="new-clip">
+    		<input placeholder="Add a link..." type="text">
+    	</div>
+	</div>
+	<div id="clips-container">
+		<ul style="display: block;" id="clip-list" class="unstyled">
+			{% for link in group.links %}
+			<li data-cid="c24" class="clip ui-draggable">
+				<div class="display">
+					<div class="clip-content">
+        				<div class="drag">
+        				</div>
+        				<span class="clip-date">
+        					<i class="icon icon-date">
+        					</i> 
+        					{{ link.created }}
+        				</span>
+                		<a rel="nofollow" class="clip-title" target="_blank" href="{{ link.url }}">
+                			{{ link.title }}
+               			 </a>
+                		<p class="domain">
+                			<i class="fav" style="background-image:url('');">
+                			</i>
+                			<span>
+                				{{ link.url_domain }}
+                			</span>
+                			<span>
+                				· <span class="comment-count">
+                					<a href="" title="Comment">
+                						<i class="icon icon-comment">
+                						</i>
+                						Add comment
+                					</a>
+                    			</span>
+            				</span>
+            				<span>
+            					<a href="#" class="clip-like isOwn" rel="tooltip" title="You can't like your own clip">
+            						<i class="icon icon-like">
+            						</i>
+            						<span>
+            							Like
+            						</span>
+            					</a>
+            				</span>
+        				</p>
+    				</div>
+    				<ul class="actions">
+        				<li class="clip-reader">
+        					<a href="" rel="tooltip" title="View in Reader">
+        						Reader
+        					</a>
+        				</li>
+        				<li class="clip-edit">
+        					<a href="" rel="tooltip" title="Edit">
+        						Edit
+        					</a>
+        				</li>
+        				<li class="clip-read-later ">
+        					<a href="" rel="tooltip" title="Mark as Read Later">
+        						Read Later
+        					</a>
+        				</li>
+        				<li class="clip-star">
+        					<a href="" rel="tooltip" title="Star">
+        						Star
+        					</a>
+        				</li>
+        				<li class="clip-destroy">
+        					<a href="" rel="tooltip" title="Remove">
+        						×
+        					</a>
+        				</li>
+    				</ul>
+    			</div>
+    		</li>
+    		{% end %}
+    	</ul>
+    </div>
+ </div>
+{% end %}
+

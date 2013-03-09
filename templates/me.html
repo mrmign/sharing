@@ -45,79 +45,37 @@
     	</div>
 	</div>
    
-<div id="body" class="container">
-    <div class="clearfix">    
-		<div id="app">
-			<div class="row">
-    			<div id="sidebar" class="span3">
-        			<ul style="position: relative;" id="lists" class="unstyled">
-            			<li>
-            				<a href="file:///feed" class="list-link" data-link="push">
-            					<i class="icon icon-feed"></i>
-            					Feed
-            				</a>
-            			</li>
-            			<div id="system-lists">
-            				<li id="list-299357" class="list ui-droppable">
-            		
-            					<a href="/me/group/group_id" data-list-slug="inbox" data-list-id="299357" data-link="push">
-            						<i class="icon icon-feed"></i>
-            						
-            						Inbox
-            					</a>
-            		
-            				</li>
-            			</div>
-            
-            			<div id="system-lists">
-            				<li class="list list-all">
-            	
-            					<a href="file:///yybest123/all" class="list-link type-all" data-list-slug="all" data-link="push">
-            						<i class="icon icon-feed"></i>
-            						All Links
-            					</a>
-            	
-            				</li>
-            			</div>
-            			<div class="ui-sortable" id="user-lists">
-                
-            				<li id="list-299358" class="list ui-droppable">
-            					<div class="list-link  owner public">
-            						<a href="file:///yybest123/design" data-list-slug="design" data-list-id="299358" data-link="push">
-            							<span></span>
-            							Group One
-            						</a>
-            					</div>
-            				</li>
-            				<li id="list-299359" class="list ui-droppable">
-            					<div class="list-link  owner public">
-            						<a href="file:///yybest123/awesome" data-list-slug="awesome" data-list-id="299359" data-link="push">
-            							<span></span>
-            							Group Two
-            						</a>
-            					</div>
-            				</li>
-            				<li id="list-299360" class="list ui-droppable">
-            					<div class="list-link  owner public">
-            						<a href="file:///yybest123/great-articles" data-list-slug="great-articles" data-list-id="299360" data-link="push">
-            							<span></span>
-            							Group Three
-            						</a>
-            					</div>
-            				</li>
-            			</div>
-            			<div id="new_list">
-                			<a href="" class="add-list">+ New Group</a>
-            
-        				</div>
-        			</ul>
-    			</div>
+<div class="container" id="body">
+        <div class="clearfix row" id="app">
+            <div class="span3" id="sidebar">
+                <ul class="unstyled" id="lists" style="position: relative;">
+                    <li><a class="list-link" data-link="push" href="file:///feed">Feed</a></li>
+                    <li><a class="list-link" data-link="push" href="file:///feed">All Links</a></li>
+                    <li style="list-style: none; display: inline">
+                        <div id="system-lists">
+                        groups:
+                        {% for group in user.groups %}
+                            
+                                <ul>
+                                    <li class="list ui-droppable" id="list-299357"><a data-link="push"
+                                    data-list-id="299357" data-list-slug="inbox" href=
+                                    "/me/group/{{group.id}}">{{group.group_name}}</a></li>
+                                </ul>
+                            
+                         {% end %}
+                         </div> 
+                        <div id="new_list">
+                            <a class="add-list" href="">+ New Group</a>
+                        </div>
+                    </li>
+                </ul> 
+            </div>
     
     			<div class="main span9">
-        
-        
-        
-        
+                {% block content %}
+
+
+                {% end %}
     			</div>
     
 			</div>
