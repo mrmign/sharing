@@ -29,7 +29,7 @@ class LoginHandler(BaseHandler):
 
 class SignupHandler(BaseHandler):
     def get(self):
-        self.render("signup.html")
+        self.render("signup.html", signup_msg="")
 
     def post(self):
         username = self.get_argument('username')
@@ -43,12 +43,12 @@ class SignupHandler(BaseHandler):
             user = User()
             user.username = username
             user.email = email
-            user.password = password
+            user.password = password 
             self.db.add(user)
             self.db.commit()
             self.render("login.html", login_msg="signup successfully,please login!")
         else:
-            self.render("signup.html")
+            self.render("signup.html", signup_msg="your username or email has existed,please print again")
 
 class LogoutHandler(BaseHandler):
     def get(self):
