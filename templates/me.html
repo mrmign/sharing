@@ -18,14 +18,14 @@
     	<div class="container"> 
         <h3 class="logo"><a href="/" class="brand"><img src="{{static_url("images/share.png")}}" alt="Share" width="86" height="46"></a></h3>
         
-        <ul class="nav secondary-nav nav-discover"> 
-            <li class="nav-discover"><a href="#">Discover</a></li>
-        </ul> 
+        
         <form action="/search" method="get" id="search-form">
             <input placeholder="Search your clips..." id="search" name="q" type="text"> 
         </form>
         <ul class="nav secondary-nav nav-user">
-            <li><a href="#">Discover Friends</a></li>
+            <li><a href="/staff_picks">Staff Picks</a></li>
+            <li><a href="/popular_groups">Popular groups</a></li>
+            <li><a href="/recent_links">Recent links</a></li>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <span><img src="{{static_url("images/me.jpeg")}}" class="avatar" title="{{user.username}}" height="32" width="32"></span>
@@ -46,16 +46,18 @@
 	</div>
    
 <div class="container" id="body">
-        <div class="clearfix" id="app">
-            <div class="row">
-                <div class="span3" id="sidebar">
-                    <ul class="unstyled" id="lists" style="position: relative;">
-                        <li><a class="list-link" data-link="push" href="/feed">Feed</a></li>
-                        <li><a class="list-link" data-link="push" href="/mylinks">All Links</a></li>
-                        <li style="list-style: none; display: inline">
-                            <div id="system-lists">
-                                groups:
-                                {% for g in user.groups %}
+        <div class="clearfix row" id="app">
+            <div class="span3" id="sidebar">
+                <ul class="unstyled" id="lists" style="position: relative;">
+                    <li><a class="list-link" data-link="push" href="/feed">Feed</a></li>
+                    <li><a class="list-link" data-link="push" href="/mylinks">All Links</a></li>
+                    <li><a class="list-link" data-link="push" href="/following">Following</a></li>
+                    <li><a class="list-link" data-link="push" href="/follower">Follower</a></li>
+                    <li style="list-style: none; display: inline">
+                        <div id="system-lists">
+                        groups:
+                        {% for g in user.groups %}
+                            
                                 <ul>
                                     <li class="list ui-droppable" id="list-299357">
                                         <a data-link="push"
@@ -67,7 +69,7 @@
                                 {% end %}
                             </div> 
                             <div id="new_list">
-                                <a class="add-list" href="">+ New Group</a>
+                                <a class="add-list" href="/me/newgroup">+ New Group</a>
                             </div>
                         </li>
                     </ul> 
