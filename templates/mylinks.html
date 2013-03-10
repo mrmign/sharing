@@ -1,81 +1,7 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    	<title>{{user.username}}'s links | Sharing Links!</title>
-		<meta property="og:image" content="{{static_url("images/share.png")}}">
-		<meta property="og:description" content="Share is the best way to collect, share and discover interesting things you find on the web.">
-		<meta property="fb:admins" content="603317924">
-    	<meta charset="utf-8">    
-        <meta name="google-site-verification" content="aTHx0fECngasT9jjBPd1v4U0rASSCH36eobTv3xqzA8">
-    	<meta name="author" content="Share">    
-    
-    	<link rel="stylesheet" href="{{static_url("css/me1.css")}}" type="text/css">
-		<link rel="stylesheet" href="{{static_url("css/me2.css")}}" type="text/css">
-	</head>
-<body class="app">
-	<div class="topbar">
-    	<div class="container"> 
-        <h3 class="logo"><a href="/" class="brand"><img src="{{static_url("images/share.png")}}" alt="Share" width="86" height="46"></a></h3>
-        
-        <ul class="nav secondary-nav nav-discover"> 
-            <li class="nav-discover"><a href="#">Discover</a></li>
-        </ul> 
-        <form action="/search" method="get" id="search-form">
-            <input placeholder="Search your clips..." id="search" name="q" type="text"> 
-        </form>
-        <ul class="nav secondary-nav nav-user">
-            <li><a href="#">Discover Friends</a></li>
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <span><img src="{{static_url("images/me.jpeg")}}" class="avatar" title="{{user.username}}" height="32" width="32"></span>
-                <span class="caret"></span></a>
-                
-                <ul class="dropdown-menu pull-right">
-                    <li class="username">{{user.username}}</li>
-                    
-                    <li><a href="#">Public Profile</a></li>
-                    <li><a href="#">Import</a></li> 
-                    <li><a href="#">Settings</a></li>
-                    <li><a href="/logout">Logout</a></li> 
-                </ul> 
-            </li>
-            
-        </ul>
-    	</div>
-	</div>
-   
-<div class="container" id="body">
-        <div class="clearfix row" id="app">
-            <div class="span3" id="sidebar">
-                <ul class="unstyled" id="lists" style="position: relative;">
-                    <li><a class="list-link" data-link="push" href="file:///feed">Feed</a></li>
-                    <li><a class="list-link" data-link="push" href="file:///feed">All Links</a></li>
-                    <li style="list-style: none; display: inline">
-                        <div id="system-lists">
-                        groups:
-                        {% for group in user.groups %}
-                            
-                                <ul>
-                                    <li class="list ui-droppable" id="list-299357"><a data-link="push"
-                                    data-list-id="299357" data-list-slug="inbox" href=
-                                    "/me/group/{{group.id}}">{{group.group_name}}</a></li>
-                                </ul>
-                            
-                         {% end %}
-                         </div> 
-                        <div id="new_list">
-                            <a class="add-list" href="">+ New Group</a>
-                        </div>
-                    </li>
-                </ul> 
-            </div>
+{% extends "me.html" %}
 
-            <div class="main span9">
-    
-        
-        
-    
+{% block content %}
+
     <div id="clips" style="display: block;">
         <div class="clearfix">
             <div id="list-info">
@@ -188,13 +114,5 @@
         </div>
         
     </div>
-    
-</div>
+{% end %}
 
-        </div>
-   
-</div>
-<script src="{{static_url("js/jquery.js")}}"></script>
-<script src="{{static_url("js/bootstrap.min.js")}}"></script>
-</body>
-</html>
