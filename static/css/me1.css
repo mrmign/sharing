@@ -146,10 +146,10 @@ html.fixedscroll {
 .topbar ul li a {
 }
 .topbar form {
-    border-left: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: -1px 0 0 white;
+   /* border-left: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: -1px 0 0 white;*/
     float: left;
-    margin: 0;
+    margin-left: 80px;
     padding: 11px 0 10px 30px;
 }
 .topbar form input#search {
