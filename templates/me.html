@@ -46,49 +46,82 @@
 	</div>
    
 <div class="container" id="body">
-        <div class="clearfix row" id="app">
-            <div class="span3" id="sidebar">
-                <ul class="unstyled" id="lists" style="position: relative;">
-                    <li><a class="list-link" data-link="push" href="/feed">Feed</a></li>
-                    <li><a class="list-link" data-link="push" href="/mylinks">All Links</a></li>
-                    <li style="list-style: none; display: inline">
-                        <div id="system-lists">
-                        groups:
-                        {% for g in user.groups %}
-                            
+        <div class="clearfix" id="app">
+            <div class="row">
+                <div class="span3" id="sidebar">
+                    <ul class="unstyled" id="lists" style="position: relative;">
+                        <li><a class="list-link" data-link="push" href="/feed">Feed</a></li>
+                        <li><a class="list-link" data-link="push" href="/mylinks">All Links</a></li>
+                        <li style="list-style: none; display: inline">
+                            <div id="system-lists">
+                                groups:
+                                {% for g in user.groups %}
                                 <ul>
-                                    <li class="list ui-droppable" id="list-299357"><a data-link="push"
-                                    data-list-id="299357" data-list-slug="inbox" href=
-                                    "/me/group/{{g.id}}">{{g.group_name}}</a></li>
-                                </ul>
-                            
-                         {% end %}
-                         </div> 
-                        <div id="new_list">
-                            <a class="add-list" href="">+ New Group</a>
-                        </div>
-                    </li>
-                </ul> 
-            </div>
+                                    <li class="list ui-droppable" id="list-299357">
+                                        <a data-link="push"
+                                        data-list-id="299357" data-list-slug="inbox" href=
+                                        "/me/group/{{g.id}}">{{g.group_name}}
+                                        </a>
+                                    </li>
+                                </ul>     
+                                {% end %}
+                            </div> 
+                            <div id="new_list">
+                                <a class="add-list" href="">+ New Group</a>
+                            </div>
+                        </li>
+                    </ul> 
+                </div>
 
     			<div class="main span9">
-                {% block content %}
-                <h1>Your Home</h1>
-
-                <div  >
-                    <h2>Follow what's interesting 
-                        <small>
+                    {% block content %}
+                    <h1>Your Home</h1>
+                    <div  >
+                        <h2>Follow what's interesting 
+                            <small>
                             Find what's good by following your friends and tastemakers.
-                        </small>
-                    </h2>
-                    <a class="btn btn-large btn-green" href="/feed">
+                            </small>
+                        </h2>
+                        <a class="btn btn-large btn-green" href="/feed">
                         Discover people and lists to follow
-                    </a>
-                </div>
-                {% end %}
+                        </a>
+                    </div>
+                    {% end %}
     			</div>
-    
-			</div>
+            </div>
+<!-- 
+            <div id="edit-list-modal" style="display: block;">
+                <div class="kippt-modal">
+                    <div class="overlay">
+                        <div class="content">
+                            <a class="close" href="#">×</a>
+                            <h2>Create a new list</h2>
+                            <form class="invite">
+                                <label for="list-create-name"><strong>List name</strong></label>
+                                <input type="text" value="" placeholder="eg. Programming" id="list-create-name">
+                                <label for="list-create-description"><strong>Description</strong> (optional)
+                                </label>
+                                 <textarea id="list-create-description"></textarea>
+                                 <div class="controls">
+                                    <label for="list-create-privacy-public" class="radio">
+                                    <input type="radio" checked="checked" value="public" name="list-sharing" id="list-create-privacy-public"><strong>Public</strong><br>Anyone can view clips and comments
+                                    </label>
+                                    <label for="list-create-privacy-private" class="radio">
+                                    <input type="radio" value="private" name="list-sharing" id="list-create-privacy-private"><strong>Private</strong> <i class="icon icon-lock"></i> <br>Only collaborators can view
+                                    </label>
+                                </div>   
+                                <div class="actions">
+                                    <input type="submit" class="btn btn-green" value="Create list">
+                                    <input type="reset" class="cancel btn btn-white" value="Cancel">
+                                </div>
+                                <div class="error">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
 </div>
 
 <script src="{{static_url("js/jquery.js")}}"></script>
