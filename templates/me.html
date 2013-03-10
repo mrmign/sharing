@@ -23,9 +23,9 @@
             <input placeholder="Search your clips..." id="search" name="q" type="text"> 
         </form>
         <ul class="nav secondary-nav nav-user">
-            <li><a href="/staff_picks">Staff Picks</a></li>
-            <li><a href="/popular_groups">Popular groups</a></li>
-            <li><a href="/recent_links">Recent links</a></li>
+            <li><a href="/me/staff_picks">Staff Picks</a></li>
+            <li><a href="/me/popular_groups">Popular groups</a></li>
+            <li><a href="/me/recent_links">Recent links</a></li>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <span><img src="{{static_url("images/me.jpeg")}}" class="avatar" title="{{user.username}}" height="32" width="32"></span>
@@ -49,10 +49,10 @@
         <div class="clearfix row" id="app">
             <div class="span3" id="sidebar">
                 <ul class="unstyled" id="lists" style="position: relative;">
-                    <li><a class="list-link" data-link="push" href="/feed">Feed</a></li>
-                    <li><a class="list-link" data-link="push" href="/mylinks">All Links</a></li>
-                    <li><a class="list-link" data-link="push" href="/following">Following</a></li>
-                    <li><a class="list-link" data-link="push" href="/follower">Follower</a></li>
+                    <li><a class="list-link" data-link="push" href="/me/feed">Feed</a></li>
+                    <li><a class="list-link" data-link="push" href="/me/mylinks">All Links</a></li>
+                    <li><a class="list-link" data-link="push" href="/me/following">Following</a></li>
+                    <li><a class="list-link" data-link="push" href="/me/follower">Follower</a></li>
                     <li style="list-style: none; display: inline">
                         <div id="system-lists">
                         groups:

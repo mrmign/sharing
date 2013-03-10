@@ -5,9 +5,7 @@
         <title>{{user.username}} | Sharing Links!</title>
         <meta property="og:image" content="{{static_url("images/share.png")}}">
         <meta property="og:description" content="Share is the best way to collect, share and discover interesting things you find on the web.">
-        <meta property="fb:admins" content="603317924">
         <meta charset="utf-8">    
-        <meta name="google-site-verification" content="aTHx0fECngasT9jjBPd1v4U0rASSCH36eobTv3xqzA8">
         <meta name="author" content="Share">    
     
         <link rel="stylesheet" href="{{static_url("css/me1.css")}}" type="text/css">
@@ -27,9 +25,9 @@
             <input placeholder="Search your clips..." id="search" name="q" type="text"> 
         </form>
         <ul class="nav secondary-nav nav-user">
-            <li><a href="/staff_picks">Staff Picks</a></li>
-            <li><a href="/popular_groups">Popular groups</a></li>
-            <li><a href="/recent_links">Recent links</a></li>
+            <li><a href="/me/staff_picks">Staff Picks</a></li>
+            <li><a href="/me/popular_groups">Popular groups</a></li>
+            <li><a href="/me/recent_links">Recent links</a></li>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <span><img src="{{static_url("images/me.jpeg")}}" class="avatar" title="{{user.username}}" height="32" width="32"></span>
