@@ -25,9 +25,9 @@ class MyLinksHandler(BaseHandler):
 class MeGroupHandler(BaseHandler):
     def get(self, groupid):
         group = self.db.get(LinkGroup, int(groupid))
-        print group.links.count()
-        print group.group_name
-        for l in group.links:
-            print l.id
+        # print group.links.count()
+        # print group.group_name
+        # for l in group.links:
+        #     print l.id
         # group = AutoReload
         self.render("megroup.html",group=group,user=self.current_user)
