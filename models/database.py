@@ -9,6 +9,7 @@ class User(Storm):
 	username = Unicode()
 	email = Unicode()
 	password = Unicode()
+	introduction = Unicode()
 
 	groups = ReferenceSet("User.id", "LinkGroup.user_id")
 	followings = ReferenceSet("User.id", "Following.user_id")

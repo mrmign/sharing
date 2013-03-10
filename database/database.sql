@@ -6,7 +6,8 @@ CREATE TABLE user (
 	id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	username varchar(50) NOT NULL UNIQUE,
 	email varchar(100) NOT NULL UNIQUE,
-	password varchar(100) NOT NULL 
+	password varchar(100) NOT NULL ,
+	introduction varchar(300) 
 );
 
 DROP TABLE IF EXISTS following;
