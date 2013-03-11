@@ -33,6 +33,7 @@ class MeGroupHandler(BaseHandler):
         # for l in group.links:
         #     print l.id
         # group = AutoReload
+        print "group"
         self.render("megroup.html",group=group,user=self.current_user)
 
 class StaffPicksHandler(BaseHandler):

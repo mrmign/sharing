@@ -55,7 +55,7 @@
             {% for link in group.links %}
                 <li class="clip">
                 <div class="clip-content">
-                        <a class="clip-save" href="/link/save/{{link.url}}"><i class="icon icon-save"></i> Save</a>
+                        <a class="clip-save" href="/link/save/{{link.id}}"><i class="icon icon-save"></i> Save</a>
                         <div class="clip-save-popup"></div>
                         <span class="clip-date"><i class="icon icon-date"></i> {{ link.created }}</span>
                         <a rel="nofollow" class="clip-title" target="_blank" href="{{ link.url }}">{{ link.title }}</a>

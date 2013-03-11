@@ -24,7 +24,7 @@ url_patterns = [
         (r"/signup",SignupHandler),
         (r"/group/([0-9]+)", GroupHandler),
 
-        (r"/link/save/(?P<link>[^\/]+)", LinkSaveHandler),
+        (r"/link/save/([0-9]+)", LinkSaveHandler),
 
         (r"/me/feed", FeedHandler),
         (r"/me/mylinks", MyLinksHandler),
