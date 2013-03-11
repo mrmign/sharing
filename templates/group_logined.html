@@ -1,0 +1,84 @@
+{% extends "me_nocontent.html" %}
+
+{% block content %}
+<div class="container" id="body">
+   
+<div class="public-share public-list">
+    <div class="side">
+        <h2>{{ group.group_name }}</h2>
+        
+        <p>{{ _("Group description") }}</p>
+        <h6>{{ group.links_count }} clips · {{ group.follower_count}} followers</h6>
+        <a class="btn" data-target="#signup-modal" data-link="modal" href="#">Follow this list</a>
+        <hr>
+        <h4>Author</h4>
+        <ul class="collaborators">
+            <li><a href="/{{ group.user.id }}">{{ group.user.username }}</a></li>
+        </ul>
+        <hr>
+        <!-- <h6>Share list</h6> -->
+    </div>
+    
+    <div class="main-column">
+        <ul style="display:block" id="clip-list">
+            {% for link in group.links %}
+                <li class="clip">
+                <div class="clip-content">
+                        
+                        <ul class="clip-save">
+                            <li class="btn-group">
+                                <a title="+save" class="btn dropdown-toggle settings" data-toggle="dropdown" href="#">
+                                    <span><i class="icon icon-save"></i>save</span>
+                                    <span class="caret">
+
+                                    </span>
+                                </a>
+                                <ul class="dropdown-menu pull-right" >
+                                    {% for g in user.groups%}
+                                    <li >
+                                        <a href="/link/save/{{g.id}}/{{link.id}}" class="rss" title="save this link into {{g.group_name}}">
+                                            {{g.group_name}}
+                                        </a>
+                                    </li>
+                                    
+                                    {% end %}
+                                </ul>
+                            </li>
+                            
+                        </ul>
+                        <div class="clip-save-popup"></div>
+                        <span class="clip-date"><i class="icon icon-date"></i> {{ link.created }}</span>
+                        <a rel="nofollow" class="clip-title" target="_blank" href="{{ link.url }}">{{ link.title }}</a>
+
+                        <p class="domain">
+                            
+                            <span>{{ link.url_domain }}</span>
+                            <span>›</span>
+                            <span>added by <a title="{{ group.user.username }}" href="/user/{{ group.user_id }}">{{ group.user.username }}</a></span>
+                            <span class="comment-count"><a title="Comment" href="#"><i class="icon icon-comment"></i>
+                            {% if link.comments_count > 0%}
+                                <strong> {{ link.comments_count }}</strong>
+                            {% end %}                           
+                                Comment
+                            </a></span>
+                            <span>
+                                <a class="like  " href="#">
+                                    <i class="icon icon-like"></i>
+                                    <span>
+                                        {% if link.like_count > 0 %}
+                                            {{ link.like_count}} likes
+                                        {% else %}
+                                            likes
+                                        {% end %}
+                                    </span>
+                                </a>
+                            </span>
+                        </p>
+                </div>
+            </li>
+            {% end %}
+        </ul>
+    </div>
+</div>   <!-- /container -->
+</div>
+{% end %}
