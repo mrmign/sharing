@@ -43,7 +43,7 @@ url_patterns = [
         (r"/me/group/([0-9]+)",MeGroupHandler),
 
         (r"/follow/user/([0-9]+)",FollowUserHandler),
-        (r"/follow/group/([0-9]+)",FollowGroupHandler)       
+        (r"/follow/group/([0-9]+)",FollowGroupHandler),       
         (r"/me/staff_picks",StaffPicksHandler),
         (r"/me/popular_groups",PopularGroupsHandler),
         (r"/me/recent_links",RecentLinksHandler),
