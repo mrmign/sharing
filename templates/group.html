@@ -4,6 +4,8 @@
     <title>{% block title %} {{ group.group_name }} | Share your links with others! {% end %}</title>
     <meta charset="utf-8">
     <meta name="author" content="Share">
+    <link rel="shortcut icon" href="{{static_url("images/favicon.ico")}}" type="image/x-icon">
+    <link rel="icon" href="{{static_url("images/favicon.ico")}}" type="image/x-icon">
     {% block custom_css %}
       <link rel="stylesheet" href=" {{ static_url("css/group.css") }}" type="text/css">
     {% end %}
