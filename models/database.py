@@ -9,6 +9,7 @@ class User(Storm):
 	username = Unicode()
 	email = Unicode()
 	password = Unicode()
+	introduction = Unicode()
 
 	groups = ReferenceSet("User.id", "LinkGroup.user_id")
 	followings = ReferenceSet("User.id", "Following.user_id")
@@ -17,6 +18,7 @@ class Following(Storm):
 	__storm_table__="following"
 	id = Int(primary=True)
 	user_id = Int()
+	#the people i following
 	follower_id =Int()
 
 	# groups = ReferenceSet("Following.follower_id", "LinkGroup.user_id")

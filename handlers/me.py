@@ -13,7 +13,7 @@ class FeedHandler(BaseHandler):
         # if self.current_user:
         #     print self.current_user.id, self.current_user.username
         follower_id = Select(Following.follower_id,(Following.user_id==self.current_user.id))
-        group_id = Select(LinkGroup.id, LinkGroup.user_id.is_in(follower_id))
+        group_id = Select(LinkGroup.id, (LinkGroup.user_id.is_in(follower_id)))
         links = self.db.find(Link, Link.group_id.is_in(group_id)).order_by(Desc(Link.created))
         self.render("feed.html",links=links,user=self.current_user)
 
@@ -33,6 +33,7 @@ class MeGroupHandler(BaseHandler):
         # for l in group.links:
         #     print l.id
         # group = AutoReload
+        print "group"
         self.render("megroup.html",group=group,user=self.current_user)
 
 class StaffPicksHandler(BaseHandler):
@@ -40,7 +41,8 @@ class StaffPicksHandler(BaseHandler):
 
         # if self.current_user:
         #     print self.current_user.id, self.current_user.username
-        staffs = self.db.find(User,User.id!=self.current_user.id)
+        follower_id = Select(Following.follower_id, Following.user_id==self.current_user.id)
+        staffs = self.db.find(User,Not(User.id.is_in(follower_id)),User.id!=self.current_user.id)
         self.render("staff_picks.html",staffs=staffs,user=self.current_user)
 
 class PopularGroupsHandler(BaseHandler):
@@ -105,7 +107,3 @@ class EditGroupHandler(BaseHandler):
         self.db.add(group1)
         self.db.commit()
         self.render("me.html",user=self.current_user)
-
-
-
-        
