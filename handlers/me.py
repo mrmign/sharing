@@ -4,7 +4,9 @@ from storm.expr import (Desc,Asc, Select, Not)
 import tornado.web
 from base import BaseHandler
 
-from models.database import User, LinkGroup,Link,Following
+from models.database import User, LinkGroup,Link,FollowingUser,FollowingGroup
+
+
 
 
 class FeedHandler(BaseHandler):
@@ -12,7 +14,7 @@ class FeedHandler(BaseHandler):
 
         # if self.current_user:
         #     print self.current_user.id, self.current_user.username
-        follower_id = Select(Following.follower_id,(Following.user_id==self.current_user.id))
+        follower_id = Select(FollowingUser.follower_id,(FollowingUser.user_id==self.current_user.id))
         group_id = Select(LinkGroup.id, (LinkGroup.user_id.is_in(follower_id)))
 
         links = self.db.find(Link, Link.group_id.is_in(group_id)).order_by(Desc(Link.created))
@@ -42,7 +44,7 @@ class StaffPicksHandler(BaseHandler):
 
         # if self.current_user:
         #     print self.current_user.id, self.current_user.username
-        follower_id = Select(Following.follower_id, Following.user_id==self.current_user.id)
+        follower_id = Select(FollowingUser.follower_id, FollowingUser.user_id==self.current_user.id)
         staffs = self.db.find(User,Not(User.id.is_in(follower_id)),User.id!=self.current_user.id)
         self.render("staff_picks.html",staffs=staffs,user=self.current_user)
 
@@ -51,8 +53,8 @@ class PopularGroupsHandler(BaseHandler):
 
         # if self.current_user:
         #     print self.current_user.id, self.current_user.username
-        group_id = Select(LinkGroup.id, (LinkGroup.user_id==self.current_user.id))
-        groups = self.db.find(LinkGroup, Not(LinkGroup.id.is_in(group_id)))
+        group_id = Select(FollowingGroup.group_id, FollowingGroup.user_id==self.current_user.id)
+        groups = self.db.find(LinkGroup, Not(LinkGroup.id.is_in(group_id)),User.id!=self.current_user.id)
         self.render("popular_groups.html",groups=groups,user=self.current_user)
 
 class RecentLinksHandler(BaseHandler):
@@ -108,3 +110,23 @@ class EditGroupHandler(BaseHandler):
         self.db.add(group1)
         self.db.commit()
         self.render("me.html",user=self.current_user)
+class FollowingHandler(BaseHandler):
+    def get(self):
+
+        # if self.current_user:
+        #     print self.current_user.id, self.current_user.username
+        # follower_id = Select(Following.follower_id,(Following.user_id==self.current_user.id))
+        # group_id = Select(LinkGroup.id, (LinkGroup.user_id.is_in(follower_id)))
+        # links = self.db.find(Link, Link.group_id.is_in(group_id)).order_by(Desc(Link.created))
+        follower_id = Select(FollowingUser.follower_id,(FollowingUser.user_id==self.current_user.id))
+        users = self.db.find(User, User.id.is_in(follower_id))
+        self.render("following.html",users=users,user=self.current_user)
+
+class FollowerHandler(BaseHandler):
+    def get(self):
+
+        # if self.current_user:
+        #     print self.current_user.id, self.current_user.username
+        user_id = Select(FollowingUser.user_id,(FollowingUser.follower_id==self.current_user.id))        
+        users = self.db.find(User, User.id.is_in(user_id))
+        self.render("following.html",users=users,user=self.current_user)

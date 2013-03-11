@@ -6379,6 +6379,33 @@ a.link {
     position: relative;
     width: 380px;
 }
+.list-widget .follow {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #FAFAFA;
+    background-image: linear-gradient(white, #FAFAFA);
+    border-color: #DDDDDD #DDDDDD #BFBFBF;
+    border-image: none;
+    border-radius: 30px 30px 30px 30px;
+    border-style: solid;
+    border-width: 1px;
+    color: #444444;
+    cursor: pointer;
+    display: block;
+    float: right;
+    font-size: 11px;
+    font-weight: bold;
+    height: 18px;
+    padding: 3px 10px;
+    position: absolute;
+    right: 10px;
+    text-align: center;
+    top: 45px;
+    vertical-align: text-top;
+    width: auto;
+}
 .list-widget .list-head {
     margin-left: 60px;
 }
