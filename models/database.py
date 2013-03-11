@@ -31,6 +31,7 @@ class LinkGroup(Storm):
 
 class Link(Storm):
 	__storm_table__ = "link"
+
 	id = Int(primary=True)
 	title = Unicode()
 	url = Unicode()
@@ -43,6 +44,8 @@ class Link(Storm):
 	group_id = Int()
 
 	linkgroup = Reference(group_id, "LinkGroup.id")
+
+	
 
 
 class FollowingUser(Storm):
