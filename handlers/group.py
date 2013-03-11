@@ -5,8 +5,11 @@ from base import BaseHandler
 from models.database import LinkGroup
 
 class GroupHandler(BaseHandler):
-	def get(self, groupid):
-		group = self.db.get(LinkGroup, int(groupid))
-		# print groupid
-		# print group.group_name
+	def get(self, group_id):
+		group = self.db.get(LinkGroup, int(group_id))
 		self.render("group.html",group=group)
+
+class GroupLoginedHandler(BaseHandler):
+	def get(self, group_id):
+		group = self.db.get(LinkGroup, int(group_id))
+		self.render("group_logined.html",group=group,user=self.current_user)
