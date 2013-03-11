@@ -9,7 +9,8 @@ from handlers.me import (FeedHandler,
                          MeGroupHandler,
                          StaffPicksHandler,
                          PopularGroupsHandler,
-                         RecentLinksHandler
+                         RecentLinksHandler,
+                         NewGroupHandler,
                          )
 
 from handlers.group import GroupHandler
@@ -33,6 +34,8 @@ url_patterns = [
         (r"/me/recent_links",RecentLinksHandler),
         (r"/follow/user/([0-9]+)",FollowHandler),
         
+
+        (r"/me/newgroup",NewGroupHandler),
         ]
 
  

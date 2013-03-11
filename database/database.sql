@@ -1,6 +1,7 @@
-SET SESSION storage_engine = "InnoDB";
-ALTER DATABASE CHARACTER SET "utf8";
+-- SET SESSION storage_engine = "InnoDB";
+-- ALTER DATABASE CHARACTER SET "utf8";
 
+<<<<<<< HEAD
 DROP TABLE IF EXISTS user;
 CREATE TABLE user (
 	id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
