@@ -13,7 +13,7 @@ class FeedHandler(BaseHandler):
         # if self.current_user:
         #     print self.current_user.id, self.current_user.username
         follower_id = Select(Following.follower_id,(Following.user_id==self.current_user.id))
-        group_id = Select(LinkGroup.id, (LinkGroup.user_id==follower_id))
+        group_id = Select(LinkGroup.id, LinkGroup.user_id.is_in(follower_id))
         links = self.db.find(Link, Link.group_id.is_in(group_id)).order_by(Desc(Link.created))
         self.render("feed.html",links=links,user=self.current_user)
 
@@ -61,12 +61,12 @@ class RecentLinksHandler(BaseHandler):
         links = self.db.find(Link, Not(Link.group_id.is_in(group_id))).order_by(Desc(Link.created))
         self.render("recent_links.html",links=links,user=self.current_user)
 
-class NewGroupHandler(BaseHandler):
+class AddGroupHandler(BaseHandler):
     def get(self):
-        self.render("newgroup.html", user = self.current_user,newgroup_msg="")
+        self.render("addgroup.html", user = self.current_user,newgroup_msg="")
 
     def post(self):
-        group_name = self.get_argument('group_name')
+        group_name = self.get_argument('groupname')
         group = self.db.find(LinkGroup,LinkGroup.user_id==self.current_user.id,LinkGroup.group_name==group_name).one()
         if not group:
             newgroup=LinkGroup()
@@ -76,4 +76,36 @@ class NewGroupHandler(BaseHandler):
             self.db.commit()
             self.render("me.html",user=self.current_user)
         else:
-            self.render("newgroup.html",user=self.current_user,newgroup_msg="your group_name has existed,please try again")
+            self.render("addgroup.html",user=self.current_user,newgroup_msg="your group_name has existed,please try again")
+
+class DeleteGroupHandler(BaseHandler):
+    def get(self,group_id):
+        link_id =Select(Link.id, (Link.group_id==int(group_id)))
+        links = self.db.find(Link, Link.id.is_in(link_id))
+        for link in links:
+            self.db.remove(link)
+        group = self.db.find(LinkGroup,LinkGroup.id==int(group_id)).one()
+        self.db.remove(group)
+        self.db.commit()
+        self.render("me.html",user=self.current_user)
+
+class EditGroupHandler(BaseHandler):
+    def get(self,group_id):
+        # print self.current_user.id
+        group = self.db.find(LinkGroup,LinkGroup.id==int(group_id)).one()
+        self.render("editgroup.html", user =self.current_user, group_name=group.group_name,group=group)
+    def post(self,group_id):
+        group_name = self.get_argument('groupname')
+        group = self.db.find(LinkGroup,LinkGroup.id==int(group_id)).one()
+        group.group_name = group_name
+        # print group.group_name
+        group1 = LinkGroup()
+        group1 = group
+        self.db.remove(group)
+        self.db.add(group1)
+        self.db.commit()
+        self.render("me.html",user=self.current_user)
+
+
+
+        
