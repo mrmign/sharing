@@ -10,7 +10,9 @@ from handlers.me import (FeedHandler,
                          StaffPicksHandler,
                          PopularGroupsHandler,
                          RecentLinksHandler,
-                         NewGroupHandler,
+                         AddGroupHandler,
+                         DeleteGroupHandler,
+                         EditGroupHandler,
                          )
 
 from handlers.group import GroupHandler
@@ -29,13 +31,14 @@ url_patterns = [
         (r"/me/feed", FeedHandler),
         (r"/me/mylinks", MyLinksHandler),
         (r"/me/group/([0-9]+)",MeGroupHandler),
+
         (r"/me/staff_picks",StaffPicksHandler),
         (r"/me/popular_groups",PopularGroupsHandler),
         (r"/me/recent_links",RecentLinksHandler),
         (r"/follow/user/([0-9]+)",FollowHandler),
-        
-
-        (r"/me/newgroup",NewGroupHandler),
+        (r"/me/addgroup",AddGroupHandler),
+        (r"/me/deletegroup/([0-9]+)",DeleteGroupHandler),
+        (r"/me/editgroup/([0-9]+)",EditGroupHandler),
         ]
 
  

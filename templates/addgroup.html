@@ -1,0 +1,36 @@
+{% extends "me_nocontent.html" %}
+{% block content %}
+<div id="edit-list-modal" style="display: block;"><div class="kippt-modal">
+    <!-- <div class="overlay"> -->
+        <div class="content">
+            
+            <h2>Create a new list</h2>
+            
+            <form class="invite" action="/me/addgroup" method="POST">
+                <label for="list-create-name"><strong>List name <h4>{{newgroup_msg}}</h4> </strong></label>
+                <input type="text" value="" placeholder="eg. Programming" id="list-create-name" name="groupname">
+                
+                <label for="list-create-description"><strong>Description</strong> (optional)</label>
+                <textarea id="list-create-description"></textarea>
+                
+                <div class="controls">
+                    <label for="list-create-privacy-public" class="radio">
+                        <input type="radio" checked="checked" value="public" name="list-sharing" id="list-create-privacy-public"><strong>Public</strong><br>Anyone can view clips and comments
+                    </label>
+                    <label for="list-create-privacy-private" class="radio">
+                        <input type="radio" value="private" name="list-sharing" id="list-create-privacy-private"><strong>Private</strong> <i class="icon icon-lock"></i> <br>Only collaborators can view
+                    </label>
+                </div>
+                
+                <div class="actions">
+                    <input type="submit" class="btn btn-green" value="Create Group">
+                    <!-- <input type="reset" class="cancel btn btn-white" value="Cancel"> -->
+                </div>
+                <div class="error"></div>
+            </form>
+        </div>
+    </div>
+<!-- </div> -->
+</div>
+
+{% end %}

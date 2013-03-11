@@ -1,14 +1,12 @@
 {% extends "me_nocontent.html" %}
 {% block content %}
 <div id="edit-list-modal" style="display: block;"><div class="kippt-modal">
-    <!-- <div class="overlay"> -->
-        <div class="content">
+        <div class="content">          
+            <h2>Edit list</h2>
             
-            <h2>Create a new list</h2>
-            
-            <form class="invite" action="/me/newgroup" method="POST">
-                <label for="list-create-name"><strong>List name <h4>{{newgroup_msg}}</h4> </strong></label>
-                <input type="text" value="" placeholder="eg. Programming" id="list-create-name" name="group_name">
+            <form class="invite" action="/me/editgroup/{{group.id}}" method="POST">
+                <label for="list-create-name"><strong>List name</strong></label>
+                <input type="text" value="{{group_name}}" placeholder="eg. Programming" id="list-create-name" name="groupname">
                 
                 <label for="list-create-description"><strong>Description</strong> (optional)</label>
                 <textarea id="list-create-description"></textarea>
@@ -23,14 +21,12 @@
                 </div>
                 
                 <div class="actions">
-                    <input type="submit" class="btn btn-green" value="Create list">
+                    <input type="submit" class="btn btn-green" value="Save Group">
                     <!-- <input type="reset" class="cancel btn btn-white" value="Cancel"> -->
                 </div>
                 <div class="error"></div>
             </form>
         </div>
     </div>
-<!-- </div> -->
 </div>
-
 {% end %}
