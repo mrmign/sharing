@@ -107,7 +107,7 @@ html.fixedscroll {
     z-index: 1;
 }
 .topbar .logo {
-    background: url("../../img/kippt-150.png") no-repeat scroll 0 10px / 60px auto transparent;
+    background: url("../images/share.png") no-repeat scroll 0 10px / 60px auto transparent;
     float: left;
     height: 40px;
     margin-top: 3px;
@@ -4404,19 +4404,19 @@ footer {
     background: url("../../img/icons-list.png") no-repeat scroll 1px -217px transparent;
 }
 #clip-list li.clip ul.actions .clip-read-later a {
-    background: url("../../img/icons-kipptset-1x.png") no-repeat scroll -5px -148px transparent;
+    background: url("../images/icons-kipptset-1x.png") no-repeat scroll -5px -148px transparent;
 }
 #clip-list li.clip ul.actions .clip-read-later.is-read-later a {
     background-position: -5px -176px;
 }
 #clip-list li.clip ul.actions .clip-star a {
-    background: url("../../img/icons-kipptset-1x.png") no-repeat scroll -32px -34px transparent;
+    background: url("../images/icons-kipptset-1x.png") no-repeat scroll -32px -34px transparent;
 }
 #clip-list li.clip ul.actions .clip-star.starred a {
     background-position: -32px -6px;
 }
 #clip-list li.clip ul.actions .clip-edit a {
-    background: url("../../img/icons-kipptset-1x.png") no-repeat scroll -63px -7px transparent;
+    background: url("../images/icons-kipptset-1x.png") no-repeat scroll -63px -7px transparent;
 }
 #clip-list li.clip ul.actions .clip-destroy a {
     color: #999999;
@@ -4759,7 +4759,7 @@ footer {
     text-decoration: none;
 }
 .icon {
-    background: url("../../img/icons-kipptset-1x.png") no-repeat scroll 0 0 transparent;
+    background: url("../images/icons-kipptset-1x.png") no-repeat scroll 0 0 transparent;
     display: inline-block;
     height: 14px;
     opacity: 0.2;
@@ -4844,7 +4844,7 @@ footer {
     opacity: 0.65;
 }
 .user-pro {
-    background: url("../../img/icons-kipptset-1x.png") no-repeat scroll -65px -178px transparent;
+    background: url("../iamges/icons-kipptset-1x.png") no-repeat scroll -65px -178px transparent;
     display: inline-block;
     height: 11px;
     vertical-align: text-top;
@@ -5824,7 +5824,7 @@ a.link {
     text-decoration: underline;
 }
 .public-share .side {
-    background: url("../../img/bg-side.png") no-repeat scroll right -4px transparent;
+    background: url("../images/bg-side.png") no-repeat scroll right -4px transparent;
     float: left;
     min-height: 400px;
     padding: 40px 30px 0 0;

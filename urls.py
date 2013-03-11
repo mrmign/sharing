@@ -10,11 +10,16 @@ from handlers.me import (FeedHandler,
                          StaffPicksHandler,
                          PopularGroupsHandler,
                          RecentLinksHandler,
+
                          FollowingHandler,
                          FollowerHandler
+
+
                          )
 
 from handlers.group import GroupHandler
+
+from handlers.link import LinkSaveHandler
 
 url_patterns = [
 
@@ -24,11 +29,11 @@ url_patterns = [
         (r"/login",LoginHandler),
         (r"/logout",LogoutHandler),
         (r"/signup",SignupHandler),
-
-        (r"/me/staff_picks",StaffPicksHandler),        
-        (r"/me/popular_groups",PopularGroupsHandler),
-        (r"/me/recent_links",RecentLinksHandler),
         
+        (r"/group/([0-9]+)", GroupHandler),
+
+        (r"/link/save/([0-9]+)", LinkSaveHandler),
+
 
         (r"/me/feed", FeedHandler),
         (r"/me/mylinks", MyLinksHandler),
@@ -39,7 +44,10 @@ url_patterns = [
 
         (r"/follow/user/([0-9]+)",FollowUserHandler),
         (r"/follow/group/([0-9]+)",FollowGroupHandler)       
-        
+        (r"/me/staff_picks",StaffPicksHandler),
+        (r"/me/popular_groups",PopularGroupsHandler),
+        (r"/me/recent_links",RecentLinksHandler),
+
         ]
 
  

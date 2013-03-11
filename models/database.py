@@ -14,7 +14,6 @@ class User(Storm):
 	groups = ReferenceSet("User.id", "LinkGroup.user_id")
 	followings = ReferenceSet("User.id", "FollowingUser.user_id")
 
-
 class LinkGroup(Storm):
 	__storm_table__ = "linkgroup"
 
