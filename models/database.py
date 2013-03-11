@@ -12,15 +12,8 @@ class User(Storm):
 	introduction = Unicode()
 
 	groups = ReferenceSet("User.id", "LinkGroup.user_id")
-	followings = ReferenceSet("User.id", "Following.user_id")
+	followings = ReferenceSet("User.id", "FollowingUser.user_id")
 
-class Following(Storm):
-	__storm_table__="following"
-	id = Int(primary=True)
-	user_id = Int()
-	follower_id =Int()
-
-	# groups = ReferenceSet("Following.follower_id", "LinkGroup.user_id")
 
 class LinkGroup(Storm):
 	__storm_table__ = "linkgroup"
@@ -51,6 +44,22 @@ class Link(Storm):
 	group_id = Int()
 
 	linkgroup = Reference(group_id, "LinkGroup.id")
+
+
+class FollowingUser(Storm):
+	__storm_table__="following_user"
+	id = Int(primary=True)
+	user_id = Int()
+	follower_id = Int()
+
+	# groups = ReferenceSet("Following.follower_id", "LinkGroup.user_id")
+
+
+class FollowingGroup(Storm):
+	__storm_table__="following_group"
+	id = Int(primary=True)
+	user_id = Int()
+	group_id = Int()
 
 
 

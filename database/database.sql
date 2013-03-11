@@ -10,12 +10,7 @@ CREATE TABLE user (
 	introduction varchar(300) 
 );
 
-DROP TABLE IF EXISTS following;
-CREATE TABLE following (
-	id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	user_id int NOT NULL REFERENCES user(id),
-	follower_id int NOT NULL REFERENCES user(id)
-);
+
 
 DROP TABLE IF EXISTS linkgroup;
 CREATE TABLE linkgroup (
@@ -42,4 +37,18 @@ CREATE TABLE link (
 	created timestamp,
 	group_id int NOT NULL REFERENCES linkgroup(id),
 	KEY(created)
-)
+);
+
+DROP TABLE IF EXISTS following_user;
+CREATE TABLE following_user (
+	id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	user_id int NOT NULL REFERENCES user(id),
+	follower_id int NOT NULL REFERENCES user(id)
+);
+
+DROP TABLE IF EXISTS following_group;
+CREATE TABLE following_group (
+	id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	user_id int NOT NULL REFERENCES user(id),
+	group_id int NOT NULL REFERENCES linkgroup(id)
+);
