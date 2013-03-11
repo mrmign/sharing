@@ -21,6 +21,7 @@ from handlers.group import GroupHandler
 
 from handlers.link import LinkSaveHandler
 
+from handlers.setting import (ProfileHandler,SettingsProfileHandler)
 url_patterns = [
 
         (r"/group/([0-9]+)", GroupHandler),
@@ -52,6 +53,8 @@ url_patterns = [
         (r"/me/popular_groups",PopularGroupsHandler),
         (r"/me/recent_links",RecentLinksHandler),
 
+        (r"/me/profile",ProfileHandler),
+        (r"/me/settings/profile",SettingsProfileHandler),
         ]
 
  

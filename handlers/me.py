@@ -103,11 +103,6 @@ class EditGroupHandler(BaseHandler):
         group_name = self.get_argument('groupname')
         group = self.db.find(LinkGroup,LinkGroup.id==int(group_id)).one()
         group.group_name = group_name
-        # print group.group_name
-        group1 = LinkGroup()
-        group1 = group
-        self.db.remove(group)
-        self.db.add(group1)
         self.db.commit()
         self.render("me.html",user=self.current_user)
 

@@ -1,0 +1,40 @@
+{% extends "me_nocontent.html" %}
+{% block content %}
+<div class="clearfix">  
+	<div id="settings" class="row main">
+        <div class="span3 sidenav">
+            <ul>
+                <li class="active">
+                	<a href="#">
+                		<i class="icon icon-profile"></i>
+                		Profile
+                	</a>
+                </li>
+                <li>
+                	<a href="#">
+                		<i class="icon settings"></i>
+                		Account Settings
+                	</a>
+                </li>
+                <li>
+                	<a href="#">
+                		<i class="icon icon-notifications"></i>
+                		Notifications
+                	</a>
+                </li>
+                <li>
+                	<a href="#">
+                		<i class="icon icon-connections"></i>
+                		Connections
+                	</a>
+                </li>
+            </ul>
+        </div>
+        <div class="span9">
+            {% block right%}
+            {% end %}
+        </div>
+    </div>
+</div>
+</div>
+{% end %}
