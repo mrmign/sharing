@@ -17,7 +17,7 @@ from handlers.me import (FeedHandler,
                          FollowerHandler
                          )
 
-from handlers.group import GroupHandler
+from handlers.group import (GroupHandler,GroupLoginedHandler)
 
 from handlers.link import LinkSaveHandler
 
@@ -31,8 +31,8 @@ url_patterns = [
         
         (r"/group/([0-9]+)", GroupHandler),
 
-        (r"/link/save/([0-9]+)", LinkSaveHandler),
-
+        # (r"/link/save/?(?P<group_id>[0-9]+)?/?(?P<link_id>[0-9]+)?", LinkSaveHandler),
+        (r"/link/save/(?P<group_id>[^\/]+)/?(?P<link_id>[^\/]+)?", LinkSaveHandler),
 
         (r"/me/feed", FeedHandler),
         (r"/me/mylinks", MyLinksHandler),
@@ -47,12 +47,15 @@ url_patterns = [
 
         (r"/follow/user/([0-9]+)",FollowUserHandler),
         (r"/follow/group/([0-9]+)",FollowGroupHandler),      
+
         (r"/me/staff_picks",StaffPicksHandler),
         (r"/me/popular_groups",PopularGroupsHandler),
         (r"/me/recent_links",RecentLinksHandler),
 
         (r"/me/profile",ProfileHandler),
         (r"/me/settings/profile",SettingsProfileHandler),
+        (r"/group/logined/([0-9]+)", GroupLoginedHandler),
+      
         ]
 
  

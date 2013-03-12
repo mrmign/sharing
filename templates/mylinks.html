@@ -1,6 +1,5 @@
-{% extends "me.html" %}
-
-{% block content %}
+{% extends "me_options.html" %}
+{% block option_body %}
 
     <div id="clips" style="display: block;">
         <div class="clearfix">
@@ -26,7 +25,7 @@
                         <a rel="nofollow" class="clip-title" target="_blank" href="{{ link.url }}">{{ link.title }}</a>
 
                         <p class="domain">
-                            <i style="background-image:url('');" class="fav"></i>
+                            <!-- <i style="background-image:url('');" class="fav"></i> -->
                             <span>{{ link.url_domain }}</span>
                             <span class="comment-count"><a title="Comment" href="#"><i class="icon icon-comment"></i>
                             {% if link.comments_count > 0%}

@@ -9,10 +9,9 @@
               <div class="clearfix">
                   
                   
-                  {% set gcnt = 6 %}
+                  
                 {% for group in groups %}
-                    {% if gcnt > 0 %}
-                    {% set gcnt = gcnt - 1 %}
+                    
 
                     <div class="list-widget">
                      <div > 
@@ -22,7 +21,7 @@
                             <img src="{{ static_url("images/avatar.png") }}" width="42" height="42" class="avatar" style="float:left"></a>
                              <!-- list header --> 
                              <div class="list-head"> 
-                                <h3><a href="/group/{{ group.id }}">{{ group.group_name }}</a></h3> 
+                                <h3><a href="/group/logined/{{ group.id }}">{{ group.group_name }}</a></h3> 
                                 <div class="list-meta">by <a href="/user/{{group.user.id}}">{{group.user.username}}</a> - {{ group.follower_count }} followers</div>
                                   </div> 
                                   </div>
@@ -32,7 +31,6 @@
                                     {% for li in group.links %} 
                                     {% if cnt > 0 %}
                                     <li>
-                                     <i class="fav"></i> 
                                      <div> 
                                       <a href="/group/{{ group.id }}">{{ li.title }}</a>
                                     </div> 
@@ -45,9 +43,7 @@
 
                                   {% end %}
                                  <li><a href="/group/{{ group.id }}" class="list-view">View all {{ group.links_count }} clips</a></li> </ul></div>
-                            {% else %}
-                                {% break %}
-                            {% end %}
+                            
                 {% end %}
                  
             </div>

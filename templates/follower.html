@@ -1,5 +1,40 @@
-{% extends "me.html" %}
+{% extends "me_options.html" %}
+{% block option_body %}
+<div id="clips" style="display: block;">
+        <div class="clearfix">
+            <div id="list-info">
+                <h3 title="All Links" class="name">
+                   My Followers
+                </h3>
 
-{% block content %}
-
+            </div>
+            <div id="new-clip"></div>
+        </div>
+        
+        
+            
+                
+                    <div class="follow-people clearfix">
+                    	{% for staff in users %}
+                        <div class="people-widget ">
+                            
+                            <img width="48" height="48" class="avatar" src="{{static_url("images/staff1.png")}}">
+                            <div>
+                                <h3><a href="/{{staff.username}}">{{staff.username}}</a></h3>
+                               	{% if staff.introduction %}
+                                	{{staff.introduction}}
+                                {% else %}
+                                    There is nothing about him/her.
+                                {% end %}
+                            </div>
+                        </div>
+                        {% end %} 
+                               
+                    </div>
+                
+           
+       
+      
+    </div>
+    </div>
 {% end %}

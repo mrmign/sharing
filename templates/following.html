@@ -1,5 +1,81 @@
-{% extends "me.html" %}
+{% extends "me_options.html" %}
+{% block option_body %}
+    <div class="tabbable"> <!-- Only required for left/right tabs -->
+      <div class="clearfix">
+            <div id="list-info">
+                <h3 title="All Links" class="name">
+                   My Followerings
+                </h3>
 
-{% block content %}
+            </div>
+            <div id="new-clip"></div>
+        </div>
+    	<ul class="nav nav-tabs">
+    		<li class="active"><a href="#tab1" data-toggle="tab"> Following Users </a></li>
+    		<li><a href="#tab2" data-toggle="tab">  Following Groups </a></li>
+    	</ul>
+    	<div class="tab-content">
+    		<div class="tab-pane active" id="tab1">
+    			{% for staff in users %}
+                        <div class="people-widget " style="width:260px;margin-left:75px;padding-top:10px">
+                            
+                            <img width="48" height="48" class="avatar" src="{{static_url("images/staff1.png")}}">
+                            <div  style="width:200px">
+                                <h3><a href="/{{staff.username}}">{{staff.username}}</a></h3>
+                               	{% if staff.introduction %}
+                                	{{staff.introduction}}
+                                {% else %}
+                                    There is nothing about him/her.
+                                {% end %}
+                            </div>
+                        </div>
+                        {% end %} 
+ 			</div>
 
+
+
+
+    		<div class="tab-pane" id="tab2">
+                {% for group in groups %}
+                    <div class="list-widget" style="width:580px;margin-left:40px;padding-top:10px">
+                     <div > 
+                      
+                         <a href="/user/{{group.user.id}}" title="{{ group.user.username }}">
+                            <img src="{{ static_url("images/avatar.png") }}" width="42" height="42" class="avatar" style="float:left"></a>
+                             <!-- list header --> 
+                             <div class="list-head"> 
+                                <h3><a href="/group/{{ group.id }}">{{ group.group_name }}</a></h3> 
+                                <div class="list-meta">by <a href="/user/{{group.user.id}}">{{group.user.username}}</a> - {{ group.follower_count }} followers</div>
+                                 <!-- <a href="" class="list-follow btn" data-api-uri="/api/lists/130354/">Follow</a> -->
+                                  </div> 
+                                  </div>
+                                  <!-- list --> 
+                                  <ul> 
+                                    {% set cnt = 3 %}
+                                    {% for li in group.links %} 
+                                    {% if cnt > 0 %}
+                                    <li>
+                                     <i class="fav" style="background-image:url();"></i> 
+                                     <div> 
+                                      <a href="/group/{{ group.id }}">{{ li.title }}</a>
+                                    </div> 
+                                  </li> 
+
+                                  {% set cnt = cnt - 1 %}
+                                  {% else %}
+                                    {% break %}
+                                  {% end %}
+
+                                  {% end %}
+                                 <li><a href="/group/{{ group.id }}" class="list-view">View all {{ group.links_count }} clips</a></li> </ul></div>
+                {% end %}
+    		</div>
+    	</div>
+    </div>
+
+     </div>
+                
+           
+       
+   
 {% end %}

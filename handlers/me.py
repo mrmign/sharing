@@ -12,8 +12,7 @@ from models.database import User, LinkGroup,Link,FollowingUser,FollowingGroup
 class FeedHandler(BaseHandler):
     def get(self):
 
-        # if self.current_user:
-        #     print self.current_user.id, self.current_user.username
+        
         follower_id = Select(FollowingUser.follower_id,(FollowingUser.user_id==self.current_user.id))
         group_id = Select(LinkGroup.id, (LinkGroup.user_id.is_in(follower_id)))
 
@@ -25,17 +24,13 @@ class MyLinksHandler(BaseHandler):
         sub = Select(LinkGroup.id, (LinkGroup.user_id==self.current_user.id))
         links = self.db.find(Link, Link.group_id.is_in(sub)).order_by(Desc(Link.created))
             
-        #     print self.current_user.id, self.current_user.username
+        
         self.render("mylinks.html",links=links,user=self.current_user)
     
 class MeGroupHandler(BaseHandler):
     def get(self, groupid):
         group = self.db.get(LinkGroup, int(groupid))
-        # print group.links.count()
-        # print group.group_name
-        # for l in group.links:
-        #     print l.id
-        # group = AutoReload
+        
         print "group"
         self.render("megroup.html",group=group,user=self.current_user, links=group.links)
 
@@ -56,6 +51,7 @@ class RecentLinksHandler(BaseHandler):
         group_id = Select(LinkGroup.id, (LinkGroup.user_id==self.current_user.id))
         links = self.db.find(Link, Not(Link.group_id.is_in(group_id))).order_by(Desc(Link.created))
         self.render("recent_links.html",links=links,user=self.current_user)
+        
 
 class AddGroupHandler(BaseHandler):
     def get(self):
@@ -87,13 +83,19 @@ class DeleteGroupHandler(BaseHandler):
 
 class EditGroupHandler(BaseHandler):
     def get(self,group_id):
-        # print self.current_user.id
         group = self.db.find(LinkGroup,LinkGroup.id==int(group_id)).one()
         self.render("editgroup.html", user =self.current_user, group_name=group.group_name,group=group)
     def post(self,group_id):
         group_name = self.get_argument('groupname')
         group = self.db.find(LinkGroup,LinkGroup.id==int(group_id)).one()
         group.group_name = group_name
+# <<<<<<< HEAD
+# =======
+        group1 = LinkGroup()
+        group1 = group
+        self.db.remove(group)
+        self.db.add(group1)
+# >>>>>>> a1802e5c30735b0b7bcad8fc4b4918cf991850eb
         self.db.commit()
         self.render("me.html",user=self.current_user)
 
@@ -101,10 +103,12 @@ class FollowingHandler(BaseHandler):
     def get(self):
         follower_id = Select(FollowingUser.follower_id,(FollowingUser.user_id==self.current_user.id))
         users = self.db.find(User, User.id.is_in(follower_id))
-        self.render("following.html",users=users,user=self.current_user)
+        group_id = Select(FollowingGroup.group_id,(FollowingGroup.user_id==self.current_user.id))
+        groups = self.db.find(LinkGroup, LinkGroup.id.is_in(group_id))
+        self.render("following.html",groups=groups,users=users,user=self.current_user)
 
 class FollowerHandler(BaseHandler):
     def get(self):
         user_id = Select(FollowingUser.user_id,(FollowingUser.follower_id==self.current_user.id))        
         users = self.db.find(User, User.id.is_in(user_id))
-        self.render("following.html",users=users,user=self.current_user)
+        self.render("follower.html",users=users,user=self.current_user)
