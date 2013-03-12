@@ -16,7 +16,7 @@
 
                     <div class="list-widget">
                      <div > 
-                      <a data-type="featured" data-username="{{group.user.username}}" data-api-uri="/api/users/12510/" class="follow" href="/follow/group/{{group.id}}">Follow</a>
+                      <a  class="follow" href="/follow/group/{{group.id}}">Follow</a>
                         <!-- user image -->
                          <a href="/user/{{group.user.id}}" title="{{ group.user.username }}">
                             <img src="{{ static_url("images/avatar.png") }}" width="42" height="42" class="avatar" style="float:left"></a>
@@ -24,7 +24,6 @@
                              <div class="list-head"> 
                                 <h3><a href="/group/{{ group.id }}">{{ group.group_name }}</a></h3> 
                                 <div class="list-meta">by <a href="/user/{{group.user.id}}">{{group.user.username}}</a> - {{ group.follower_count }} followers</div>
-                                 <!-- <a href="" class="list-follow btn" data-api-uri="/api/lists/130354/">Follow</a> -->
                                   </div> 
                                   </div>
                                   <!-- list --> 
@@ -33,7 +32,7 @@
                                     {% for li in group.links %} 
                                     {% if cnt > 0 %}
                                     <li>
-                                     <i class="fav" style="background-image:url();"></i> 
+                                     <i class="fav"></i> 
                                      <div> 
                                       <a href="/group/{{ group.id }}">{{ li.title }}</a>
                                     </div> 

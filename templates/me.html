@@ -50,20 +50,18 @@
         <div class="clearfix row" id="app">
             <div class="span3" id="sidebar">
                 <ul class="unstyled" id="lists" style="position: relative;">
-                    <li><a class="list-link" data-link="push" href="/me/feed">Feed</a></li>
-                    <li><a class="list-link" data-link="push" href="/me/mylinks">All Links</a></li>
-                    <li><a class="list-link" data-link="push" href="/me/following">Following</a></li>
-                    <li><a class="list-link" data-link="push" href="/me/follower">Follower</a></li>
+                    <li><a class="list-link" href="/me/feed">Feed</a></li>
+                    <li><a class="list-link" href="/me/mylinks">All Links</a></li>
+                    <li><a class="list-link" href="/me/following">Following</a></li>
+                    <li><a class="list-link" href="/me/follower">Follower</a></li>
                     <li style="list-style: none; display: inline">
                         <div id="system-lists">
                         groups:
                         {% for g in user.groups %}
                             
                                 <ul>
-                                    <li class="list ui-droppable" id="list-299357">
-                                        <a data-link="push"
-                                        data-list-id="299357" data-list-slug="inbox" href=
-                                        "/me/group/{{g.id}}">{{g.group_name}}
+                                    <li class="list ui-droppable">
+                                        <a href="/me/group/{{g.id}}">{{g.group_name}}
                                         </a>
                                     </li>
                                 </ul>     

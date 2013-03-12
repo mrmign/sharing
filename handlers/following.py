@@ -9,10 +9,6 @@ from models.database import (User, LinkGroup,Link,FollowingUser,FollowingGroup)
 
 class FollowUserHandler(BaseHandler):
     def get(self,user_id):
-
-        # if self.current_user:
-        #     print self.current_user.id, self.current_user.username
-        
         following_user = FollowingUser()
         following_user.user_id = self.current_user.id
         following_user.follower_id = int(user_id)
@@ -24,10 +20,6 @@ class FollowUserHandler(BaseHandler):
 
 class FollowGroupHandler(BaseHandler):
     def get(self,group_id):
-
-        # if self.current_user:
-        #     print self.current_user.id, self.current_user.username
-        
         following_group = FollowingGroup()
         following_group.user_id = self.current_user.id
         following_group.group_id = int(group_id)

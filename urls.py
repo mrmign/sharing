@@ -22,8 +22,6 @@ from handlers.group import GroupHandler
 from handlers.link import LinkSaveHandler
 
 url_patterns = [
-
-        (r"/group/([0-9]+)", GroupHandler),
         (r"/", HomeHandler),
 
         (r"/login",LoginHandler),
