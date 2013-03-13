@@ -4,7 +4,7 @@ from storm.expr import (Desc,Asc, Select, Not)
 import tornado.web
 from base import BaseHandler
 
-from models.database import User, LinkGroup,Link,FollowingUser,FollowingGroup
+from models.database import User, LinkGroup,Link,FollowingUser,FollowingGroup,Comment
 
 
 
@@ -89,13 +89,6 @@ class EditGroupHandler(BaseHandler):
         group_name = self.get_argument('groupname')
         group = self.db.find(LinkGroup,LinkGroup.id==int(group_id)).one()
         group.group_name = group_name
-# <<<<<<< HEAD
-# =======
-        group1 = LinkGroup()
-        group1 = group
-        self.db.remove(group)
-        self.db.add(group1)
-# >>>>>>> a1802e5c30735b0b7bcad8fc4b4918cf991850eb
         self.db.commit()
         self.render("me.html",user=self.current_user)
 

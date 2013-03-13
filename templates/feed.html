@@ -7,40 +7,42 @@
                 <h3 title="All Links" class="name">
                    My Feed
                 </h3>
-
             </div>
-            <div id="new-clip"><input type="text" placeholder="Add a link..."></div>
+            <div id="new-clip">
+                <input type="text" placeholder="Add a link...">
+            </div>
         </div>
         <div id="clips-container">
             <ul class="unstyled" id="clip-list" style="display: block;">
                 {% for link in links %}
-
-
                 <li class="clip">
-                     
-                <div class="clip-content">
-
-                        
-                        <span class="clip-date"><i class="icon icon-date"></i> {{ link.created }}</span>
-                        <a rel="nofollow" class="clip-title" target="_blank" href="{{ link.url }}">{{ link.title }}</a>
-
+                    <div class="clip-content">
+                        <span class="clip-date"><i class="icon icon-date"></i>
+                            {{ link.created }}
+                        </span>
+                        <a rel="nofollow" class="clip-title" target="_blank" href="{{ link.url }}">
+                            {{ link.title }}
+                        </a>
                         <p class="domain">
-                            <i style="background-image:url('');" class="fav"></i>
                             <span>{{ link.url_domain }}</span>
-                            <span class="comment-count"><a title="Comment" href="#"><i class="icon icon-comment"></i>
-                            {% if link.comments_count > 0%}
-                                <strong> {{ link.comments_count }}</strong>
-                            {% end %}                               
-                                Comment
-                            </a></span>
+                            <span class="comment-count">
+                                <a title="Comment" href="/me/comment/{{link.id}}">
+                                    <i class="icon icon-comment"></i>
+                                    {% if link.comments_count > 0%}
+                                    <strong> {{ link.comments_count }}
+                                    </strong>
+                                    {% end %}
+                                    Comment
+                                </a>
+                            </span>
                             <span>
                                 <a class="like  " href="#">
                                     <i class="icon icon-like"></i>
                                     <span>
                                         {% if link.like_count > 0 %}
-                                            {{ link.like_count}} likes
+                                        {{ link.like_count}} likes
                                         {% else %}
-                                            likes
+                                        likes
                                         {% end %}
                                     </span>
                                 </a>
@@ -48,28 +50,68 @@
                             <span>
                                 <a class="like  " href="#">
                                     <i class="icon icon-edit pull-right"> Edit</i>
-                                    
                                 </a>
-                                
-                                
                             </span>
                         </p>
-                </div>
-            </li>
-              
-               {% end %}
+                    </div>
+
+                    {% if link.comments_count > 0 %}
+                    <div class="feed-comments">
+                        {% for comment in link.comments %}
+                        <ul>
+                            <li>
+                                <div class="clip-content">
+                                    <div style="float:right">
+                                        <span class="clip-date">
+                                            <i class="icon icon-date">
+                                            </i>
+                                            {{ comment.created }}
+                                        </span>
+                                    </div>
+                                    <a href="#">
+                                        <img width="32" class="avatar"
+                                        src="{{static_url("images/me.jpeg")}}&amp;s=160">
+                                    </a>
+                                    
+                                    <a href="#">{{user.username}}</a>
+                                    <p class="domain">
+                                    {{comment.content}}
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                        {% end %}
+                        <div class="reply" style="padding-left:25px">
+                            <form class="add-comment">
+                                <img width="32" class="avatar" src="{{static_url("images/me.jpeg")}}&amp;s=160">
+                                <input type="text" placeholder="Leave a comment...">
+                            </form>
+                        </div>
+                    </div>
+                    {% end %}
+
+
+                </li>
+                {% end %}
             </ul>
             <div id="no-clips" style="display: none;">
-                <p><strong>Find clips to add to this list</strong>
-                    You can add links with extensions, bookmarklets and via email. <a href="/tools/">View the tools</a>
+                <p>
+                    <strong>Find clips to add to this list</strong>
+                    You can add links with extensions, bookmarklets and via email. 
+                    <a href="/tools/">View the tools</a>
                 </p>
-                <p class="no-collaborate"><strong>Collaborate with your team.</strong> Invite people to this list and easily share useful links</p>
-                <p class="no-public"><strong>Make your list public</strong>. Share the interesting things you find and save.</p>
+                <p class="no-collaborate">
+                    <strong>Collaborate with your team.</strong> 
+                    Invite people to this list and easily share useful links
+                </p>
+                <p class="no-public">
+                    <strong>Make your list public</strong>. 
+                    Share the interesting things you find and save.
+                </p>
             </div>
-            <div id="no-search-results" style="display: none;">No search results.</div>
-            
+            <div id="no-search-results" style="display: none;">No search results.
+            </div>
         </div>
-        
     </div>
-{% end %}
+    {% end %}
 

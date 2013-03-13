@@ -19,9 +19,14 @@ from handlers.me import (FeedHandler,
 
 from handlers.group import (GroupHandler,GroupLoginedHandler)
 
-from handlers.link import LinkSaveHandler
+from handlers.link import (LinkSaveHandler,
+                           CommentHandler,
+                           AddCommentHandler,
+                           DeleteCommentHandler
+                           )
 
-from handlers.setting import (ProfileHandler,SettingsProfileHandler)
+from handlers.setting import (ProfileHandler,SettingsProfileHandler,SettingsAccountHandler)
+
 url_patterns = [
         (r"/", HomeHandler),
 
@@ -54,8 +59,12 @@ url_patterns = [
 
         (r"/me/profile",ProfileHandler),
         (r"/me/settings/profile",SettingsProfileHandler),
+        (r"/me/settings/account",SettingsAccountHandler),
         (r"/group/logined/([0-9]+)", GroupLoginedHandler),
-      
+
+        (r"/me/comment/([0-9]+)",CommentHandler),
+        (r"/me/addcomment/([0-9]+)",AddCommentHandler),
+        (r"/me/deletecomment/([0-9]+)",DeleteCommentHandler),
         ]
 
  

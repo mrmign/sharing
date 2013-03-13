@@ -26,3 +26,20 @@ class SettingsProfileHandler(BaseHandler):
 			introduction = "Add Description"
 
 		self.render("profile.html" ,user=self.current_user ,groups=self.current_user.groups,description=introduction)
+
+class SettingsAccountHandler(BaseHandler):
+	def get(self):
+		self.render("settings_account.html" ,user=self.current_user)
+
+	def post(self):
+		username =self.get_argument('username')
+		email =self.get_argument('email')
+		password =self.get_argument('password1')
+		user = self.db.find(User,User.id==self.current_user.id).one()
+		user.username =username
+		user.email =email
+		if password:
+			user.password = password
+		self.db.commit()
+		self.render("settings_account.html" ,user=self.current_user)
+		

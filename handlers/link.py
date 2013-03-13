@@ -3,7 +3,7 @@
 import tornado.web
 
 from base import BaseHandler
-from models.database import Link,LinkGroup
+from models.database import Link,LinkGroup,Comment
 
 class LinkSaveHandler(BaseHandler):
 
@@ -21,4 +21,40 @@ class LinkSaveHandler(BaseHandler):
         self.db.commit()
         
         self.render("group_logined.html",group=group,user=self.current_user)
+
+
+class CommentHandler(BaseHandler):
+
+    @tornado.web.authenticated
+    def get(self,link_id):
+        l = self.db.get(Link,int(link_id))
+        self.render("comment.html" ,user=self.current_user,link=l)
         
+
+class AddCommentHandler(BaseHandler):
+    def get(self,link_id):
+        l = self.db.get(Link,int(link_id))
+        cmt = self.get_argument('add_comment')
+        comment =Comment()
+        comment.content = cmt
+        comment.user_id = self.current_user.id
+        comment.link_id = int(link_id)
+        l.comments_count += 1
+        self.db.add(comment)
+
+        self.db.commit()
+        self.render("comment.html" ,user=self.current_user,link=l)
+
+class DeleteCommentHandler(BaseHandler):
+    def get(self,comment_id):
+        comment = self.db.get(Comment,int(comment_id))
+        l = self.db.get(Link,int(comment.link_id))
+        self.db.remove(comment)
+        l.comments_count -= 1
+        self.db.commit()
+        self.render("comment.html" ,user=self.current_user,link=l)
+
+        
+
+
+

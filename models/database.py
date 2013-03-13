@@ -44,7 +44,7 @@ class Link(Storm):
 	group_id = Int()
 
 	linkgroup = Reference(group_id, "LinkGroup.id")
-
+	comments = ReferenceSet("Link.id", "Comment.link_id")
 	
 
 
@@ -62,6 +62,16 @@ class FollowingGroup(Storm):
 	id = Int(primary=True)
 	user_id = Int()
 	group_id = Int()
+
+
+
+class Comment(Storm):
+	__storm_table__="comment"
+	id =Int(primary=True)
+	content =Unicode()
+	user_id = Int()
+	link_id = Int()
+	created = DateTime()
 
 
 
