@@ -18,7 +18,7 @@
                             <span>{{ link.url_domain }}</span>
                             <span>›</span>
                             <span>added by <a title="{{ link.linkgroup.user.username }}" href="/user/{{ link.linkgroup.user_id }}">{{ link.linkgroup.user.username }}</a></span>
-                            <span class="comment-count"><a title="Comment" href="#"><i class="icon icon-comment"></i>
+                            <span class="comment-count"><a title="Comment" href="/me/comment/{{link.id}}/%2Fme%2Frecent_links"><i class="icon icon-comment"></i>
                             {% if link.comments_count > 0%}
                                 <strong> {{ link.comments_count }}</strong>
                             {% end %}                           

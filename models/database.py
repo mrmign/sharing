@@ -74,6 +74,7 @@ class Comment(Storm):
 	user_id = Int()
 	link_id = Int()
 	created = DateTime()
+	user = Reference(user_id, "User.id")
 
 
 

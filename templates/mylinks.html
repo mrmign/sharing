@@ -27,12 +27,14 @@
                         <p class="domain">
                             <!-- <i style="background-image:url('');" class="fav"></i> -->
                             <span>{{ link.url_domain }}</span>
-                            <span class="comment-count"><a title="Comment" href="#"><i class="icon icon-comment"></i>
+                            <span class="comment-count">
+                                <a title="Comment" href="/me/comment/{{link.id}}/%2Fme%2Fmylinks"><i class="icon icon-comment"></i>
                             {% if link.comments_count > 0%}
                                 <strong> {{ link.comments_count }}</strong>
                             {% end %}                               
                                 Comment
-                            </a></span>
+                            </a>
+                        </span>
                             <span>
                                 <a class="like  " href="#">
                                     <i class="icon icon-like"></i>
@@ -51,54 +53,44 @@
                                     
                                 </a>
                                 
-                                <!-- <li class="dropdown">
-                                    <a data-toggle="dropdown" class="like" href="#">
-                                        <span class="icon icon-edit pull-right">edit</span>
-                                        <span class="caret"></span>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li class="username">jg</li>
-                                        <li><a href="#">Public Profile</a></li>
-                                        <li><a href="#">Import</a></li>
-                                        <li><a href="#">Settings</a></li>
-                                        <li><a href="/logout">Logout</a></li>
-                                    </ul>
-                                </li> -->
                             </span>
                         </p>
                 </div>
-            </li>
-               <!--  <li class="clip ui-draggable" data-cid="c178">
-                    <div class="display">
-                        <div class="clip-content">
-                            <div class="drag"></div>
-                            <span class="clip-date"><abbr title="2013-03-03T14:27:00.000Z" class="timeago">5d</abbr></span>
-                            <a class="clip-title" target="_blank" href="http://stereopsis.com/flux/">f.lux: software to make your life better</a>
-                            <div class="edit">
-                                <input type="text" value="f.lux: software to make your life better" class="clip-input">
-                            </div>
-                            <p class="domain"> 
-                                <i style="background-image:url('https://www.google.com/s2/u/0/favicons?domain=stereopsis.com');" class="fav"></i>
-                                <span>stereopsis.com</span>
-                                <span class="list" title="List">Awesome</span>
-                                <span>
-                                · <span class="comment-count"><a title="Comment" href=""><i class="icon icon-comment"></i>Add comment</a></span>
-                                </span>
-                                <span><a title="You can't like your own clip" rel="tooltip" class="clip-like isOwn" href="#"><i class="icon icon-like"></i><span>Like</span></a></span>
-                            </p>
-                        </div>
-                        <ul class="actions">
-                            <li class="clip-reader"><a title="View in Reader" rel="tooltip" href="">Reader</a></li>
-                            <li class="clip-edit"><a title="Edit" rel="tooltip" href="">Edit</a></li>
-                            <li class="clip-read-later "><a title="Mark as Read Later" rel="tooltip" href="">Read Later</a></li>
-                            <li class="clip-star"><a title="Star" rel="tooltip" href="">Star</a></li>
-                            <li class="clip-destroy"><a title="Remove" rel="tooltip" href="">×</a></li>
+                {% if link.comments_count > 0 %}
+                    <div class="feed-comments">
+                        {% for comment in link.comments %}
+                        <ul>
+                            <li>
+                                <div class="clip-content">
+                                    <div style="float:right">
+                                        <span class="clip-date">
+                                            <i class="icon icon-date">
+                                            </i>
+                                            {{ comment.created }}
+                                        </span>
+                                    </div>
+                                    <a href="#">
+                                        <img width="32" class="avatar"
+                                        src="{{static_url("images/me.jpeg")}}&amp;s=160">
+                                    </a>
+                                    
+                                    <a href="#">{{user.username}}</a>
+                                    <p class="domain">
+                                    {{comment.content}}
+                                    </p>
+                                </div>
+                            </li>
                         </ul>
+                        {% end %}
+                        <div class="reply" style="padding-left:25px">
+                            <form class="add-comment" action="/me/entercomment/{{link.id}}/%2Fme%2Fmylinks">
+                                <img width="32" class="avatar" src="{{static_url("images/me.jpeg")}}&amp;s=160">
+                                <input type="text" placeholder="Leave a comment..." name="enter">
+                            </form>
+                        </div>
                     </div>
-                    <div class="notes">
-                        <div class="content"><a href="#">software to make your life beautiful</a></div>
-                    </div>
-                </li> -->
+                    {% end %}
+            </li>
                {% end %}
             </ul>
             <div id="no-clips" style="display: none;">
