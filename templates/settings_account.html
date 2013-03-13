@@ -1,0 +1,110 @@
+{% extends "settings_nocontent.html" %}
+{% block script %}
+<script type="text/javascript">
+
+ function validate_required(field,alerttxt)
+    {
+      with (field)
+      {
+        if (value==null||value=="")
+          {alert(alerttxt);return false}
+        else {return true}
+      }
+    }
+
+    function validate_email(field,alerttxt)
+    {
+      with (field)
+      {
+        apos=value.indexOf("@")
+        dotpos=value.lastIndexOf(".")
+        if (apos<1||dotpos-apos<2) 
+          {alert(alerttxt);return false}
+        else {return true}
+      }
+    }
+
+    function validate_password(field,alerttxt)
+    {
+      with (field)
+      {
+        if (value!={{user.password}})
+        	{alert(alerttxt);return false}
+        else {return true}
+        	
+      }
+    }
+
+    function confirm_password(field1,field2,alerttxt)
+    {
+    	if(field1.value != field2.value)
+    		{alert(alerttxt);return false}
+    	else if(field1.value=="")
+    		{field1.value={{user.password}};return true}
+    	else
+    		{return true}
+    }
+
+    function validate_form(thisform)
+    {
+      with (thisform)
+      {
+        if (validate_required(username,"Username must be filled out!")==false)
+          {username.focus();return false}
+        if (validate_required(email,"Email must be filled out!")==false)
+          {email.focus();return false}
+      	if (validate_email(email,"Not a valid e-mail address!")==false)
+          {email.focus();return false}
+        if (validate_password(current_password,"Password doesn't match user's password.")==false)
+          {current_password.focus();return false}
+      	if(confirm_password(password1,password2,"The two password doesn't match.")==false)
+      		{password1.focus();return false}
+      }
+    }
+</script>
+{% end %}
+
+{% block right %}
+<div class="padding">
+		<h1>Account Settings</h1>
+		<hr>
+		<form method="POST" action="/me/settings/account" onsubmit="return validate_form(this)">
+			<div class="">
+				<label for="username">Username</label>
+				<div class="input">
+					<input type="text" maxlength="30" value="{{user.username}}" name="username" id="id_username">
+				</div>
+			</div>
+			<div class="">
+				<label for="email">Email</label>
+				<div class="input">
+					<input type="text" maxlength="75" value="{{user.email}}" name="email" id="id_email">
+				</div>
+			</div>
+			<div class="">
+				<label for="current_password">Current password 
+					<span>(If you have one)</span>
+				</label>
+				<div class="input">
+					<input type="password" id="id_current_password" name="current_password">
+				</div>
+			</div>
+			<div class="">
+				<label for="password1">New password</label>
+				<div class="input">
+					<input type="password" id="id_password1" name="password1">
+				</div>
+			</div>
+			<div class="">
+				<label for="password2">Password confirmation</label>
+				<div class="input">
+					<input type="password" id="id_password2" name="password2">
+				</div>
+			</div>
+			<div class="actions">
+				<a class="delete" href="#">Cancel my account</a>
+				<input type="submit" class="btn" value="Save changes">
+			</div>
+		</form>
+	</div>
+{% end %}
