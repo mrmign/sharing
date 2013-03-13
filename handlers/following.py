@@ -18,6 +18,7 @@ class FollowUserHandler(BaseHandler):
         staffs = self.db.find(User,Not(User.id.is_in(follower_id)),User.id!=self.current_user.id)
         self.render("staff_picks.html",staffs=staffs,user=self.current_user)
 
+
 class FollowGroupHandler(BaseHandler):
     def get(self,group_id):
         following_group = FollowingGroup()
