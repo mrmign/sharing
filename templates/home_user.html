@@ -1,4 +1,4 @@
-{% extends "me_nocontent.html" %}
+{% extends "main.html" %}
 {% block content %}
 <div id="body" class="container">
 	<div class="clearfix">
@@ -14,13 +14,13 @@
                 				<div class="profile-info span6">
                     				<h1>{{user.username}}</h1>
                     				<p>
-                    					<a class="" href="/me/settings/profile">
+                    					
                     						{{description}}
-                    					</a>
+                    					
                     				</p>
                     			</div>
                     			<div class="profile-extra">
-                    				<a class="btn" href="/me/settings/profile">Edit my profile</a>
+                    				<a class="btn" title="Follow" href="/login">Follow me</a>
                     				<div>
                     				</div>
                     			</div>

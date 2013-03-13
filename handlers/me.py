@@ -22,15 +22,13 @@ class FeedHandler(BaseHandler):
 class MyLinksHandler(BaseHandler):
     def get(self):
         sub = Select(LinkGroup.id, (LinkGroup.user_id==self.current_user.id))
-        links = self.db.find(Link, Link.group_id.is_in(sub)).order_by(Desc(Link.created))
-            
+        links = self.db.find(Link, Link.group_id.is_in(sub)).order_by(Desc(Link.created))     
         
         self.render("mylinks.html",links=links,user=self.current_user)
     
 class MeGroupHandler(BaseHandler):
     def get(self, groupid):
-        group = self.db.get(LinkGroup, int(groupid))
-        
+        group = self.db.get(LinkGroup, int(groupid))        
         print "group"
         self.render("megroup.html",group=group,user=self.current_user, links=group.links)
 

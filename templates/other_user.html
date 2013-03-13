@@ -12,15 +12,20 @@
                     				<img width="130" height="130" class="avatar" src="{{static_url("images/me.jpeg")}}&amp;s=160">
                     			</div>
                 				<div class="profile-info span6">
-                    				<h1>{{user.username}}</h1>
+                    				<h1>{{u.username}}</h1>
                     				<p>
-                    					<a class="" href="/me/settings/profile">
+                    					
                     						{{description}}
-                    					</a>
+                    					
                     				</p>
                     			</div>
                     			<div class="profile-extra">
-                    				<a class="btn" href="/me/settings/profile">Edit my profile</a>
+                                        {% set following_list = [usr.follower_id for usr in user.followings] %}
+                                        {% if u.id not in following_list %}
+                    				<a class="btn" title="Follow" href="/user/follow/user/{{u.id}}">Follow me</a>
+                                        {% else %}
+                                        <a class="btn" title="Unfollow" href="/user/unfollow/user/{{u.id}}">Following</a>
+                                        {% end %}
                     				<div>
                     				</div>
                     			</div>
@@ -39,12 +44,19 @@
                     			{% set gcnt = gcnt + 1 %}
 
                     			<div class="list-widget" style="width:350px">
-                    				<a title="{{user.username}}" href="#">
+                                   {% set following_list = [gg.group_id for gg in user.following_groups] %}
+    {% if group.id not in following_list %}
+        <a class="follow" style="" title="cancel this following"href="/user/follow/group/{{group.id}}">Follow</a>
+    {% else %}
+        <a class="follow" style="" title="cancel this following"href="/user/unfollow/group/{{group.id}}">Following</a>
+    {% end %}
+                                        
+                    				<a title="{{u.username}}" href="#">
                     					<img style="float:left;width:42px;height:42px" class="avatar" src="{{static_url("images/me.jpeg")}}">
                     				</a>
                     				<div class="list-head">
                     					<h3><a href="/group/{{group.id}}">{{group.group_name}}</a></h3>
-                    					<div class="list-meta">by <a href="#">{{user.username}}</a> · {{group.follower_count}} followers
+                    					<div class="list-meta">by <a href="#">{{u.username}}</a> · {{group.follower_count}} followers
                     					</div>
                     				</div>
                     				<ul>
