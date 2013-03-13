@@ -1,0 +1,74 @@
+{% extends "main.html" %}
+{% block content %}
+<div id="body" class="container">
+	<div class="clearfix">
+		<div class="app-bg">
+			<div class="row">
+				<div class="main span12">
+					<div class="profile clearfix">
+						<div class="profile-head row">
+							<div class="profile-head row">
+                				<div class="span2">
+                    				<img width="130" height="130" class="avatar" src="{{static_url("images/me.jpeg")}}&amp;s=160">
+                    			</div>
+                				<div class="profile-info span6">
+                    				<h1>{{user.username}}</h1>
+                    				<p>
+                    					
+                    						{{description}}
+                    					
+                    				</p>
+                    			</div>
+                    			<div class="profile-extra">
+                    				<a class="btn" title="Follow" href="/login">Follow me</a>
+                    				<div>
+                    				</div>
+                    			</div>
+                    		</div>
+                    		<div class="profile-tabs">
+                    			<a class="active" href="#"><strong></strong> Lists</a>
+                    			<a href="#"><strong></strong> Following</a>
+                    			<a href="#"><strong></strong> Followers</a>
+                    		</div>
+
+                    		{% block setting %}
+                    		<div class="profile-lists">
+                    			{% set gcnt = 0 %}
+
+                    			{% for group in groups %}
+                    			{% set gcnt = gcnt + 1 %}
+
+                    			<div class="list-widget" style="width:350px">
+                    				<a title="{{user.username}}" href="#">
+                    					<img style="float:left;width:42px;height:42px" class="avatar" src="{{static_url("images/me.jpeg")}}">
+                    				</a>
+                    				<div class="list-head">
+                    					<h3><a href="/group/{{group.id}}">{{group.group_name}}</a></h3>
+                    					<div class="list-meta">by <a href="#">{{user.username}}</a> · {{group.follower_count}} followers
+                    					</div>
+                    				</div>
+                    				<ul>
+                    					<li>
+                    						<a class="list-view" href="#">View all {{group.links_count}} clips ›</a>
+                    					</li>
+                    				</ul>
+                    			</div>
+
+                    			{% if gcnt == 2 %}
+                    			     <div class="clearfix"></div>
+                    			     {% set gcnt = 0 %}
+                    			
+                    			     {% end %}
+
+                    			{% end %}
+                    		</div>
+                    		{% end %}
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% end %}

@@ -13,6 +13,7 @@ class User(Storm):
 
 	groups = ReferenceSet("User.id", "LinkGroup.user_id")
 	followings = ReferenceSet("User.id", "FollowingUser.user_id")
+	following_groups = ReferenceSet("User.id", "FollowingGroup.user_id")
 
 class LinkGroup(Storm):
 	__storm_table__ = "linkgroup"
@@ -28,6 +29,7 @@ class LinkGroup(Storm):
 
 	user = Reference(user_id, "User.id")
 	links = ReferenceSet("LinkGroup.id", "Link.group_id")
+
 
 class Link(Storm):
 	__storm_table__ = "link"

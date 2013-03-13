@@ -4,7 +4,7 @@
       <div class="clearfix">
             <div id="list-info">
                 <h3 title="All Links" class="name">
-                   My Followerings
+                   My Followings
                 </h3>
 
             </div>
@@ -17,11 +17,12 @@
     	<div class="tab-content">
     		<div class="tab-pane active" id="tab1">
     			{% for staff in users %}
-                        <div class="people-widget " style="width:260px;margin-left:75px;padding-top:10px">
+                        <div class="people-widget " style="top:10px;width:260px;margin-left:65px;padding-top:15px">
                             
                             <img width="48" height="48" class="avatar" src="{{static_url("images/staff1.png")}}">
                             <div  style="width:200px">
-                                <h3><a href="/{{staff.username}}">{{staff.username}}</a></h3>
+                              <a class="follow" style="padding-top:5px;top:5px;right:0" title="cancel this following"href="/me/following/unfollow/user/{{staff.id}}">Following</a>
+                                <h3 style="padding-top:10px"><a href="/user/{{staff.id}}">{{staff.username}}</a></h3>
                                	{% if staff.introduction %}
                                 	{{staff.introduction}}
                                 {% else %}
@@ -39,7 +40,9 @@
                 {% for group in groups %}
                     <div class="list-widget" style="width:580px;margin-left:40px;padding-top:10px">
                      <div > 
-                      
+                      <a  class="follow" style="top:17px" title="cancel this follow" href="/me/following/unfollow/group/{{group.id}}">
+                        Following
+                      </a>
                          <a href="/user/{{group.user.id}}" title="{{ group.user.username }}">
                             <img src="{{ static_url("images/avatar.png") }}" width="42" height="42" class="avatar" style="float:left"></a>
                              <!-- list header --> 

@@ -2,31 +2,44 @@
 
 {% block content %}
 <div class="container" id="body">
-    <div class="clearfix">
-        <div class="row lookup">
-            <div class="main span12 columns">
-                <div class="padding">
-                    <div class="follow-people clearfix">
+    <div class="landing">
+        <div class="home-discover">
+            
+                <div >
+                    <div class="clearfix">
+
                     	{% for staff in staffs %}
-                        <div class="people-widget ">
-                            <a data-type="featured" data-username="{{staff.username}}" data-api-uri="/api/users/12510/" class="follow" href="/follow/user/{{staff.id}}">Follow</a>
-                            <img width="48" height="48" class="avatar" src="{{static_url("images/staff1.png")}}">
-                            <div>
-                                <h3><a href="/{{staff.username}}">{{staff.username}}</a></h3>
-                               	{% if staff.introduction %}
-                                	{{staff.introduction}}
-                                {% else %}
-                                    There is nothing about him/her.
-                                {% end %}
+                        <div class="list-widget" style="height:80px">
+                            <div > 
+                                <a class="follow" title="follow this user" href="/follow/user/{{staff.id}}">
+
+                                    Follow
+                                </a>
+                                <a href="#" title="{{ staff.username }}">
+                            
+                                    <img class="avatar" src="{{static_url("images/staff1.png")}}" width="42" height="42" class="avatar" style="float:left">
+                                </a>
+                                <div class="list-head" style="padding-top:15px"> 
+                                    <h3><a href="/user/{{staff.id}}">{{staff.username}}</a></h3>
+                                
+                                </div> 
                             </div>
+                                <div style="padding-top:15px;padding-left:35px">
+                                    
+                                   	{% if staff.introduction %}
+                                    	{{staff.introduction}}
+                                    {% else %}
+                                        There is nothing about him/her.
+                                    {% end %}
+                                </div>
                         </div>
                         {% end %} 
                                
                     </div>
                 </div>
-            </div>
+            
         </div>
-      
+
     </div>
 </div>
 

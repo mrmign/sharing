@@ -9,7 +9,12 @@
         
         <p>{{ _("Group description") }}</p>
         <h6>{{ group.links_count }} clips · {{ group.follower_count}} followers</h6>
-        <a class="btn" data-target="#signup-modal" data-link="modal" href="#">Follow this list</a>
+{% set following_list = [gg.group_id for gg in user.following_groups] %}
+    {% if group.id not in following_list %}
+        <a class="btn" title="follow" href="/group/follow/group/{{group.id}}">Follow this group</a>
+    {% else %}
+        <a class="btn" title="unfollow" data-target="#signup-modal" data-link="modal" href="/group/unfollow/group/{{group.id}}">Following</a>
+    {% end %}
         <hr>
         <h4>Author</h4>
         <ul class="collaborators">

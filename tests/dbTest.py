@@ -1,10 +1,22 @@
 from models.database import (User, LinkGroup, Link, store)
 from storm.expr import (Desc,Asc, Select)
+user = store.get(User, 22)
+for u in user.followings:
+	print u.follower_id
 
-sub = Select(LinkGroup.id, (LinkGroup.user_id==7))
-result = store.find(Link, Link.group_id.is_in(sub)).order_by(Desc(Link.created))
-for l in result:
-    print l.title, l.created
+# g = store.get(LinkGroup, 1)
+# for l in g.links:
+# 	print l.group_name
+
+# l = store.get(Link, 1)
+# group = l.linkgroup
+# usr = group.user
+# print group.group_name, usr.username
+
+# sub = Select(LinkGroup.id, (LinkGroup.user_id==7))
+# result = store.find(Link, Link.group_id.is_in(sub)).order_by(Desc(Link.created))
+# for l in result:
+#     print l.title, l.created
 
 # user = store.get(User,1)
 # print user.username

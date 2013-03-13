@@ -9,31 +9,102 @@ from models.database import (User, LinkGroup,Link,FollowingUser,FollowingGroup)
 
 class FollowUserHandler(BaseHandler):
     def get(self,user_id):
-
-        # if self.current_user:
-        #     print self.current_user.id, self.current_user.username
-        
         following_user = FollowingUser()
         following_user.user_id = self.current_user.id
         following_user.follower_id = int(user_id)
         self.db.add(following_user)
         self.db.commit()
-        follower_id = Select(FollowingUser.follower_id, FollowingUser.user_id==self.current_user.id)
-        staffs = self.db.find(User,Not(User.id.is_in(follower_id)),User.id!=self.current_user.id)
-        self.render("staff_picks.html",staffs=staffs,user=self.current_user)
+        self.redirect("/me/staff_picks")
+        
 
 class FollowGroupHandler(BaseHandler):
     def get(self,group_id):
-
-        # if self.current_user:
-        #     print self.current_user.id, self.current_user.username
-        
         following_group = FollowingGroup()
         following_group.user_id = self.current_user.id
         following_group.group_id = int(group_id)
         self.db.add(following_group)
         self.db.commit()
-        print group_id
-        group_id = Select(FollowingGroup.group_id, FollowingGroup.user_id==self.current_user.id)
-        groups = self.db.find(LinkGroup, Not(LinkGroup.id.is_in(group_id)),User.id!=self.current_user.id)
-        self.render("popular_groups.html",groups=groups,user=self.current_user)
+        self.redirect("/me/popular_groups")
+        
+
+class FollowerFollowUserHandler(BaseHandler):
+    def get(self,user_id):
+        following_user = FollowingUser()
+        following_user.user_id = self.current_user.id
+        following_user.follower_id = int(user_id)
+        self.db.add(following_user)
+        self.db.commit()
+        self.redirect("/me/follower")
+
+class FollowerUnfollowUserHandler(BaseHandler):
+    def get(self,user_id):
+        following_user=self.db.find(FollowingUser, FollowingUser.follower_id==int(user_id),\
+                        FollowingUser.user_id==self.current_user.id).one()       
+        self.db.remove(following_user)        
+        self.redirect("/me/follower")
+
+class FollowingUnfollowUserHandler(BaseHandler):
+    def get(self,user_id):
+        following_user=self.db.find(FollowingUser, FollowingUser.follower_id==int(user_id),\
+                        FollowingUser.user_id==self.current_user.id).one()       
+        self.db.remove(following_user)        
+        self.redirect("/me/following")
+
+class FollowingUnfollowGroupHandler(BaseHandler):
+    def get(self,group_id):
+        following_group=self.db.find(FollowingGroup, FollowingGroup.group_id==int(group_id),\
+                        FollowingGroup.user_id==self.current_user.id).one()       
+        self.db.remove(following_group)        
+        self.redirect("/me/following")
+
+class GroupFollowGroupHandler(BaseHandler):
+    def get(self, group_id):
+        print int(group_id)
+        following_group = FollowingGroup()
+        following_group.user_id = self.current_user.id
+        following_group.group_id = int(group_id)
+        self.db.add(following_group)
+        self.db.commit()
+        self.redirect("/group/logined/{0}".format(group_id))
+
+class GroupUnfollowGroupHandler(BaseHandler):
+    def get(self,group_id):
+        following_group=self.db.find(FollowingGroup, FollowingGroup.group_id==int(group_id),\
+                        FollowingGroup.user_id==self.current_user.id).one()       
+        self.db.remove(following_group)        
+        self.redirect("/group/logined/{0}".format(group_id))
+
+class UserFollowGroupHandler(BaseHandler):
+    def get(self, group_id):
+        group = self.db.get(LinkGroup,int(group_id))
+        following_group = FollowingGroup()
+        following_group.user_id = self.current_user.id
+        following_group.group_id = int(group_id)
+        self.db.add(following_group)
+        self.db.commit()
+        self.redirect("/user/{0}".format(group.user.id))
+
+class UserUnfollowGroupHandler(BaseHandler):
+    def get(self,group_id):
+        group = self.db.get(LinkGroup,int(group_id))
+        following_group=self.db.find(FollowingGroup, FollowingGroup.group_id==int(group_id),\
+                        FollowingGroup.user_id==self.current_user.id).one()       
+        self.db.remove(following_group)        
+        self.redirect("/user/{0}".format(group.user.id))
+
+            
+class UserFollowUserHandler(BaseHandler):
+    def get(self,user_id):        
+        following_user = FollowingUser()
+        following_user.user_id = self.current_user.id
+        following_user.follower_id = int(user_id)
+        self.db.add(following_user)
+        self.db.commit()
+        self.redirect("/user/{0}".format(user_id))
+
+class UserUnfollowUserHandler(BaseHandler):
+    def get(self, user_id):
+        following_user=self.db.find(FollowingUser, FollowingUser.follower_id==int(user_id),\
+                        FollowingUser.user_id==self.current_user.id)[0]       
+        self.db.remove(following_user)        
+        self.redirect("/user/{0}".format(user_id))

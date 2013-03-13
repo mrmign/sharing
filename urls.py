@@ -2,7 +2,19 @@
 
 from  handlers.home import HomeHandler
 
-from  handlers.following import (FollowUserHandler,FollowGroupHandler)
+from  handlers.following import (FollowUserHandler,
+                                 FollowGroupHandler,
+                                 FollowerFollowUserHandler,
+                                 FollowerUnfollowUserHandler,
+                                 FollowingUnfollowUserHandler,
+                                 FollowingUnfollowGroupHandler,
+                                 GroupFollowGroupHandler,
+                                 GroupUnfollowGroupHandler,
+                                 UserFollowGroupHandler,
+                                 UserUnfollowGroupHandler,
+                                 UserFollowUserHandler,
+                                 UserUnfollowUserHandler
+                                 )
 from handlers.auth import (LoginHandler,SignupHandler,LogoutHandler)
 from handlers.me import (FeedHandler,
                          MyLinksHandler,
@@ -17,13 +29,17 @@ from handlers.me import (FeedHandler,
                          FollowerHandler
                          )
 
-from handlers.group import (GroupHandler,GroupLoginedHandler)
+from handlers.group import (GroupHandler,
+                           GroupLoginedHandler                           
+                           )
 
 from handlers.link import LinkSaveHandler
 
-url_patterns = [
+from handlers.setting import (ProfileHandler,SettingsProfileHandler)
 
-        (r"/group/([0-9]+)", GroupHandler),
+from handlers.user import UserHandler
+
+url_patterns = [
         (r"/", HomeHandler),
 
         (r"/login",LoginHandler),
@@ -52,8 +68,24 @@ url_patterns = [
         (r"/me/staff_picks",StaffPicksHandler),
         (r"/me/popular_groups",PopularGroupsHandler),
         (r"/me/recent_links",RecentLinksHandler),
+
+        (r"/me/profile",ProfileHandler),
+        (r"/me/settings/profile",SettingsProfileHandler),
+
         (r"/group/logined/([0-9]+)", GroupLoginedHandler),
-      
+        (r"/me/follower/follow/user/([0-9]+)",FollowerFollowUserHandler),
+        (r"/me/follower/unfollow/user/([0-9]+)",FollowerUnfollowUserHandler),
+        (r"/me/following/unfollow/user/([0-9]+)",FollowingUnfollowUserHandler),
+        (r"/me/following/unfollow/group/([0-9]+)",FollowingUnfollowGroupHandler),
+
+        (r"/user/([0-9]+)",UserHandler),
+        (r"/user/follow/user/([0-9]+)",UserFollowUserHandler),
+        (r"/user/unfollow/user/([0-9]+)",UserUnfollowUserHandler),
+        (r"/group/follow/group/([0-9]+)",GroupFollowGroupHandler),
+        (r"/group/unfollow/group/([0-9]+)",GroupUnfollowGroupHandler),
+        (r"/user/follow/group/([0-9]+)",UserFollowGroupHandler),
+        (r"/user/unfollow/group/([0-9]+)",UserUnfollowGroupHandler),
+
         ]
 
  
