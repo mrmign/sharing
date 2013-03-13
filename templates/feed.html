@@ -26,7 +26,7 @@
                         <p class="domain">
                             <span>{{ link.url_domain }}</span>
                             <span class="comment-count">
-                                <a title="Comment" href="/me/comment/{{link.id}}">
+                                <a title="Comment" href="/me/comment/{{link.id}}/%2Fme%2Ffeed">
                                     <i class="icon icon-comment"></i>
                                     {% if link.comments_count > 0%}
                                     <strong> {{ link.comments_count }}
@@ -57,9 +57,8 @@
 
                     {% if link.comments_count > 0 %}
                     <div class="feed-comments">
-                        <ul style="list-style:none">
                         {% for comment in link.comments %}
-                        
+                        <ul style="list-style:none">
                             <li>
                                 <div class="clip-content">
                                     <div style="float:right">
@@ -69,27 +68,23 @@
                                             {{ comment.created }}
                                         </span>
                                     </div>
-                                    <div>
                                     <a href="#">
                                         <img width="32" class="avatar"
                                         src="{{static_url("images/me.jpeg")}}&amp;s=160">
                                     </a>
                                     
                                     <a href="#">{{user.username}}</a>
-                                    </div>
-                                    <span  class="s">
+                                    <span class="s">
                                     {{comment.content}}
                                     </span>
                                 </div>
                             </li>
-                            <hr>
-                       
+                        </ul>
                         {% end %}
-                         </ul>
                         <div class="reply" style="padding-left:25px">
-                            <form class="add-comment">
+                            <form class="add-comment" action="/me/entercomment/{{link.id}}/%2Fme%2Ffeed">
                                 <img width="32" class="avatar" src="{{static_url("images/me.jpeg")}}&amp;s=160">
-                                <input type="text" placeholder="Leave a comment...">
+                                <input type="text" placeholder="Leave a comment..." name="enter">
                             </form>
                         </div>
                     </div>

@@ -22,7 +22,10 @@ class BaseHandler(tornado.web.RequestHandler):
 
     def initialize(self):
         # print self.request.uri
-        self.previous = url_unescape(self.get_secure_cookie("previous"))
-        self.set_secure_cookie("previous",str(url_escape(self.request.uri)))
+        if self.get_secure_cookie("common_previous"):
+            self.previous = url_unescape(self.get_secure_cookie("common_previous"))
+        else:
+            self.previous = "/"
+        self.set_secure_cookie("common_previous",str(url_escape(self.request.uri)))
 
    

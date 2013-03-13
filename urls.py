@@ -36,6 +36,7 @@ from handlers.group import (GroupHandler,
 from handlers.link import (LinkSaveHandler,
                            CommentHandler,
                            AddCommentHandler,
+                           EnterCommentHandler,
                            DeleteCommentHandler
                            )
 
@@ -48,6 +49,7 @@ from handlers.user import UserHandler
 # test handler
 from handlers.test import TestHandler
 
+from handlers.redirect import RedirectPageHandler
 url_patterns = [
         (r"/", HomeHandler),
 
@@ -83,8 +85,9 @@ url_patterns = [
         (r"/me/settings/account",SettingsAccountHandler),
         (r"/group/logined/([0-9]+)", GroupLoginedHandler),
 
-        (r"/me/comment/([0-9]+)",CommentHandler),
+        (r"/me/comment/(?P<link_id>[^\/]+)/?(?P<previous_page>[^\/]+)?",CommentHandler),
         (r"/me/addcomment/([0-9]+)",AddCommentHandler),
+        (r"/me/entercomment/(?P<link_id>[^\/]+)/?(?P<previous_page>[^\/]+)?",EnterCommentHandler),
         (r"/me/deletecomment/([0-9]+)",DeleteCommentHandler),
         (r"/me/follower/follow/user/([0-9]+)",FollowUserHandler),
         (r"/me/follower/unfollow/user/([0-9]+)",FollowerUnfollowUserHandler),
@@ -100,6 +103,7 @@ url_patterns = [
         (r"/user/unfollow/group/([0-9]+)",UserUnfollowGroupHandler),
 
         # (r"/hello/(?P<prepage>[^\/]+)", TestHandler),
+        (r"/redirect/pre", RedirectPageHandler),
         ]
 
  

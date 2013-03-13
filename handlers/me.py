@@ -24,7 +24,6 @@ class MyLinksHandler(BaseHandler):
 class MeGroupHandler(BaseHandler):
     def get(self, groupid):
         group = self.db.get(LinkGroup, int(groupid))        
-        print "group"
         self.render("megroup.html",group=group,user=self.current_user, links=group.links)
 
 class StaffPicksHandler(BaseHandler):
