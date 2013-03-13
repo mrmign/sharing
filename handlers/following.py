@@ -14,8 +14,8 @@ class FollowUserHandler(BaseHandler):
         following_user.follower_id = int(user_id)
         self.db.add(following_user)
         self.db.commit()
-        self.redirect("/me/staff_picks")
-        
+        # self.redirect("/me/staff_picks")
+        self.redirect(self.previous)
 
 
 class FollowGroupHandler(BaseHandler):
@@ -25,7 +25,7 @@ class FollowGroupHandler(BaseHandler):
         following_group.group_id = int(group_id)
         self.db.add(following_group)
         self.db.commit()
-        self.redirect("/me/popular_groups")
+        self.redirect(self.previous)
         
 
 class FollowerFollowUserHandler(BaseHandler):
@@ -60,7 +60,6 @@ class FollowingUnfollowGroupHandler(BaseHandler):
 
 class GroupFollowGroupHandler(BaseHandler):
     def get(self, group_id):
-        print int(group_id)
         following_group = FollowingGroup()
         following_group.user_id = self.current_user.id
         following_group.group_id = int(group_id)

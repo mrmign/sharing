@@ -2,6 +2,7 @@
 
 import logging
 import tornado.web
+from tornado.escape import url_escape, url_unescape
 
 from models.database import User
 
@@ -18,3 +19,10 @@ class BaseHandler(tornado.web.RequestHandler):
         if not user_id:
             return None
         return self.db.get(User,int(user_id))
+
+    def initialize(self):
+        # print self.request.uri
+        self.previous = url_unescape(self.get_secure_cookie("previous"))
+        self.set_secure_cookie("previous",str(url_escape(self.request.uri)))
+
+   
