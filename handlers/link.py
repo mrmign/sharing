@@ -5,6 +5,7 @@ from tornado.escape import url_escape
 
 from base import BaseHandler
 from models.database import Link,LinkGroup,Comment
+from utils.processurl import ParseUrl
 
 class LinkSaveHandler(BaseHandler):
 
@@ -73,3 +74,23 @@ class DeleteCommentHandler(BaseHandler):
             l.comments_count -= 1
             self.db.commit()
         self.render("comment.html" ,user=self.current_user,link=l)
+
+class LinkAddHandler(BaseHandler):
+    def get(self):
+        url = self.get_argument('url')
+        group_id =self.get_argument('hd')
+        print url
+        print group_id
+        parse = ParseUrl(url)
+        link = Link()
+        link.title = parse.title
+        link.url = url
+        link.url_domain = parse.domain
+        link.group_id = int(group_id)
+        self.db.add(link)
+        group = self.db.get(LinkGroup, int(group_id))
+        group.links_count += 1
+        self.db.commit()
+        self.redirect("/me/group/{0}".format(group_id))
+        # self.render("megroup.html",group=group,user=self.current_user, links=group.links)
+        

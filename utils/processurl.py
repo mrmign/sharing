@@ -2,6 +2,9 @@
 from urlparse import urlparse
 import urllib2
 from bs4 import BeautifulSoup
+import sys
+reload(sys)
+sys.setdefaultencoding( "utf-8" )
 
 class ParseUrl():
     def __init__(self, url):

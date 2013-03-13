@@ -1,4 +1,4 @@
-#coding=utf-8
+#encoding=utf-8
 
 from storm.expr import (Desc,Asc, Select, Not)
 import tornado.web
@@ -23,8 +23,10 @@ class MyLinksHandler(BaseHandler):
     
 class MeGroupHandler(BaseHandler):
     def get(self, groupid):
-        group = self.db.get(LinkGroup, int(groupid))        
-        self.render("megroup.html",group=group,user=self.current_user, links=group.links)
+        group = self.db.get(LinkGroup, int(groupid))
+        link_id =Select(Link.id, (Link.group_id==int(group.id)))
+        links = self.db.find(Link, Link.id.is_in(link_id)).order_by(Desc(Link.updated))        
+        self.render("megroup.html",group=group,user=self.current_user, links=links)
 
 class StaffPicksHandler(BaseHandler):
     def get(self):

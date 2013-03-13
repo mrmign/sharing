@@ -47,7 +47,10 @@
     		</ul>
     	</div>
     	<div id="new-clip">
-    		<input placeholder="Add a link..." type="text">
+            <form action="/me/addlink">
+                <input type="hidden" value="{{group.id}}" name="hd">
+                <input placeholder="Add a link..." type="text" name="url">
+            </form>
     	</div>
 	</div>
 	<div id="clips-container">
@@ -58,7 +61,7 @@
                     <div class="clip-content">
                         <span class="clip-date">
                             <i class="icon icon-date"></i> 
-                            {{ link.created }}
+                            {{ link.updated }}
                         </span>
                         <a rel="nofollow" class="clip-title" target="_blank" href="{{ link.url }}">
                             {{ link.title }}

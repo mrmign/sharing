@@ -1,5 +1,4 @@
-#coding:utf-8
-
+#encoding=utf-8
 from  handlers.home import HomeHandler
 
 from  handlers.following import (FollowUserHandler,
@@ -37,7 +36,8 @@ from handlers.link import (LinkSaveHandler,
                            CommentHandler,
                            AddCommentHandler,
                            EnterCommentHandler,
-                           DeleteCommentHandler
+                           DeleteCommentHandler,
+                           LinkAddHandler
                            )
 
 from handlers.setting import (ProfileHandler,SettingsProfileHandler,SettingsAccountHandler)
@@ -104,6 +104,8 @@ url_patterns = [
 
         # (r"/hello/(?P<prepage>[^\/]+)", TestHandler),
         (r"/redirect/pre", RedirectPageHandler),
+
+        (r"/me/addlink",LinkAddHandler),
         ]
 
  
