@@ -68,15 +68,17 @@
                                             {{ comment.created }}
                                         </span>
                                     </div>
+                                    <div>
                                     <a href="#">
                                         <img width="32" class="avatar"
                                         src="{{static_url("images/me.jpeg")}}&amp;s=160">
                                     </a>
                                     
                                     <a href="#">{{user.username}}</a>
-                                    <p class="domain">
+                                    <p style="width:300px;height:10px" class="domain">
                                     {{comment.content}}
                                     </p>
+                                    </div>
                                 </div>
                             </li>
                         </ul>
