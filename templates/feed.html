@@ -57,8 +57,9 @@
 
                     {% if link.comments_count > 0 %}
                     <div class="feed-comments">
+                        <ul style="list-style:none">
                         {% for comment in link.comments %}
-                        <ul>
+                        
                             <li>
                                 <div class="clip-content">
                                     <div style="float:right">
@@ -74,13 +75,15 @@
                                     </a>
                                     
                                     <a href="#">{{user.username}}</a>
-                                    <p class="domain">
+                                    <span  class="s">
                                     {{comment.content}}
-                                    </p>
+                                    </span>
                                 </div>
                             </li>
-                        </ul>
+                            <hr>
+                       
                         {% end %}
+                         </ul>
                         <div class="reply" style="padding-left:25px">
                             <form class="add-comment">
                                 <img width="32" class="avatar" src="{{static_url("images/me.jpeg")}}&amp;s=160">
