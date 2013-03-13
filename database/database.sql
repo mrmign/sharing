@@ -52,3 +52,12 @@ CREATE TABLE following_group (
 	user_id int NOT NULL REFERENCES user(id),
 	group_id int NOT NULL REFERENCES linkgroup(id)
 );
+
+DROP TABLE IF EXISTS comment;
+CREATE TABLE comment (
+	id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	content varchar(500),
+	user_id int NOT NULL REFERENCES user(id),
+	link_id int NOT NULL REFERENCES link(id),
+	created timestamp
+);
