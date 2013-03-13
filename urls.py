@@ -45,6 +45,9 @@ from handlers.setting import (ProfileHandler,SettingsProfileHandler)
 
 from handlers.user import UserHandler
 
+# test handler
+from handlers.test import TestHandler
+
 url_patterns = [
         (r"/", HomeHandler),
 
@@ -96,6 +99,7 @@ url_patterns = [
         (r"/user/follow/group/([0-9]+)",UserFollowGroupHandler),
         (r"/user/unfollow/group/([0-9]+)",UserUnfollowGroupHandler),
 
+        # (r"/hello/(?P<prepage>[^\/]+)", TestHandler),
         ]
 
  

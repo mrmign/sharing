@@ -6,13 +6,8 @@ from base import BaseHandler
 
 from models.database import User, LinkGroup,Link,FollowingUser,FollowingGroup,Comment
 
-
-
-
 class FeedHandler(BaseHandler):
     def get(self):
-
-        
         follower_id = Select(FollowingUser.follower_id,(FollowingUser.user_id==self.current_user.id))
         group_id = Select(LinkGroup.id, (LinkGroup.user_id.is_in(follower_id)))
 
