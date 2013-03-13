@@ -7,7 +7,6 @@ from models.database import User
 
 class ProfileHandler(BaseHandler):
 	def get(self):
-		print self.current_user
 		introduction = self.current_user.introduction
 		if not introduction:
 			introduction="Add Description"

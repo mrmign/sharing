@@ -15,7 +15,33 @@
             
                 
                     <div class="follow-people clearfix">
-                    	{% for staff in users %}
+                    {% set following_list = [u.follower_id for u in user.followings] %}
+
+
+                        {% for staff in users %}
+
+                        <div class="people-widget ">
+                            {% if staff.id not in following_list %}
+                                <a class="follow" title="follow this user" href="/me/follower/follow/user/{{staff.id}}">
+                                    Follow
+                                </a>
+                            {% else %}
+                                <a class="follow" title="cancel this following"href="/me/follower/unfollow/user/{{staff.id}}">
+                                    Following
+                                </a>
+                            {% end %}
+                            <img width="48" height="48" class="avatar" src="{{static_url("images/staff1.png")}}">
+                            <div>
+                                <h3><a href="/user/{{staff.id}}">{{staff.username}}</a></h3>
+                                {% if staff.introduction %}
+                                    {{staff.introduction}}
+                                {% else %}
+                                    There is nothing about him/her.
+                                {% end %}
+                            </div>
+                        </div>
+                        {% end %} 
+                    	<!-- {% for staff in users %}
                         <div class="people-widget ">
                             
                             <img width="48" height="48" class="avatar" src="{{static_url("images/staff1.png")}}">
@@ -28,7 +54,7 @@
                                 {% end %}
                             </div>
                         </div>
-                        {% end %} 
+                        {% end %}  -->
                                
                     </div>
                 

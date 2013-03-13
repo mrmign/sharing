@@ -40,11 +40,11 @@
         
         <p>{{ _("Group description") }}</p>
         <h6>{{ group.links_count }} clips · {{ group.follower_count}} followers</h6>
-        <a class="btn" data-target="#signup-modal" data-link="modal" href="#">Follow this list</a>
+        <a class="btn" data-target="#signup-modal" data-link="modal" href="/login">Follow this group</a>
         <hr>
         <h4>Author</h4>
         <ul class="collaborators">
-            <li><a href="/{{ group.user.id }}">{{ group.user.username }}</a></li>
+            <li><a href="/user/{{ group.user.id }}">{{ group.user.username }}</a></li>
         </ul>
         <hr>
         <!-- <h6>Share list</h6> -->
