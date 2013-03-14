@@ -37,7 +37,9 @@ from handlers.link import (LinkSaveHandler,
                            AddCommentHandler,
                            EnterCommentHandler,
                            DeleteCommentHandler,
-                           LinkAddHandler
+                           DeleteMylinkHandler,
+                           LinkEditHandler,
+                           LinkAddHandler,
                            )
 
 from handlers.setting import (ProfileHandler,SettingsProfileHandler,SettingsAccountHandler)
@@ -89,21 +91,12 @@ url_patterns = [
         (r"/me/addcomment/([0-9]+)",AddCommentHandler),
         (r"/me/entercomment/(?P<link_id>[^\/]+)/?(?P<previous_page>[^\/]+)?",EnterCommentHandler),
         (r"/me/deletecomment/([0-9]+)",DeleteCommentHandler),
-        (r"/me/follower/follow/user/([0-9]+)",FollowUserHandler),
-        (r"/me/follower/unfollow/user/([0-9]+)",FollowerUnfollowUserHandler),
-        (r"/me/following/unfollow/user/([0-9]+)",FollowingUnfollowUserHandler),
-        (r"/me/following/unfollow/group/([0-9]+)",FollowingUnfollowGroupHandler),
 
         (r"/user/([0-9]+)",UserHandler),
-        (r"/user/follow/user/([0-9]+)",FollowUserHandler),
-        (r"/user/unfollow/user/([0-9]+)",UserUnfollowUserHandler),
-        (r"/group/follow/group/([0-9]+)",FollowGroupHandler),
-        (r"/group/unfollow/group/([0-9]+)",GroupUnfollowGroupHandler),
-        (r"/user/follow/group/([0-9]+)",FollowGroupHandler),
-        (r"/user/unfollow/group/([0-9]+)",UserUnfollowGroupHandler),
-
-        # (r"/hello/(?P<prepage>[^\/]+)", TestHandler),
+        
         (r"/redirect/pre", RedirectPageHandler),
+        (r"/delete/mylink/([0-9]+)",DeleteMylinkHandler),
+        (r"/link/edit/(?P<link_id>[^\/]+)/?(?P<previous_page>[^\/]+)?",LinkEditHandler),
 
         (r"/me/addlink",LinkAddHandler),
         ]

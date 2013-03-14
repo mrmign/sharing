@@ -16,80 +16,57 @@
                 {% for link in links %}
 
 
-                <li class="clip">
-                    
-                <div class="clip-content">
-
-                        
-                        <span class="clip-date"><i class="icon icon-date"></i> {{ link.created }}</span>
-                        <a rel="nofollow" class="clip-title" target="_blank" href="{{ link.url }}">{{ link.title }}</a>
-
-                        <p class="domain">
-                            <!-- <i style="background-image:url('');" class="fav"></i> -->
-                            <span>{{ link.url_domain }}</span>
-                            <span class="comment-count">
-                                <a title="Comment" href="/me/comment/{{link.id}}/%2Fme%2Fmylinks"><i class="icon icon-comment"></i>
-                            {% if link.comments_count > 0%}
-                                <strong> {{ link.comments_count }}</strong>
-                            {% end %}                               
-                                Comment
-                            </a>
+                <li data-cid="c24" class="clip ui-draggable">
+                <div class="display">
+                    <div class="clip-content">
+                        <span class="clip-date">
+                            <i class="icon icon-date"></i> 
+                            {{ link.created }}
                         </span>
+                        <a rel="nofollow" style="width:500px" class="clip-title" target="_blank" href="{{ link.url }}">
+                            {{ link.title }}
+                         </a>
+                        <p class="domain">
+                            <i class="fav" >
+                            </i>
                             <span>
-                                <a class="like  " href="#">
-                                    <i class="icon icon-like"></i>
+                                {{ link.url_domain }}
+                            </span>
+                            <span>
+                                · <span class="comment-count">
+                                    <a href="/me/comment/{{link.id}}/%2Fme%2Fmylinks" title="Comment">
+                                        <i class="icon icon-comment">
+                                        </i>
+                                        Add comment
+                                    </a>
+                                </span>
+                            </span>
+                            <span>
+                                <a href="#" class="clip-like isOwn" rel="tooltip" title="You can't like your own clip">
+                                    <i class="icon icon-like">
+                                    </i>
                                     <span>
-                                        {% if link.like_count > 0 %}
-                                            {{ link.like_count}} likes
-                                        {% else %}
-                                            likes
-                                        {% end %}
+                                        Like
                                     </span>
                                 </a>
                             </span>
-                            <span>
-                                <a class="like  " href="#">
-                                    <i class="icon icon-edit pull-right"> Edit</i>
-                                    
-                                </a>
-                                
-                            </span>
                         </p>
-                </div>
-                {% if link.comments_count > 0 %}
-                    <div class="feed-comments">
-                        {% for comment in link.comments %}
-                        <ul>
-                            <li>
-                                <div class="clip-content">
-                                    <div style="float:right">
-                                        <span class="clip-date">
-                                            <i class="icon icon-date">
-                                            </i>
-                                            {{ comment.created }}
-                                        </span>
-                                    </div>
-                                    <a href="#">
-                                        <img width="32" class="avatar"
-                                        src="{{static_url("images/me.jpeg")}}&amp;s=160">
-                                    </a>
-                                    
-                                    <a href="#">{{user.username}}</a>
-                                    <p class="domain">
-                                    {{comment.content}}
-                                    </p>
-                                </div>
-                            </li>
-                        </ul>
-                        {% end %}
-                        <div class="reply" style="padding-left:25px">
-                            <form class="add-comment" action="/me/entercomment/{{link.id}}/%2Fme%2Fmylinks">
-                                <img width="32" class="avatar" src="{{static_url("images/me.jpeg")}}&amp;s=160">
-                                <input type="text" placeholder="Leave a comment..." name="enter">
-                            </form>
-                        </div>
                     </div>
-                    {% end %}
+                    <ul class="actions">
+                        
+                        <li class="clip-edit">
+                            <a href="/link/edit/{{link.id}}/%2Fme%2Fmylinks" rel="tooltip" title="Edit">
+                                Edit
+                            </a>
+                        </li>
+                                                
+                        <li class="clip-destroy">
+                            <a href="/delete/mylink/{{link.id}}" rel="tooltip" title="Remove">
+                                X
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </li>
                {% end %}
             </ul>
