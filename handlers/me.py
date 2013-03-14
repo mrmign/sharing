@@ -12,7 +12,7 @@ class FeedHandler(BaseHandler):
         group_id = Select(LinkGroup.id, (LinkGroup.user_id.is_in(follower_id)))
 
         links = self.db.find(Link, Link.group_id.is_in(group_id)).order_by(Desc(Link.created))
-        self.render("feed.html",links=links,user=self.current_user)
+        self.render("feed.html",links=links[:10],user=self.current_user)
 
 class MyLinksHandler(BaseHandler):
     def get(self):

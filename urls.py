@@ -4,16 +4,8 @@ from  handlers.home import HomeHandler
 
 from  handlers.following import (FollowUserHandler,
                                  FollowGroupHandler,
-                                 FollowerFollowUserHandler,
-                                 FollowerUnfollowUserHandler,
-                                 FollowingUnfollowUserHandler,
-                                 FollowingUnfollowGroupHandler,
-                                 GroupFollowGroupHandler,
-                                 GroupUnfollowGroupHandler,
-                                 UserFollowGroupHandler,
-                                 UserUnfollowGroupHandler,
-                                 UserFollowUserHandler,
-                                 UserUnfollowUserHandler
+                                 UnfollowUserHandler,
+                                 UnfollowGroupHandler
                                  )
 from handlers.auth import (LoginHandler,SignupHandler,LogoutHandler)
 from handlers.me import (FeedHandler,
@@ -50,6 +42,7 @@ from handlers.user import UserHandler
 from handlers.test import TestHandler
 
 from handlers.redirect import RedirectPageHandler
+from handlers.loadmore import LoadMoreHandler
 url_patterns = [
         (r"/", HomeHandler),
 
@@ -89,21 +82,16 @@ url_patterns = [
         (r"/me/addcomment/([0-9]+)",AddCommentHandler),
         (r"/me/entercomment/(?P<link_id>[^\/]+)/?(?P<previous_page>[^\/]+)?",EnterCommentHandler),
         (r"/me/deletecomment/([0-9]+)",DeleteCommentHandler),
-        (r"/me/follower/follow/user/([0-9]+)",FollowUserHandler),
-        (r"/me/follower/unfollow/user/([0-9]+)",FollowerUnfollowUserHandler),
-        (r"/me/following/unfollow/user/([0-9]+)",FollowingUnfollowUserHandler),
-        (r"/me/following/unfollow/group/([0-9]+)",FollowingUnfollowGroupHandler),
+        
+        (r"/unfollow/user/([0-9]+)",UnfollowUserHandler),
+        
+        (r"/unfollow/group/([0-9]+)",UnfollowGroupHandler),
 
         (r"/user/([0-9]+)",UserHandler),
-        (r"/user/follow/user/([0-9]+)",FollowUserHandler),
-        (r"/user/unfollow/user/([0-9]+)",UserUnfollowUserHandler),
-        (r"/group/follow/group/([0-9]+)",FollowGroupHandler),
-        (r"/group/unfollow/group/([0-9]+)",GroupUnfollowGroupHandler),
-        (r"/user/follow/group/([0-9]+)",FollowGroupHandler),
-        (r"/user/unfollow/group/([0-9]+)",UserUnfollowGroupHandler),
-
-        # (r"/hello/(?P<prepage>[^\/]+)", TestHandler),
+       
         (r"/redirect/pre", RedirectPageHandler),
+        (r"/loadmore",LoadMoreHandler),
+        (r"/test", TestHandler),
         ]
 
  

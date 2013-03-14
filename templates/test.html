@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+</script>
+
+</head>
+<body>
+
+<button>向页面发送 HTTP POST 请求，并获得返回的结果</button>
+<a class="btn" href="#">click test</a>
+<script>
+$(document).ready(function(){
+
+  var fetch_url = "/test";
+  var next_page = 2; 
+  $(".btn").click(function(){
+    $.post(fetch_url,
+    {
+      type:"feed",
+      page_num:next_page
+    },
+    function(data,status){
+      alert("数据：" + data.html_data + "\n状态：" + status);
+      next_page = next_page + 1;
+    },
+    "json");
+  });
+});
+</script>
+</body>
+</html>

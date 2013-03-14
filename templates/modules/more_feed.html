@@ -1,0 +1,39 @@
+{% for link in links %}
+<li class="clip">
+	<div class="clip-content">
+		<span class="clip-date"><i class="icon icon-date"></i>
+			{{link.created}}
+		</span>
+		<a href="{{link.url}}" target="_blank" class="clip-title" rel="nofollow">
+			{{link.title}}
+		</a>
+		<p class="domain">
+			<span>{{link.url_domain}}</span>
+			<span class="comment-count">
+			<a href="/me/comment/{{link.id}}/%2Fme%2Ffeed" title="Comment">
+				<i class="icon icon-comment"></i>
+				Comment
+			</a>
+			</span>
+			<span>
+				<a href="#" class="like ">
+					<i class="icon icon-like"></i>
+					<span>likes</span>
+				</a>
+			</span>
+			<span>
+				<a href="#" class="like ">
+					<i class="icon icon-edit pull-right"> Edit</i>
+				</a>
+			</span>
+		</p>
+	</div>
+</li>
+{% end %}
+{% if ret_count < 10 %}
+<li class="clip">
+	<div class="clip-content">
+		<span class="clip-title"> You have reached the bottom!</span>
+	</div>
+</li>
+{% end %}

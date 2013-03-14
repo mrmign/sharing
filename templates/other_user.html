@@ -22,9 +22,9 @@
                                 <div class="profile-extra">
                                         {% set following_list = [usr.follower_id for usr in user.followings] %}
                                         {% if u.id not in following_list %}
-                                    <a class="btn" title="Follow" href="/user/follow/user/{{u.id}}">Follow me</a>
+                                    <a class="btn" title="Follow" href="/follow/user/{{u.id}}">Follow me</a>
                                         {% else %}
-                                        <a class="btn" title="Unfollow" href="/user/unfollow/user/{{u.id}}">Following</a>
+                                        <a class="btn" title="Unfollow" href="/unfollow/user/{{u.id}}">Following</a>
                                         {% end %}
                                     <div>
                                     </div>
@@ -59,12 +59,12 @@
                                 {% for group in groups %}
                                 {% set gcnt = gcnt + 1 %}
 
-                                <div class="list-widget" style="width:350px">
+                                <div class="list-widget" style="width:350px;height:200px">
                                    {% set following_list = [gg.group_id for gg in user.following_groups] %}
                                     {% if group.id not in following_list %}
-                                        <a class="follow" style="" title="cancel this following"href="/user/follow/group/{{group.id}}">Follow</a>
+                                        <a class="follow" style="" title="cancel this following"href="/follow/group/{{group.id}}">Follow</a>
                                     {% else %}
-                                        <a class="follow" style="" title="cancel this following"href="/user/unfollow/group/{{group.id}}">Following</a>
+                                        <a class="follow" style="" title="cancel this following"href="/unfollow/group/{{group.id}}">Following</a>
                                     {% end %}
                                         
                                     <a title="{{u.username}}" href="#">
