@@ -20,8 +20,7 @@ class LinkSaveHandler(BaseHandler):
         link.group_id = int(group_id)
         self.db.add(link)
         self.db.commit()
-        
-        self.render("group_logined.html",group=group,user=self.current_user)
+        self.redirect(self.previous)
 
 
 class CommentHandler(BaseHandler):
@@ -73,3 +72,20 @@ class DeleteCommentHandler(BaseHandler):
             l.comments_count -= 1
             self.db.commit()
         self.render("comment.html" ,user=self.current_user,link=l)
+
+class DeleteMylinkHandler(BaseHandler):
+    def get(self,link_id):
+        link = self.db.get(Link,int(link_id))
+        self.db.remove(link)
+        self.db.commit()
+        self.redirect(self.previous)
+
+class LinkEditHandler(BaseHandler):
+
+    @tornado.web.authenticated
+    def get(self,link_id, previous_page):
+        # print previous_page
+        # print url_escape(previous_page)
+        self.set_secure_cookie("previous",url_escape(previous_page))
+        link = self.db.get(Link,int(link_id))
+        self.render("link_edit.html" ,user=self.current_user,link=link)

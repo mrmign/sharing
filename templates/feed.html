@@ -1,6 +1,6 @@
 {% extends "me_options.html" %}
 {% block option_body %}
-
+<div class="public-share public-list">
     <div id="clips" style="display: block;">
         <div class="clearfix">
             <div id="list-info">
@@ -14,85 +14,67 @@
         </div>
         <div id="clips-container">
             <ul class="unstyled" id="clip-list" style="display: block;">
-                {% for link in links %}
+               {% for link in links %}
                 <li class="clip">
-                    <div class="clip-content">
-                        <span class="clip-date"><i class="icon icon-date"></i>
-                            {{ link.created }}
-                        </span>
-                        <a rel="nofollow" class="clip-title" target="_blank" href="{{ link.url }}">
-                            {{ link.title }}
-                        </a>
-                        <p class="domain">
-                            <span>{{ link.url_domain }}</span>
-                            <span class="comment-count">
-                                <a title="Comment" href="/me/comment/{{link.id}}/%2Fme%2Ffeed">
-                                    <i class="icon icon-comment"></i>
-                                    {% if link.comments_count > 0%}
-                                    <strong> {{ link.comments_count }}
-                                    </strong>
-                                    {% end %}
-                                    Comment
+                <div class="clip-content">
+                        <ul class="clip-save" style="list-style:none">
+                            <li class="btn-group">
+                                <a  title="+save" class="btn dropdown-toggle settings" data-toggle="dropdown" href="#">
+                                    <span><i class="icon icon-save"></i>save</span>
+                                    <span class="caret">
+
+                                    </span>
                                 </a>
-                            </span>
+                                <ul class="dropdown-menu pull-right" >
+                                    {% for g in user.groups%}
+                                    <li >
+                                        <a href="/link/save/{{g.id}}/{{link.id}}" class="rss" title="save this link into {{g.group_name}}">
+                                            {{g.group_name}}
+                                        </a>
+                                    </li>
+                                    
+                                    {% end %}
+                                </ul>
+                            </li>
+                            
+                        </ul>
+                        <div class="clip-save-popup"></div>
+                        <span class="clip-date"><i class="icon icon-date"></i> {{ link.created }}</span>
+                        <a rel="nofollow" style="width:450px"class="clip-title" target="_blank" href="{{ link.url }}">{{ link.title }}</a>
+
+                        <p class="domain">
+                            
+                            <span>{{ link.url_domain }}</span>
+                            <span>›</span>
+                            <span>added by <a title="{{ link.linkgroup.user.username }}" href="/user/{{ link.linkgroup.user_id }}">{{ link.linkgroup.user.username }}</a></span>
+                            <span class="comment-count"><a title="Comment" href="/me/comment/{{link.id}}/%2Fme%2Ffeed"><i class="icon icon-comment"></i>
+                            {% if link.comments_count > 0%}
+                                <strong> {{ link.comments_count }}</strong>
+                            {% end %}                           
+                                Comment
+                            </a></span>
                             <span>
                                 <a class="like  " href="#">
                                     <i class="icon icon-like"></i>
                                     <span>
                                         {% if link.like_count > 0 %}
-                                        {{ link.like_count}} likes
+                                            {{ link.like_count}} likes
                                         {% else %}
-                                        likes
+                                            likes
                                         {% end %}
                                     </span>
                                 </a>
                             </span>
-                            <span>
-                                <a class="like  " href="#">
-                                    <i class="icon icon-edit pull-right"> Edit</i>
-                                </a>
-                            </span>
+                            
+                            <!-- <span class="s">
+                                {{link.description}}
+                            </span> -->
+                           
                         </p>
-                    </div>
-
-                    {% if link.comments_count > 0 %}
-                    <div class="feed-comments">
-                        {% for comment in link.comments %}
-                        <ul style="list-style:none">
-                            <li>
-                                <div class="clip-content">
-                                    <div style="float:right">
-                                        <span class="clip-date">
-                                            <i class="icon icon-date">
-                                            </i>
-                                            {{ comment.created }}
-                                        </span>
-                                    </div>
-                                    <a href="#">
-                                        <img width="32" class="avatar"
-                                        src="{{static_url("images/me.jpeg")}}&amp;s=160">
-                                    </a>
-                                    
-                                    <a href="#">{{user.username}}</a>
-                                    <span class="s">
-                                    {{comment.content}}
-                                    </span>
-                                </div>
-                            </li>
-                        </ul>
-                        {% end %}
-                        <div class="reply" style="padding-left:25px">
-                            <form class="add-comment" action="/me/entercomment/{{link.id}}/%2Fme%2Ffeed">
-                                <img width="32" class="avatar" src="{{static_url("images/me.jpeg")}}&amp;s=160">
-                                <input type="text" placeholder="Leave a comment..." name="enter">
-                            </form>
-                        </div>
-                    </div>
-                    {% end %}
-
-
-                </li>
-                {% end %}
+                </div>
+            </li>  
+              
+               {% end %}
             </ul>
             <div id="no-clips" style="display: none;">
                 <p>
@@ -113,5 +95,6 @@
             </div>
         </div>
     </div>
+</div>
     {% end %}
 

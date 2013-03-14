@@ -11,17 +11,20 @@
                     <li style="list-style: none; display: inline">
                         <div id="system-lists">
                         groups:
+                        <ul>
+                           
                         {% for g in user.groups %}
                             
-                                <ul>
+                                
                                     <li class="list ui-droppable" id="list-299357">
                                         <a data-link="push"
                                         data-list-id="299357" data-list-slug="inbox" href=
                                         "/me/group/{{g.id}}">{{g.group_name}}
                                         </a>
                                     </li>
-                                </ul>     
+                                    
                                 {% end %}
+                         </ul>
                             </div> 
                             <div id="new_list">
                                 <a class="add-list" href="/me/addgroup">+ New Group</a>

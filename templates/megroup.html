@@ -60,7 +60,7 @@
                             <i class="icon icon-date"></i> 
                             {{ link.created }}
                         </span>
-                        <a rel="nofollow" class="clip-title" target="_blank" href="{{ link.url }}">
+                        <a rel="nofollow" style="width:500px" class="clip-title" target="_blank" href="{{ link.url }}">
                             {{ link.title }}
                          </a>
                         <p class="domain">
@@ -90,28 +90,15 @@
                         </p>
                     </div>
                     <ul class="actions">
-                        <li class="clip-reader">
-                            <a href="" rel="tooltip" title="View in Reader">
-                                Reader
-                            </a>
-                        </li>
+                        
                         <li class="clip-edit">
                             <a href="" rel="tooltip" title="Edit">
                                 Edit
                             </a>
                         </li>
-                        <li class="clip-read-later ">
-                            <a href="" rel="tooltip" title="Mark as Read Later">
-                                Read Later
-                            </a>
-                        </li>
-                        <li class="clip-star">
-                            <a href="" rel="tooltip" title="Star">
-                                Star
-                            </a>
-                        </li>
+                                                
                         <li class="clip-destroy">
-                            <a href="" rel="tooltip" title="Remove">
+                            <a href="/delete/mylink/{{link.id}}" rel="tooltip" title="Remove">
                                 X
                             </a>
                         </li>

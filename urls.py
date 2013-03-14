@@ -37,7 +37,9 @@ from handlers.link import (LinkSaveHandler,
                            CommentHandler,
                            AddCommentHandler,
                            EnterCommentHandler,
-                           DeleteCommentHandler
+                           DeleteCommentHandler,
+                           DeleteMylinkHandler,
+                           LinkEditHandler
                            )
 
 from handlers.setting import (ProfileHandler,SettingsProfileHandler,SettingsAccountHandler)
@@ -102,8 +104,9 @@ url_patterns = [
         (r"/user/follow/group/([0-9]+)",FollowGroupHandler),
         (r"/user/unfollow/group/([0-9]+)",UserUnfollowGroupHandler),
 
-        # (r"/hello/(?P<prepage>[^\/]+)", TestHandler),
         (r"/redirect/pre", RedirectPageHandler),
+        (r"/delete/mylink/([0-9]+)",DeleteMylinkHandler),
+        (r"/link/edit/(?P<link_id>[^\/]+)/?(?P<previous_page>[^\/]+)?",LinkEditHandler),
         ]
 
  
