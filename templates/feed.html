@@ -15,7 +15,9 @@
         </div>
         <div id="clips-container">
             <ul class="unstyled" id="clip-list" style="display: block;">
+                {% set count_link = 0 %}
                {% for link in links %}
+               {% set count_link = count_link + 1 %}
                 <li class="clip">
                 <div class="clip-content">
                         <ul class="clip-save" style="list-style:none">
@@ -77,35 +79,33 @@
               
                {% end %}
             </ul>
-            {% if total_page > 1 %} 
+            {% if count_link == 10 %} 
             <div style="display:block;margin:15px 10px;text-align:center;font-size:23px" id="load-more">
                 <a class="click-load-more" href="javascript:void(0);" style="color: #848484;" onclick="getmore();">Click here to view more!</a>
             </div>
             {% end %}
            
-<script>
-  function getmore(){
-  var fetch_url = "/loadmore";
-  var next_page = 2; 
-   $.post(fetch_url,
+<script type="text/javascript">
+var fetch_url = "/loadmore";
+var next_page = 2; 
+function getmore(){
+$.post(fetch_url,
     {
       type:1,
       page_num:next_page
     },
-    function(data,status){
-        if(next_page <= data.total)
+    function(data){
+        if(200 == data.status_code)
         {
-          $("#clip-list").append(data.ret);
-          next_page = next_page + 1;            
+            $("#clip-list").append(data.ret);
+            next_page = next_page + 1;            
         }
-      if(data.cnt < 10)
-      {
-        $("#load-more").remove();
-      }
-    },
-    "json");
+        else if (202 == data.status_code)
+        {
+            $("#load-more").remove();
+        }
+    },"json");
 }
-
 </script>
             <div id="no-clips" style="display: none;">
                 <p>
@@ -127,7 +127,7 @@
         </div>
     </div>
 </div>
-    {% end %}
+{% end %}
 
 {% block tailjs %}
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
