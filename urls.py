@@ -1,5 +1,4 @@
-#coding:utf-8
-
+#encoding=utf-8
 from  handlers.home import HomeHandler
 
 from  handlers.following import (FollowUserHandler,
@@ -39,7 +38,8 @@ from handlers.link import (LinkSaveHandler,
                            EnterCommentHandler,
                            DeleteCommentHandler,
                            DeleteMylinkHandler,
-                           LinkEditHandler
+                           LinkEditHandler,
+                           LinkAddHandler,
                            )
 
 from handlers.setting import (ProfileHandler,SettingsProfileHandler,SettingsAccountHandler)
@@ -107,6 +107,8 @@ url_patterns = [
         (r"/redirect/pre", RedirectPageHandler),
         (r"/delete/mylink/([0-9]+)",DeleteMylinkHandler),
         (r"/link/edit/(?P<link_id>[^\/]+)/?(?P<previous_page>[^\/]+)?",LinkEditHandler),
+
+        (r"/me/addlink",LinkAddHandler),
         ]
 
  
