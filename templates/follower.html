@@ -22,11 +22,11 @@
 
                         <div class="people-widget ">
                             {% if staff.id not in following_list %}
-                                <a class="follow" title="follow this user" href="/me/follower/follow/user/{{staff.id}}">
+                                <a class="follow" title="follow this user" href="/follow/user/{{staff.id}}">
                                     Follow
                                 </a>
                             {% else %}
-                                <a class="follow" title="cancel this following"href="/me/follower/unfollow/user/{{staff.id}}">
+                                <a class="follow" title="cancel this following"href="/unfollow/user/{{staff.id}}">
                                     Following
                                 </a>
                             {% end %}
@@ -41,20 +41,7 @@
                             </div>
                         </div>
                         {% end %} 
-                    	<!-- {% for staff in users %}
-                        <div class="people-widget ">
-                            
-                            <img width="48" height="48" class="avatar" src="{{static_url("images/staff1.png")}}">
-                            <div>
-                                <h3><a href="/{{staff.username}}">{{staff.username}}</a></h3>
-                               	{% if staff.introduction %}
-                                	{{staff.introduction}}
-                                {% else %}
-                                    There is nothing about him/her.
-                                {% end %}
-                            </div>
-                        </div>
-                        {% end %}  -->
+                    	
                                
                     </div>
                 

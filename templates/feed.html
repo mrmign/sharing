@@ -1,4 +1,5 @@
 {% extends "me_options.html" %}
+
 {% block option_body %}
 <div class="public-share public-list">
     <div id="clips" style="display: block;">
@@ -76,6 +77,36 @@
               
                {% end %}
             </ul>
+            {% if total_page > 1 %} 
+            <div style="display:block;margin:15px 10px;text-align:center;font-size:23px" id="load-more">
+                <a class="click-load-more" href="javascript:void(0);" style="color: #848484;" onclick="getmore();">Click here to view more!</a>
+            </div>
+            {% end %}
+           
+<script>
+  function getmore(){
+  var fetch_url = "/loadmore";
+  var next_page = 2; 
+   $.post(fetch_url,
+    {
+      type:1,
+      page_num:next_page
+    },
+    function(data,status){
+        if(next_page <= data.total)
+        {
+          $("#clip-list").append(data.ret);
+          next_page = next_page + 1;            
+        }
+      if(data.cnt < 10)
+      {
+        $("#load-more").remove();
+      }
+    },
+    "json");
+}
+
+</script>
             <div id="no-clips" style="display: none;">
                 <p>
                     <strong>Find clips to add to this list</strong>
@@ -98,3 +129,7 @@
 </div>
     {% end %}
 
+{% block tailjs %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
+{% end %}

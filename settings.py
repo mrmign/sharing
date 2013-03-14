@@ -12,3 +12,5 @@ settings = dict(
         login_url="/login",
         debug=True,
         )
+
+NUM_FEED = 10

@@ -5,14 +5,14 @@ import tornado.web
 from base import BaseHandler
 
 from models.database import User, LinkGroup,Link,FollowingUser,FollowingGroup,Comment
-
+from settings import NUM_FEED
 class FeedHandler(BaseHandler):
     def get(self):
         follower_id = Select(FollowingUser.follower_id,(FollowingUser.user_id==self.current_user.id))
         group_id = Select(LinkGroup.id, (LinkGroup.user_id.is_in(follower_id)))
 
         links = self.db.find(Link, Link.group_id.is_in(group_id)).order_by(Desc(Link.created))
-        self.render("feed.html",links=links,user=self.current_user)
+        self.render("feed.html",links=links[:10],user=self.current_user,total_page = (links.count()-1)/NUM_FEED + 1)
 
 class MyLinksHandler(BaseHandler):
     def get(self):

@@ -11,14 +11,14 @@
         <h6>{{ group.links_count }} clips · {{ group.follower_count}} followers</h6>
 {% set following_list = [gg.group_id for gg in user.following_groups] %}
     {% if group.id not in following_list %}
-        <a class="btn" title="follow" href="/group/follow/group/{{group.id}}">Follow this group</a>
+        <a class="btn" title="follow" href="/follow/group/{{group.id}}">Follow this group</a>
     {% else %}
-        <a class="btn" title="unfollow" data-target="#signup-modal" data-link="modal" href="/group/unfollow/group/{{group.id}}">Following</a>
+        <a class="btn" title="unfollow" data-target="#signup-modal" data-link="modal" href="/unfollow/group/{{group.id}}">Following</a>
     {% end %}
         <hr>
         <h4>Author</h4>
         <ul class="collaborators">
-            <li><a href="/{{ group.user.id }}">{{ group.user.username }}</a></li>
+            <li><a href="/user/{{ group.user.id }}">{{ group.user.username }}</a></li>
         </ul>
         <hr>
         <!-- <h6>Share list</h6> -->
