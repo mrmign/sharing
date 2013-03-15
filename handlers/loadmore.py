@@ -28,7 +28,7 @@ class LoadMoreHandler(BaseHandler):
     def _get_more_feed(self, page):
         follower_id = Select(FollowingUser.follower_id,(FollowingUser.user_id==self.current_user.id))
         group_id = Select(LinkGroup.id, (LinkGroup.user_id.is_in(follower_id)))
-        links = self.db.find(Link, Link.group_id.is_in(group_id)).order_by(Desc(Link.created))
+        links = self.db.find(Link, Link.group_id.is_in(group_id)).order_by(Desc(Link.updated))
         total = links.count()
         total_page = (total - 1) / NUM_FEED + 1
         l = links[10*(page - 1): 10*page]

@@ -21,6 +21,7 @@ class LinkGroup(Storm):
 	id = Int(primary=True)
 	user_id = Int()
 	group_name = Unicode()
+	private = Int()
 	follower_count = Int()
 	like_count = Int()
 	updated = DateTime()

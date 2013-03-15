@@ -76,7 +76,9 @@
                 					<abbr title="{{comment.created}}" class="timeago">{{comment.created}}
                 					</abbr>
                 				</span>
+                                {% if comment.user_id==user.id or link.linkgroup.user.id==user.id %}
                 				<a class="delete" href="/me/deletecomment/{{comment.id}}">Delete</a>
+                                {% end %}
                 			</div>
                 			<div class="comment">
                 				{{comment.content}}

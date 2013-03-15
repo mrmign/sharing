@@ -6,6 +6,7 @@ from base import BaseHandler
 
 from models.database import User, LinkGroup,Link,FollowingUser,FollowingGroup,Comment
 from settings import NUM_FEED
+from tornado.escape import url_escape
 class FeedHandler(BaseHandler):
     def get(self):
         follower_id = Select(FollowingUser.follower_id,(FollowingUser.user_id==self.current_user.id))
@@ -17,7 +18,7 @@ class FeedHandler(BaseHandler):
 class MyLinksHandler(BaseHandler):
     def get(self):
         sub = Select(LinkGroup.id, (LinkGroup.user_id==self.current_user.id))
-        links = self.db.find(Link, Link.group_id.is_in(sub)).order_by(Desc(Link.created))     
+        links = self.db.find(Link, Link.group_id.is_in(sub)).order_by(Desc(Link.updated))     
         
         self.render("mylinks.html",links=links,user=self.current_user)
     
@@ -43,7 +44,7 @@ class PopularGroupsHandler(BaseHandler):
 class RecentLinksHandler(BaseHandler):
     def get(self):
         group_id = Select(LinkGroup.id, (LinkGroup.user_id==self.current_user.id))
-        links = self.db.find(Link, Not(Link.group_id.is_in(group_id))).order_by(Desc(Link.created))
+        links = self.db.find(Link, Not(Link.group_id.is_in(group_id))).order_by(Desc(Link.updated))
         self.render("recent_links.html",links=links,user=self.current_user)
         
 
@@ -58,6 +59,9 @@ class AddGroupHandler(BaseHandler):
             newgroup=LinkGroup()
             newgroup.user_id=self.current_user.id
             newgroup.group_name=group_name
+            radio_value = self.get_argument('list-sharing')
+            if radio_value == "private":
+                newgroup.private = 1
             self.db.add(newgroup)
             self.db.commit()
             self.render("me.html",user=self.current_user)
@@ -76,15 +80,22 @@ class DeleteGroupHandler(BaseHandler):
         self.render("me.html",user=self.current_user)
 
 class EditGroupHandler(BaseHandler):
-    def get(self,group_id):
+    def get(self,group_id,previous_page):
+        self.set_secure_cookie("previous",url_escape(previous_page))
         group = self.db.find(LinkGroup,LinkGroup.id==int(group_id)).one()
         self.render("editgroup.html", user =self.current_user, group_name=group.group_name,group=group)
-    def post(self,group_id):
+    def post(self,group_id,previous_page):
+        print previous_page
         group_name = self.get_argument('groupname')
         group = self.db.find(LinkGroup,LinkGroup.id==int(group_id)).one()
         group.group_name = group_name
+        radio_value = self.get_argument('list-sharing')
+        if radio_value=="private":
+            group.private = 1
+        else:
+            group.private = 0
         self.db.commit()
-        self.render("me.html",user=self.current_user)
+        self.redirect(previous_page)
 
 class FollowingHandler(BaseHandler):
     def get(self):

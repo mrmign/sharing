@@ -67,11 +67,9 @@ class DeleteCommentHandler(BaseHandler):
     def get(self,comment_id):
         comment = self.db.get(Comment,int(comment_id))
         l = self.db.get(Link,int(comment.link_id))
-        link_owner = l.linkgroup.user
-        if comment.user_id==self.current_user.id or link_owner.id==self.current_user.id:
-            self.db.remove(comment)
-            l.comments_count -= 1
-            self.db.commit()
+        self.db.remove(comment)
+        l.comments_count -= 1
+        self.db.commit()
         self.render("comment.html" ,user=self.current_user,link=l)
 
 class DeleteMylinkHandler(BaseHandler):
@@ -90,6 +88,7 @@ class LinkEditHandler(BaseHandler):
         self.set_secure_cookie("previous",url_escape(previous_page))
         link = self.db.get(Link,int(link_id))
         self.render("link_edit.html" ,user=self.current_user,link=link)
+        
 class LinkAddHandler(BaseHandler):
     def get(self):
         url = self.get_argument('url')

@@ -67,7 +67,9 @@ url_patterns = [
         
         (r"/me/addgroup",AddGroupHandler),
         (r"/me/deletegroup/([0-9]+)",DeleteGroupHandler),
-        (r"/me/editgroup/([0-9]+)",EditGroupHandler),
+        # (r"/me/editgroup/([0-9]+)",EditGroupHandler),
+        (r"/me/editgroup/(?P<group_id>[^\/]+)/?(?P<previous_page>[^\/]+)?",EditGroupHandler),
+
 
         (r"/follow/user/([0-9]+)",FollowUserHandler),
         (r"/follow/group/([0-9]+)",FollowGroupHandler),      
@@ -85,13 +87,14 @@ url_patterns = [
         (r"/me/addcomment/([0-9]+)",AddCommentHandler),
         (r"/me/entercomment/(?P<link_id>[^\/]+)/?(?P<previous_page>[^\/]+)?",EnterCommentHandler),
         (r"/me/deletecomment/([0-9]+)",DeleteCommentHandler),
-        
+
         (r"/unfollow/user/([0-9]+)",UnfollowUserHandler),
         
         (r"/unfollow/group/([0-9]+)",UnfollowGroupHandler),
 
         (r"/user/([0-9]+)",UserHandler),
       
+
         (r"/redirect/pre", RedirectPageHandler),
         (r"/delete/mylink/([0-9]+)",DeleteMylinkHandler),
         (r"/link/edit/(?P<link_id>[^\/]+)/?(?P<previous_page>[^\/]+)?",LinkEditHandler),
