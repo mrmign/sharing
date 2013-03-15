@@ -1,6 +1,6 @@
 *.py[co]
 *.json
-
+uploads/*.html
 # Packages
 *.egg
 *.egg-info

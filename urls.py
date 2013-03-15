@@ -45,6 +45,7 @@ from handlers.test import TestHandler
 
 from handlers.redirect import RedirectPageHandler
 from handlers.loadmore import LoadMoreHandler
+from handlers.upload import UploadHandler
 url_patterns = [
         (r"/", HomeHandler),
 
@@ -100,6 +101,7 @@ url_patterns = [
         (r"/loadmore",LoadMoreHandler),
 
         (r"/test", TestHandler),
+        (r"/upload", UploadHandler),
         ]
 
  

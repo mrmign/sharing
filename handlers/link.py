@@ -94,8 +94,8 @@ class LinkAddHandler(BaseHandler):
     def get(self):
         url = self.get_argument('url')
         group_id =self.get_argument('hd')
-        print url
-        print group_id
+        # print url
+        # print group_id
         parse = ParseUrl(url)
         link = Link()
         link.title = parse.title

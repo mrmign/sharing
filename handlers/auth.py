@@ -53,4 +53,6 @@ class SignupHandler(BaseHandler):
 class LogoutHandler(BaseHandler):
     def get(self):
         self.clear_cookie("share_user")
+        self.clear_cookie("previous")
+        self.clear_cookie("common_previous")
         self.redirect("/")
