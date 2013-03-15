@@ -1,14 +1,40 @@
- {% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>{% block title %}Share your links with others! {% end %}| Shareit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    {% block script %} {% end %}
+    {% block custom_css %}
+      
+    {% end %}
+    <link rel="stylesheet" href=" {{ static_url("css/bootstrap-v2.css") }}" type="text/css">
+    <link rel="shortcut icon" href="{{static_url("images/favicon.ico")}}" type="image/x-icon">
+    <link rel="icon" href="{{static_url("images/favicon.ico")}}" type="image/x-icon">
+  </head>
+  <body class="home home-new  logged-out">
 
-
+    <nav class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+            <a href="/" class="brand"><img src="{{ static_url("images/share.png") }}" alt="Share" width="86" height="46"></a>
+            <div class="nav-collapse">
+              <ul class="nav actions">
+                  <li><a href="/login" >Log In</a></li>
+                  <li><a href="/signup">Sign Up</a></li>
+              </ul>
+              
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+    </nav>
 
 {% block content %}
-	<ul>
-		{% for group in groups %}
-			{% for l in group.links %}
-			  <li>{{ l.title }}</li>
-			  {% end %}
-		{% end %}
-	</ul>
 {% end %}
 
+<script src="{{static_url("js/jquery.js")}}"></script>
+<script src="{{static_url("js/bootstrap.min.js")}}"></script>
+
+</body>
+</html>

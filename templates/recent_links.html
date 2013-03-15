@@ -1,6 +1,7 @@
 {% extends "me_nocontent.html" %}
 
 {% block content %}
+<div class="public-share public-list">
 <div id="clips" style="display: block;">
         
         <div id="clips-container">
@@ -8,10 +9,30 @@
                {% for link in links %}
                 <li class="clip">
                 <div class="clip-content">
-                        <a class="clip-save" href="/link/save/{{link.id}}"><i class="icon icon-save"></i> Save</a>
+                        <ul class="clip-save" style="list-style:none">
+                            <li class="btn-group">
+                                <a  title="+save" class="btn dropdown-toggle settings" data-toggle="dropdown" href="#">
+                                    <span><i class="icon icon-save"></i>save</span>
+                                    <span class="caret">
+
+                                    </span>
+                                </a>
+                                <ul class="dropdown-menu pull-right" >
+                                    {% for g in user.groups%}
+                                    <li >
+                                        <a href="/link/save/{{g.id}}/{{link.id}}" class="rss" title="save this link into {{g.group_name}}">
+                                            {{g.group_name}}
+                                        </a>
+                                    </li>
+                                    
+                                    {% end %}
+                                </ul>
+                            </li>
+                            
+                        </ul>
                         <div class="clip-save-popup"></div>
                         <span class="clip-date"><i class="icon icon-date"></i> {{ link.created }}</span>
-                        <a rel="nofollow" class="clip-title" target="_blank" href="{{ link.url }}">{{ link.title }}</a>
+                        <a rel="nofollow" style="width:650px" title="{{link.description}}" class="clip-title" target="_blank" href="{{ link.url }}">{{ link.title }}</a>
 
                         <p class="domain">
                             
@@ -36,6 +57,11 @@
                                     </span>
                                 </a>
                             </span>
+                            
+                            <!-- <span class="s">
+                                {{link.description}}
+                            </span> -->
+                           
                         </p>
                 </div>
             </li>  
@@ -54,4 +80,5 @@
         </div>
         
     </div>
+</div>
 {% end %}

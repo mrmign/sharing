@@ -1,11 +1,12 @@
-#coding:utf-8
-
-from  handlers.home import HomeHandler
+#encoding=utf-8
+from  handlers.home import (HomeHandler,
+                            HomeRecentHandler,
+                            )
 
 from  handlers.following import (FollowUserHandler,
                                  FollowGroupHandler,
                                  UnfollowUserHandler,
-                                 UnfollowGroupHandler
+                                 UnfollowGroupHandler,
                                  )
 from handlers.auth import (LoginHandler,SignupHandler,LogoutHandler)
 from handlers.me import (FeedHandler,
@@ -18,7 +19,8 @@ from handlers.me import (FeedHandler,
                          DeleteGroupHandler,
                          EditGroupHandler,
                          FollowingHandler,
-                         FollowerHandler
+                         FollowerHandler,
+                         MeHandler,
                          )
 
 from handlers.group import (GroupHandler,
@@ -29,7 +31,12 @@ from handlers.link import (LinkSaveHandler,
                            CommentHandler,
                            AddCommentHandler,
                            EnterCommentHandler,
-                           DeleteCommentHandler
+                           DeleteCommentHandler,
+                           DeleteMylinkHandler,
+                           LinkEditHandler,
+                           LinkAddHandler,
+                           LinkSaveEditHandler,
+                           LinkMoveHandler,
                            )
 
 from handlers.setting import (ProfileHandler,SettingsProfileHandler,SettingsAccountHandler)
@@ -91,7 +98,16 @@ url_patterns = [
        
         (r"/redirect/pre", RedirectPageHandler),
         (r"/loadmore",LoadMoreHandler),
+
+        (r"/delete/mylink/([0-9]+)",DeleteMylinkHandler),
+        (r"/link/edit/(?P<link_id>[^\/]+)/?(?P<previous_page>[^\/]+)?",LinkEditHandler),
+
+        (r"/me/addlink",LinkAddHandler),
         (r"/test", TestHandler),
+        (r"/link/save_edit/([0-9]+)", LinkSaveEditHandler),
+        (r"/home_recent", HomeRecentHandler),
+        (r"/me", MeHandler),
+        (r"/link/move/(?P<group_id>[^\/]+)/?(?P<link_id>[^\/]+)?",LinkMoveHandler),
         ]
 
  

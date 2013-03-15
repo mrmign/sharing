@@ -1,0 +1,62 @@
+{% extends "me_nocontent.html" %}
+{% block script %} 
+<script type="text/javascript">
+    function validate_required(field,alerttxt)
+       {
+         with (field)
+         {
+           if (value==null||value=="")
+             {alert(alerttxt);return false}
+           else {return true}
+         }
+       }
+       function validate_form(thisform)
+       {
+         with (thisform)
+         {
+           if (validate_required(link_title,"title must be filled out!")==false)
+             {link_title.focus();return false}
+         }
+       }
+    
+</script>
+{% end %}
+{% block content %}
+<div id="clip-modal" style="margin-top: 0px; display: block;">
+<div id="reader-bg">
+    <div class="notes" style="display: block;" id="reader-content">
+        <div id="reader-tabs">
+            <div>
+                <a href="#" class="notes-tab"><span>Edit</span></a>
+            </div>
+        </div>
+        <aside class="bar">
+            <section>
+                <a href="/redirect/pre" class="close button" title="Close (Esc)">×</a>
+            </section>
+        </aside>
+        
+        <div class="notes-mode">
+            <img width="42" height="32" style="" src="{{static_url("images/me.jpeg")}}&amp;s=160" class="avatar inline" title="{{user.username}}">
+            <div  class="notes-content">
+                <div class="comments">
+                <form class="edit-clip" action="/link/save_edit/{{link.id}}"> 
+                    <input style="width:500px" name="link_url" type="text" placeholder="Website url" value="{{link.url}}" class="text-url" disabled>
+                    <div class="input" >                        
+                        <input style="width:500px" name="link_title" type="text" placeholder="Your title goes here" class="item-title" value="{{link.title}}">
+                    </div>
+                    <div class="input">
+                        <textarea style="width:488px" name="link_description" placeholder="Add notes, highlights or #tags..." class="item-notes">{{link.description}}</textarea>
+                    </div>
+                    <div class="actions">
+                        <input type="submit" value="Save Changes" class="save btn button">
+                        
+                    </div>
+                </form>
+                 </div> 
+            </div>
+          
+        </div>
+    </div>
+</div>
+{% end %}

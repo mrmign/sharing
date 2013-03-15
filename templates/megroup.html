@@ -3,9 +3,12 @@
 <div id="clips" style="display: block;">
 	<div class="clearfix">
     	<div id="list-info">
+
 			<h3 class="name" title="{{group.group_name}}}">
+                <a href="/group/{{group.id}}" style="color:#444" class="clip-title">
     			{{group.group_name}}
-   				 <small>
+   				 </a>
+                 <small>
    				 	<a href="#" target="_blank" title="View the public list">
    				 		Public
    				 	</a>
@@ -47,7 +50,10 @@
     		</ul>
     	</div>
     	<div id="new-clip">
-    		<input placeholder="Add a link..." type="text">
+            <form action="/me/addlink">
+                <input type="hidden" value="{{group.id}}" name="hd">
+                <input placeholder="Add a link..." type="text" name="url">
+            </form>
     	</div>
 	</div>
 	<div id="clips-container">
@@ -58,9 +64,9 @@
                     <div class="clip-content">
                         <span class="clip-date">
                             <i class="icon icon-date"></i> 
-                            {{ link.created }}
+                            {{ link.updated }}
                         </span>
-                        <a rel="nofollow" class="clip-title" target="_blank" href="{{ link.url }}">
+                        <a rel="nofollow" title="{{link.description}}" style="width:500px" class="clip-title" target="_blank" href="{{ link.url }}">
                             {{ link.title }}
                          </a>
                         <p class="domain">
@@ -89,32 +95,36 @@
                             </span>
                         </p>
                     </div>
-                    <ul class="actions">
-                        <li class="clip-reader">
-                            <a href="" rel="tooltip" title="View in Reader">
-                                Reader
+                    <ul class="pull-right" style="list-style:none;font-size:16px">
+                        
+                        <li style="width:15px;display:inline">
+                            <a style="color:#848484" title="edit" href="/link/edit/{{link.id}}/%2Fme%2Fgroup%2F{{group.id}}">
+                                E |
                             </a>
                         </li>
-                        <li class="clip-edit">
-                            <a href="" rel="tooltip" title="Edit">
-                                Edit
+                        <li style="width:15px;display:inline">
+                            <a style="color:#848484" title="remove" href="/delete/mylink/{{link.id}}">
+                                X |
                             </a>
                         </li>
-                        <li class="clip-read-later ">
-                            <a href="" rel="tooltip" title="Mark as Read Later">
-                                Read Later
-                            </a>
+                        <li class="dropdown" style="width:15px;display:inline">
+                            <a style="color:#848484" title="move" href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span>M</span>
+                            <span class="caret"></span></a>
+                            
+                            <ul class="dropdown-menu pull-right">
+                                {% for g in user.groups%}
+                                    <li >
+                                        <a href="/link/move/{{g.id}}/{{link.id}}" class="rss" title="save this link into {{g.group_name}}">
+                                            {{g.group_name}}
+                                        </a>
+                                    </li>
+                                    
+                                {% end %}
+                                
+                            </ul> 
                         </li>
-                        <li class="clip-star">
-                            <a href="" rel="tooltip" title="Star">
-                                Star
-                            </a>
-                        </li>
-                        <li class="clip-destroy">
-                            <a href="" rel="tooltip" title="Remove">
-                                X
-                            </a>
-                        </li>
+                        
                     </ul>
                 </div>
             </li>

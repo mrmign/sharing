@@ -1,29 +1,55 @@
 {% for link in links %}
 <li class="clip">
 	<div class="clip-content">
-		<span class="clip-date"><i class="icon icon-date"></i>
-			{{link.created}}
-		</span>
-		<a href="{{link.url}}" target="_blank" class="clip-title" rel="nofollow">
-			{{link.title}}
-		</a>
+		<ul class="clip-save" style="list-style:none">
+			<li class="btn-group">
+				<a title="+save" class="btn dropdown-toggle settings" data-toggle="dropdown" href="#">
+					<span><i class="icon icon-save"></i>save</span>
+					<span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu pull-right">
+
+						<li>
+							<a href="/link/save/22/343" class="rss" title="save this link into good">
+							good
+							</a>
+						</li>
+						<li>
+							<a href="/link/save/23/343" class="rss" title="save this link into better">
+							better
+							</a>
+						</li>
+
+						<li>
+							<a href="/link/save/24/343" class="rss" title="save this link into best">
+							best
+							</a>
+						</li>
+
+						<li>
+							<a href="/link/save/25/343" class="rss" title="save this link into my new group">
+							my new group
+						</a>
+					</li>
+
+					</ul>
+				</li>
+			</ul>
+		<div class="clip-save-popup"></div>
+		<span class="clip-date"><i class="icon icon-date"></i> {{link.created}}</span>
+		<a rel="nofollow" style="width:450px" class="clip-title" target="_blank" href="{{link.url}}">{{link.title}}</a>
 		<p class="domain">
 			<span>{{link.url_domain}}</span>
+			<span>›</span>
+			<span>added by <a title="{{link.linkgroup.user.username}}" href="/user/{{link.linkgroup.user.id}}">{{link.linkgroup.user.username}}</a></span>
 			<span class="comment-count">
-			<a href="/me/comment/{{link.id}}/%2Fme%2Ffeed" title="Comment">
-				<i class="icon icon-comment"></i>
-				Comment
-			</a>
+				<a title="Comment" href="/me/comment/{{link.id}}/%2Fme%2Ffeed"><i class="icon icon-comment"></i>
+				Comment</a>
 			</span>
 			<span>
-				<a href="#" class="like ">
-					<i class="icon icon-like"></i>
-					<span>likes</span>
-				</a>
-			</span>
-			<span>
-				<a href="#" class="like ">
-					<i class="icon icon-edit pull-right"> Edit</i>
+				<a class="like " href="#">
+				<i class="icon icon-like"></i>
+				<span>likes</span>
 				</a>
 			</span>
 		</p>

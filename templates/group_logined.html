@@ -9,12 +9,14 @@
         
         <p>{{ _("Group description") }}</p>
         <h6>{{ group.links_count }} clips · {{ group.follower_count}} followers</h6>
-{% set following_list = [gg.group_id for gg in user.following_groups] %}
-    {% if group.id not in following_list %}
-        <a class="btn" title="follow" href="/follow/group/{{group.id}}">Follow this group</a>
-    {% else %}
-        <a class="btn" title="unfollow" data-target="#signup-modal" data-link="modal" href="/unfollow/group/{{group.id}}">Following</a>
-    {% end %}
+        {% if group.user.id!=user.id %}
+            {% set following_list = [gg.group_id for gg in user.following_groups] %}
+                {% if group.id not in following_list %}
+                    <a class="btn" title="follow" href="/follow/group/{{group.id}}">Follow this group</a>
+                {% else %}
+                    <a class="btn" title="unfollow" data-target="#signup-modal" data-link="modal" href="/unfollow/group/{{group.id}}">Following</a>
+                {% end %}
+        {% end %}
         <hr>
         <h4>Author</h4>
         <ul class="collaborators">
@@ -53,7 +55,7 @@
                         </ul>
                         <div class="clip-save-popup"></div>
                         <span class="clip-date"><i class="icon icon-date"></i> {{ link.created }}</span>
-                        <a style="width:500px" rel="nofollow" class="clip-title" target="_blank" href="{{ link.url }}">{{ link.title }}</a>
+                        <a style="width:500px" title="{{link.description}}" rel="nofollow" class="clip-title" target="_blank" href="{{ link.url }}">{{ link.title }}</a>
 
                         <p class="domain">
                             
