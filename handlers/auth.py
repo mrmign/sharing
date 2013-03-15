@@ -51,6 +51,8 @@ class SignupHandler(BaseHandler):
             self.render("signup.html", signup_msg="your username or email has existed,please print again")
 
 class LogoutHandler(BaseHandler):
+
+    @tornado.web.authenticated
     def get(self):
         self.clear_cookie("share_user")
         self.clear_cookie("previous")

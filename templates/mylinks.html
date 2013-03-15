@@ -31,7 +31,7 @@
                             <i class="icon icon-date"></i> 
                             {{ link.updated }}
                         </span>
-                        <a rel="nofollow" style="width:500px" class="clip-title" target="_blank" href="{{ link.url }}">
+                        <a rel="nofollow" title="{{link.description}}" style="width:500px" class="clip-title" target="_blank" href="{{ link.url }}">
                             {{ link.title }}
                          </a>
                         <p class="domain">
@@ -60,19 +60,36 @@
                             </span>
                         </p>
                     </div>
-                    <ul class="actions">
+                    <ul class="pull-right" style="list-style:none;font-size:16px">
                         
-                        <li class="clip-edit">
-                            <a href="/link/edit/{{link.id}}/%2Fme%2Fmylinks" rel="tooltip" title="Edit">
-                                Edit
+                        <li style="width:15px;display:inline">
+                            <a style="color:#848484" title="edit" href="/link/edit/{{link.id}}/%2Fme%2Fgroup%2F{{link.linkgroup.id}}">
+                                E |
                             </a>
                         </li>
-                                                
-                        <li class="clip-destroy">
-                            <a href="/delete/mylink/{{link.id}}" rel="tooltip" title="Remove">
-                                X
+                        <li style="width:15px;display:inline">
+                            <a style="color:#848484" title="remove" href="/delete/mylink/{{link.id}}">
+                                X |
                             </a>
                         </li>
+                        <li class="dropdown" style="width:15px;display:inline">
+                            <a style="color:#848484" title="move" href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span>M</span>
+                            <span class="caret"></span></a>
+                            
+                            <ul class="dropdown-menu pull-right">
+                                {% for g in user.groups%}
+                                    <li >
+                                        <a href="/link/move/{{g.id}}/{{link.id}}" class="rss" title="save this link into {{g.group_name}}">
+                                            {{g.group_name}}
+                                        </a>
+                                    </li>
+                                    
+                                {% end %}
+                                
+                            </ul> 
+                        </li>
+                        
                     </ul>
                 </div>
             </li>

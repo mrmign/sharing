@@ -8,6 +8,8 @@ from models.database import (User, LinkGroup,Link,FollowingUser,FollowingGroup)
 
 
 class FollowUserHandler(BaseHandler):
+
+    @tornado.web.authenticated
     def get(self,user_id):
         following_user = FollowingUser()
         following_user.user_id = self.current_user.id
@@ -18,6 +20,8 @@ class FollowUserHandler(BaseHandler):
 
 
 class FollowGroupHandler(BaseHandler):
+
+    @tornado.web.authenticated
     def get(self,group_id):
         following_group = FollowingGroup()
         following_group.user_id = self.current_user.id
@@ -27,6 +31,8 @@ class FollowGroupHandler(BaseHandler):
         self.redirect(self.previous) 
 
 class UnfollowUserHandler(BaseHandler):
+
+    @tornado.web.authenticated
     def get(self,user_id):
         following_user=self.db.find(FollowingUser, FollowingUser.follower_id==int(user_id),\
                         FollowingUser.user_id==self.current_user.id).one()       
@@ -35,6 +41,7 @@ class UnfollowUserHandler(BaseHandler):
 
 
 class UnfollowGroupHandler(BaseHandler):
+    @tornado.web.authenticated
     def get(self,group_id):
         following_group=self.db.find(FollowingGroup, FollowingGroup.group_id==int(group_id),\
                         FollowingGroup.user_id==self.current_user.id).one()       
