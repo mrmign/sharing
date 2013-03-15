@@ -7,9 +7,17 @@
                 <h3 title="All Links" class="name">
                     All Links
                 </h3>
-
             </div>
-            <div id="new-clip"><input type="text" placeholder="Add a link..."></div>
+            <div id="new-clip">
+                <form action="/me/addlink">
+                    <input type="text" placeholder="Add a link..." name="url">
+                    <select name="hd">
+                        {% for g in user.groups %}
+                        <option value="{{g.id}}">{{g.group_name}}</option>
+                        {% end %}
+                    </select>
+                </form>
+            </div>
         </div>
         <div id="clips-container">
             <ul class="unstyled" id="clip-list" style="display: block;">
@@ -21,7 +29,7 @@
                     <div class="clip-content">
                         <span class="clip-date">
                             <i class="icon icon-date"></i> 
-                            {{ link.created }}
+                            {{ link.updated }}
                         </span>
                         <a rel="nofollow" style="width:500px" class="clip-title" target="_blank" href="{{ link.url }}">
                             {{ link.title }}

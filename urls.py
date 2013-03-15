@@ -3,16 +3,8 @@ from  handlers.home import HomeHandler
 
 from  handlers.following import (FollowUserHandler,
                                  FollowGroupHandler,
-                                 FollowerFollowUserHandler,
-                                 FollowerUnfollowUserHandler,
-                                 FollowingUnfollowUserHandler,
-                                 FollowingUnfollowGroupHandler,
-                                 GroupFollowGroupHandler,
-                                 GroupUnfollowGroupHandler,
-                                 UserFollowGroupHandler,
-                                 UserUnfollowGroupHandler,
-                                 UserFollowUserHandler,
-                                 UserUnfollowUserHandler
+                                 UnfollowUserHandler,
+                                 UnfollowGroupHandler
                                  )
 from handlers.auth import (LoginHandler,SignupHandler,LogoutHandler)
 from handlers.me import (FeedHandler,
@@ -52,6 +44,7 @@ from handlers.user import UserHandler
 from handlers.test import TestHandler
 
 from handlers.redirect import RedirectPageHandler
+from handlers.loadmore import LoadMoreHandler
 url_patterns = [
         (r"/", HomeHandler),
 
@@ -73,7 +66,9 @@ url_patterns = [
         
         (r"/me/addgroup",AddGroupHandler),
         (r"/me/deletegroup/([0-9]+)",DeleteGroupHandler),
-        (r"/me/editgroup/([0-9]+)",EditGroupHandler),
+        # (r"/me/editgroup/([0-9]+)",EditGroupHandler),
+        (r"/me/editgroup/(?P<group_id>[^\/]+)/?(?P<previous_page>[^\/]+)?",EditGroupHandler),
+
 
         (r"/follow/user/([0-9]+)",FollowUserHandler),
         (r"/follow/group/([0-9]+)",FollowGroupHandler),      
@@ -92,13 +87,22 @@ url_patterns = [
         (r"/me/entercomment/(?P<link_id>[^\/]+)/?(?P<previous_page>[^\/]+)?",EnterCommentHandler),
         (r"/me/deletecomment/([0-9]+)",DeleteCommentHandler),
 
-        (r"/user/([0-9]+)",UserHandler),
+        (r"/unfollow/user/([0-9]+)",UnfollowUserHandler),
         
+        (r"/unfollow/group/([0-9]+)",UnfollowGroupHandler),
+
+        (r"/user/([0-9]+)",UserHandler),
+      
+
         (r"/redirect/pre", RedirectPageHandler),
         (r"/delete/mylink/([0-9]+)",DeleteMylinkHandler),
         (r"/link/edit/(?P<link_id>[^\/]+)/?(?P<previous_page>[^\/]+)?",LinkEditHandler),
 
         (r"/me/addlink",LinkAddHandler),
+       
+        (r"/loadmore",LoadMoreHandler),
+
+        (r"/test", TestHandler),
         ]
 
  

@@ -1,22 +1,21 @@
 {% extends "me_options.html" %}
+
 {% block option_body %}
 <div class="public-share public-list">
     <div id="clips" style="display: block;">
-        <div class="clearfix">
+        <div class="clearfix" style="height:100px;">
             <div id="list-info">
                 <h3 title="All Links" class="name">
                    My Feed
                 </h3>
             </div>
-            <div id="new-clip">
-                <input type="text" placeholder="Add a link...">
-            </div>
+            <div id="new-clip"></div>
         </div>
         <div id="clips-container">
             <ul class="unstyled" id="clip-list" style="display: block;">
                {% for link in links %}
                 <li class="clip">
-                <div class="clip-content">
+                    <div class="clip-content">
                         <ul class="clip-save" style="list-style:none">
                             <li class="btn-group">
                                 <a  title="+save" class="btn dropdown-toggle settings" data-toggle="dropdown" href="#">
@@ -36,23 +35,22 @@
                                     {% end %}
                                 </ul>
                             </li>
-                            
                         </ul>
                         <div class="clip-save-popup"></div>
                         <span class="clip-date"><i class="icon icon-date"></i> {{ link.created }}</span>
                         <a rel="nofollow" style="width:450px"class="clip-title" target="_blank" href="{{ link.url }}">{{ link.title }}</a>
-
                         <p class="domain">
-                            
                             <span>{{ link.url_domain }}</span>
                             <span>›</span>
                             <span>added by <a title="{{ link.linkgroup.user.username }}" href="/user/{{ link.linkgroup.user_id }}">{{ link.linkgroup.user.username }}</a></span>
-                            <span class="comment-count"><a title="Comment" href="/me/comment/{{link.id}}/%2Fme%2Ffeed"><i class="icon icon-comment"></i>
-                            {% if link.comments_count > 0%}
-                                <strong> {{ link.comments_count }}</strong>
-                            {% end %}                           
-                                Comment
-                            </a></span>
+                            <span class="comment-count">
+                                <a title="Comment" href="/me/comment/{{link.id}}/%2Fme%2Ffeed"><i class="icon icon-comment"></i>
+                                    {% if link.comments_count > 0%}
+                                    <strong> {{ link.comments_count }}</strong>
+                                    {% end %}
+                                    Comment
+                                </a>
+                            </span>
                             <span>
                                 <a class="like  " href="#">
                                     <i class="icon icon-like"></i>
@@ -65,17 +63,39 @@
                                     </span>
                                 </a>
                             </span>
-                            
-                            <!-- <span class="s">
-                                {{link.description}}
-                            </span> -->
-                           
                         </p>
-                </div>
-            </li>  
-              
-               {% end %}
+                    </div>
+                </li>
+                {% end %}
             </ul>
+            {% if total_page > 1 %}
+            <div style="display:block;margin:15px 10px;text-align:center;font-size:23px" id="load-more">
+                <a class="click-load-more" href="javascript:void(0);" style="color: #848484;" onclick="getmore();">Click here to view more!</a>
+            </div>
+            {% end %}
+            <script>
+            function getmore(){
+                var fetch_url = "/loadmore";
+                var next_page = 2;
+                $.post(fetch_url,
+                {
+                    type:1,
+                    page_num:next_page
+                },
+                function(data,status){
+                    if(next_page <= data.total)
+                    {
+                        $("#clip-list").append(data.ret);
+                        next_page = next_page + 1;
+                    }
+                    if(data.cnt < 10)
+                    {
+                        $("#load-more").remove();
+                    }
+                },
+                "json");
+            }
+            </script>
             <div id="no-clips" style="display: none;">
                 <p>
                     <strong>Find clips to add to this list</strong>
@@ -98,3 +118,7 @@
 </div>
     {% end %}
 
+{% block tailjs %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
+{% end %}

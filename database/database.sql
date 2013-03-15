@@ -21,7 +21,8 @@
 -- 	like_count int NOT NULL DEFAULT 0,
 -- 	links_count int NOT NULL DEFAULT 0,
 -- 	updated timestamp,
--- 	created timestamp
+-- 	created timestamp,
+-- 	private int NOT NULL DEFAULT 0,
 -- );
 
 -- DROP TABLE IF EXISTS link;

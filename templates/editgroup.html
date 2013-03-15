@@ -1,10 +1,11 @@
 {% extends "me_nocontent.html" %}
 {% block content %}
 <div id="edit-list-modal" style="display: block;"><div class="kippt-modal">
-        <div class="content">          
+        <div class="content">
+            <a class="close" href="/redirect/pre">×</a>          
             <h2>Edit list</h2>
             
-            <form class="invite" action="/me/editgroup/{{group.id}}" method="POST">
+            <form class="invite" action="/me/editgroup/{{group.id}}/%2Fme%2Fgroup%2F{{group.id}}" method="POST">
                 <label for="list-create-name"><strong>List name</strong></label>
                 <input type="text" value="{{group_name}}" placeholder="eg. Programming" id="list-create-name" name="groupname">
                 
@@ -12,12 +13,21 @@
                 <textarea id="list-create-description"></textarea>
                 
                 <div class="controls">
+                    {% if group.private == 0 %}
                     <label for="list-create-privacy-public" class="radio">
                         <input type="radio" checked="checked" value="public" name="list-sharing" id="list-create-privacy-public"><strong>Public</strong><br>Anyone can view clips and comments
                     </label>
                     <label for="list-create-privacy-private" class="radio">
                         <input type="radio" value="private" name="list-sharing" id="list-create-privacy-private"><strong>Private</strong> <i class="icon icon-lock"></i> <br>Only collaborators can view
                     </label>
+                    {% else %}
+                    <label for="list-create-privacy-public" class="radio">
+                        <input type="radio" value="public" name="list-sharing" id="list-create-privacy-public"><strong>Public</strong><br>Anyone can view clips and comments
+                    </label>
+                    <label for="list-create-privacy-private" class="radio">
+                        <input type="radio" checked="checked" value="private" name="list-sharing" id="list-create-privacy-private"><strong>Private</strong> <i class="icon icon-lock"></i> <br>Only collaborators can view
+                    </label>
+                    {% end %}
                 </div>
                 
                 <div class="actions">

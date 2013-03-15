@@ -1,4 +1,22 @@
 {% extends "me_options.html" %}
+<!-- {% block script %}
+<script type="text/javascript">
+
+function delete()
+{
+    question = confirm("Are you sure you want to delete this list? WARNING: All clips in this list will be removed")    
+    if (question != "0")
+    {
+        return true
+    }
+    else
+    {
+        return false
+    }       
+}
+</script>
+{% end %} -->
+
 {% block option_body %}
 <div id="clips" style="display: block;">
 	<div class="clearfix">
@@ -6,9 +24,13 @@
 			<h3 class="name" title="{{group.group_name}}}">
     			{{group.group_name}}
    				 <small>
-   				 	<a href="#" target="_blank" title="View the public list">
+                    {% if group.private==0 %}
+   				 	<a href="/group/{{group.id}}" target="_blank" title="View the public list">
    				 		Public
    				 	</a>
+                    {% else %}
+                    <i class="icon icon-lock"></i>Private
+                    {% end %}
    				 </small>
 			</h3>
 			<ul class="list-actions unstyled">
@@ -21,31 +43,35 @@
         			</a>
         			<ul class="dropdown-menu pull-right">
             			<li>
-            				<a href="#" class="rss" title="List RSS feed">
-            					RSS
-            				</a>
-            			</li>
-            			<li>
-            				<a href="/me/editgroup/{{group.id}}" class="edit">
+            				<a href="/me/editgroup/{{group.id}}/%2Fme%2Fgroup%2F{{group.id}}" class="edit">
             					Edit
             				</a>
             			</li>
             			<li>
-            				<a href="/me/deletegroup/{{group.id}}" class="delete">
+            				<a href="/me/deletegroup/{{group.id}}" class="delete" onclick="return winconfirm();">
             					Delete
             				</a>
             			</li>
         			</ul>
     			</li>
-    			<li>
-    				<a href="#" class="share btn">
-    					<i>
-    					</i>
-    					Invite
-    				</a>
-    			</li>
     		</ul>
     	</div>
+<script type="text/javascript">
+
+function winconfirm()
+{
+    if(!confirm("Are you sure you want to delete this list? WARNING: All clips in this list will be removed") ) 
+    {
+        return false;
+    }  
+
+    else
+    {
+        return true;
+    }
+    
+}
+</script>
     	<div id="new-clip">
             <form action="/me/addlink">
                 <input type="hidden" value="{{group.id}}" name="hd">
