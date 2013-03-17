@@ -1,101 +1,62 @@
 {% extends "me_nocontent.html" %}
 {% block script %} 
 <script type="text/javascript">
-
- function validate_required(field,alerttxt)
-    {
-      with (field)
-      {
-        if (value==null||value=="")
-          {alert(alerttxt);return false}
-        else {return true}
-      }
-    }
-    function validate_form(thisform)
-    {
-      with (thisform)
-      {
-        if (validate_required(add_comment,"comment must be filled out!")==false)
-          {add_comment.focus();return false}
-      }
-    }
-
+    function validate_required(field,alerttxt)
+       {
+         with (field)
+         {
+           if (value==null||value=="")
+             {alert(alerttxt);return false}
+           else {return true}
+         }
+       }
+       function validate_form(thisform)
+       {
+         with (thisform)
+         {
+           if (validate_required(link_title,"title must be filled out!")==false)
+             {link_title.focus();return false}
+         }
+       }
+    
 </script>
 {% end %}
 {% block content %}
-<div id="clip-modal" style="margin-top: 0px; display: block;"><div id="reader-bg">
-    <div id="reader-content" style="display: block;" class="notes">
+<div id="clip-modal" style="margin-top: 0px; display: block;">
+<div id="reader-bg">
+    <div class="notes" style="display: block;" id="reader-content">
         <div id="reader-tabs">
             <div>
-                <a class="notes-tab" href="#"><span>EDIT</span></a>
-                
+                <a href="#" class="notes-tab"><span>Edit</span></a>
             </div>
         </div>
         <aside class="bar">
             <section>
-                <a title="Close (Esc)" class="close button" href="/redirect/pre">×</a>
+                <a href="/redirect/pre" class="close button" title="Close (Esc)">×</a>
             </section>
         </aside>
+        
         <div class="notes-mode">
-            <div class="notes-content">
-                <h1>{{link.title}}</h1> 
-                <a href="{{link.url}}" class="item-url">{{link.url}}</a>
-                <div>
-                    <span>
-                        Posted by 
-                        <strong>{{link.linkgroup.user.username}}</strong>
-                        <i class="icon icon-date"></i>
-                        <abbr title="{{link.updated}}" class="timeago">{{link.updated}}</abbr>
-                    </span>
-                    <a class="clip-like " href="#">
-                        <i class="icon icon-like"></i>
-                        <span>Like</span>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Likes -->
-            <div class="likes">
-                <h4>Likes</h4>
-                <ul class="like-list"></ul>
-            </div>
-            
-            <!-- Comments -->
-            <div class="comments">
-                <ul class="comment-list">
-                    {% if link.comments_count >0 %}
-                    {% for comment in link.comments %}
-                    <li class="canDelete">
-                        <a title="{{user.username}}" href="#">
-                            <img class="avatar inline" src="{{static_url("images/me.jpeg")}}&amp;s=160" style="">
-                        </a>
-                        <div>
-                            <div class="user">
-                                <strong><a title="{{comment.user.username}}" href="#">{{comment.user.username}}</a></strong>
-                                <span class="timestamp">
-                                    <abbr title="{{comment.created}}" class="timeago">{{comment.created}}
-                                    </abbr>
-                                </span>
-                                <a class="delete" href="/me/deletecomment/{{comment.id}}">Delete</a>
-                            </div>
-                            <div class="comment">
-                                {{comment.content}}
-                            </div>
-                        </div>
-                    </li>
-                    {% end %}
-                    {% end %}
-                </ul>
-                <form class="new-comment" method="GET" action="/me/addcomment/{{link.id}}" onsubmit="return validate_form(this)">
-                    <img width="42" height="42" title="Post as laura_ting" class="avatar inline" src="{{static_url("images/me.jpeg")}}&amp;s=160" style="">
-                    <textarea placeholder="Add comments or notes" name="add_comment"></textarea>
+            <img width="42" height="32" style="" src="{{static_url("images/me.jpeg")}}&amp;s=160" class="avatar inline" title="{{user.username}}">
+            <div  class="notes-content">
+                <div class="comments">
+                <form class="edit-clip" action="/link/save_edit/{{link.id}}"> 
+                    <input style="width:500px" name="link_url" type="text" placeholder="Website url" value="{{link.url}}" class="text-url" disabled>
+                    <div class="input" >                        
+                        <input style="width:500px" name="link_title" type="text" placeholder="Your title goes here" class="item-title" value="{{link.title}}">
+                    </div>
+                    <div class="input">
+                        <textarea style="width:488px" name="link_description" placeholder="Add notes, highlights or #tags..." class="item-notes">{{link.description}}</textarea>
+                    </div>
                     <div class="actions">
-                        <input type="submit" class="comment btn button" value="Comment">
+                        <input type="submit" value="Save Changes" class="save btn button">
+                        
                     </div>
                 </form>
+                 </div> 
             </div>
+          
         </div>
     </div>
-</div>
 </div>
 {% end %}

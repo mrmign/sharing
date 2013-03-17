@@ -1,0 +1,75 @@
+{% extends "me_nocontent.html" %}
+{% block content %}
+
+<div class="clearfix">
+    
+<div class="row" id="import">
+    <div class="span12 columns main" id="import"> 
+        <div class="padding page"> 
+            <h1>Import</h1>
+            
+            <p class="big">You can import your existing bookmarks with this tool. All bookmarks will be saved into a new list with tags and descriptions as notes.</p>
+            <hr>
+
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+                <div class="clearfix">
+                    <label>Choose a service</label>
+                    <div class="input" id="import">
+                        <select name="type" id="id_type">
+                            <option value="google_bookmarks">Google Bookmarks</option>
+                            <option value="chrome">Google Chrome</option>
+                            <option value="firefox">Mozilla Firefox </option>
+                            <option value="safari">Apple Safari</option>
+                        </select>
+                        
+
+                        <ol class="message google_bookmarks" style="display: none;">
+                            <li>Go to <a href="https://www.google.com/bookmarks" target="_new">Google Bookmarks</a><br></li>
+                            <li>Click <em>"Export bookmarks"</em></li>
+                            <li>Upload the <code>GoogleBookmarks.html</code> file</li>
+                        </ol>
+                        <ol class="message chrome" style="display: none;font-size:13px">
+                            <li>Go to <a href="chrome://bookmarks/" target="_new">Bookmark Manager</a></li>
+                            <li>From the Organize menu choose <em>"Export bookmarks to HTML File..."</em></li>
+                            <li>Save the file on your computer</li>
+                            <li>Upload the saved <code>.html</code> file</li>
+                        </ol>
+                        <ol class="message firefox" style="display: block;">
+                             <li>Go to <em>Bookmarks › Show All Bookmarks ()</em></li>
+                             <li>From the "star" menu choose <em>"Export HTML"</em></li>
+                             <li>Save the file on your computer</li>
+                             <li>Upload the saved <code>bookmarks.html</code> file</li>
+                        </ol>
+                        <ol class="message safari" style="display: none;">
+                             <li>Go to <em>File › Export bookmarks</em></li>
+                             <li>Save the file on your computer</li>
+                             <li>Upload the saved <code>Safari Bookmarks.html</code> file</li>
+                        </ol>
+                    </div>
+                </div>
+                <hr>
+                <div class="clearfix">
+                    <label for="id_import_file">Export file (.html)</label>
+                    <div class="input">
+                        <input type="file" name="import_file" id="id_import_file">
+                        
+                        <span class="help-block"></span>
+                    </div>
+                </div><p></p>
+                <hr>
+                <div class="actions">
+                    <input type="submit" value="Upload &amp; Start Import" class="btn large">
+                </div>
+
+            </form>
+
+            
+        </div>
+    </div>
+</div>
+
+</div>
+{% end %}
+{% block tailjs %}
+<script src="{{static_url("js/upload.js")}}"></script>
+{% end %}

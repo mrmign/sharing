@@ -1,0 +1,60 @@
+{% extends "home.html" %}
+
+{% block content %}
+<article class="container">
+    <div id="landing">
+      <div class="home-discover">
+          <div>
+              <div class="clearfix">
+                  <h2 style="text-align:center">What others are sharing?</h2>
+                  <div class="list-tabs" style="text-align:center; font-size:16px">
+                      <a href="/" class="active">Popular</a> |
+                      <a href="/home_recent" class="active">Recent</a>
+                  </div>
+                  {% block recent %}
+                  {% set gcnt = 6 %}
+                {% for group in groups %}
+                    {% if gcnt > 0 %}
+                    {% set gcnt = gcnt - 1 %}
+                    <div class="list-widget" style="height:220px"> 
+                        <!-- user image -->
+                         <a href="/user/{{group.user.id}}" title="{{ group.user.username }}">
+                            <img src="{{ static_url("images/avatar.png") }}" width="42" height="42" class="avatar" style="float:left"></a>
+                             <!-- list header --> 
+                             <div class="list-head"> 
+                                <h3><a href="/group/{{ group.id }}">{{ group.group_name }}</a></h3> 
+                                <div class="list-meta">by <a href="/user/{{group.user.id}}">{{group.user.username}}</a> - {{ group.follower_count }} followers</div>
+                                 <!-- <a href="" class="list-follow btn" data-api-uri="/api/lists/130354/">Follow</a> -->
+                                  </div> 
+                                  <!-- list --> 
+                                  <ul> 
+                                    {% set cnt = 3 %}
+                                    {% for li in group.links %} 
+                                    {% if cnt > 0 %}
+                                    <li>
+                                     <i class="fav" style="background-image:url();"></i> 
+                                     <div> 
+                                      <a href="/group/{{ group.id }}">{{ li.title }}</a>
+                                    </div> 
+                                  </li> 
+
+                                  {% set cnt = cnt - 1 %}
+                                  {% else %}
+                                    {% break %}
+                                  {% end %}
+
+                                  {% end %}
+                                 <li><a href="/group/{{ group.id }}" class="list-view">View all {{ group.links_count }} clips</a></li> </ul></div>
+                            {% else %}
+                                {% break %}
+                            {% end %}
+                          {% end %}
+                {% end %}
+                 
+            </div>
+        </div>
+    </div>
+</div>
+</article> <!-- /container -->
+{% end %}
+

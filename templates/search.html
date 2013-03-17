@@ -1,22 +1,11 @@
 {% extends "me_options.html" %}
 {% block option_body %}
-
-    <div id="clips" style="display: block;">
-        <div class="clearfix">
+<div id="clips" style="display: block;">
+        <div class="clearfix" style="height:100px">
             <div id="list-info">
-                <h3 title="All Links" class="name">
-                    All Links
+                <h3 title="Search: {{text}}" class="name">
+                     Search: {{text}} 
                 </h3>
-            </div>
-            <div id="new-clip">
-                <form action="/me/addlink">
-                    <input type="text" placeholder="Add a link..." name="url">
-                    <select name="hd">
-                        {% for g in user.groups %}
-                        <option value="{{g.id}}">{{g.group_name}}</option>
-                        {% end %}
-                    </select>
-                </form>
             </div>
         </div>
         <div id="clips-container">
@@ -108,4 +97,3 @@
         
     </div>
 {% end %}
-

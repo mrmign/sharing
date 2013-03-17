@@ -6,6 +6,7 @@ from tornado.escape import url_escape
 from base import BaseHandler
 from models.database import Link,LinkGroup,Comment
 from utils.processurl import ParseUrl
+from storm.expr import (Desc,Asc, Select, Like)
 
 class LinkSaveHandler(BaseHandler):
 
@@ -36,6 +37,8 @@ class CommentHandler(BaseHandler):
         
 
 class AddCommentHandler(BaseHandler):
+
+    @tornado.web.authenticated
     def get(self,link_id):
         l = self.db.get(Link,int(link_id))
         cmt = self.get_argument('add_comment')
@@ -50,6 +53,8 @@ class AddCommentHandler(BaseHandler):
         self.render("comment.html" ,user=self.current_user,link=l)
 
 class EnterCommentHandler(BaseHandler):
+
+    @tornado.web.authenticated
     def get(self,link_id,previous_page):
         l = self.db.get(Link,int(link_id))
         cmt = self.get_argument('enter')
@@ -64,6 +69,8 @@ class EnterCommentHandler(BaseHandler):
         self.redirect(previous_page)
 
 class DeleteCommentHandler(BaseHandler):
+
+    @tornado.web.authenticated
     def get(self,comment_id):
         comment = self.db.get(Comment,int(comment_id))
         l = self.db.get(Link,int(comment.link_id))
@@ -73,6 +80,8 @@ class DeleteCommentHandler(BaseHandler):
         self.render("comment.html" ,user=self.current_user,link=l)
 
 class DeleteMylinkHandler(BaseHandler):
+
+    @tornado.web.authenticated
     def get(self,link_id):
         link = self.db.get(Link,int(link_id))
         self.db.remove(link)
@@ -83,18 +92,18 @@ class LinkEditHandler(BaseHandler):
 
     @tornado.web.authenticated
     def get(self,link_id, previous_page):
-        # print previous_page
-        # print url_escape(previous_page)
         self.set_secure_cookie("previous",url_escape(previous_page))
         link = self.db.get(Link,int(link_id))
         self.render("link_edit.html" ,user=self.current_user,link=link)
-        
+
 class LinkAddHandler(BaseHandler):
+
+    @tornado.web.authenticated
     def get(self):
         url = self.get_argument('url')
         group_id =self.get_argument('hd')
-        print url
-        print group_id
+        # print url
+        # print group_id
         parse = ParseUrl(url)
         link = Link()
         link.title = parse.title
@@ -106,5 +115,39 @@ class LinkAddHandler(BaseHandler):
         group.links_count += 1
         self.db.commit()
         self.redirect("/me/group/{0}".format(group_id))
-        # self.render("megroup.html",group=group,user=self.current_user, links=group.links)
+
+class LinkSaveEditHandler(BaseHandler):
+
+    @tornado.web.authenticated
+    def get(self,link_id):
+        l = self.db.get(Link,int(link_id))
+        l.title = self.get_argument('link_title')       
+        l.description = self.get_argument('link_description')
+        self.db.commit()
+        self.redirect(self.previous)
+
+class LinkMoveHandler(BaseHandler):
+
+    @tornado.web.authenticated
+    def get(self,group_id, link_id):
+        l = self.db.get(Link,int(link_id))      
+        link = Link()
+        link.title = l.title
+        link.url = l.url
+        link.url_domain = l.url_domain      
+        link.group_id = int(group_id)
+        self.db.remove(l)
+        self.db.add(link)
+        self.db.commit()
+        self.redirect(self.previous)
         
+
+class LinkSearchHandler(BaseHandler):
+    @tornado.web.authenticated
+    def get(self):
+        text = self.get_argument('q')
+        print text
+        sub = Select(LinkGroup.id, (LinkGroup.user_id==self.current_user.id))
+        link_id = Select(Link.id, (Link.group_id.is_in(sub)))
+        links = self.db.find(Link,Link.id.is_in(link_id),Link.title.like("%"+text+"%")).order_by(Desc(Link.updated)) 
+        self.render("search.html",user=self.current_user,links=links,text=text)

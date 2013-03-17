@@ -1,74 +1,162 @@
-{% extends "main.html" %}
+{% extends home.html %}
+{% block custom_css %}
+      <link rel="stylesheet" href=" {{ static_url("css/custom.css") }}" type="text/css">
+    {% end %}
 {% block content %}
 <div id="body" class="container">
-	<div class="clearfix">
-		<div class="app-bg">
-			<div class="row">
-				<div class="main span12">
-					<div class="profile clearfix">
-						<div class="profile-head row">
-							<div class="profile-head row">
-                				<div class="span2">
-                    				<img width="130" height="130" class="avatar" src="{{static_url("images/me.jpeg")}}&amp;s=160">
-                    			</div>
-                				<div class="profile-info span6">
-                    				<h1>{{user.username}}</h1>
-                    				<p>
-                    					
-                    						{{description}}
-                    					
-                    				</p>
-                    			</div>
-                    			<div class="profile-extra">
-                    				<a class="btn" title="Follow" href="/login">Follow me</a>
-                    				<div>
-                    				</div>
-                    			</div>
-                    		</div>
-                    		<div class="profile-tabs">
-                    			<a class="active" href="#"><strong></strong> Lists</a>
-                    			<a href="#"><strong></strong> Following</a>
-                    			<a href="#"><strong></strong> Followers</a>
-                    		</div>
+    <div class="clearfix">
+        <div class="app-bg">
+            <div class="row">
+                <div class="main span12">
+                    <div class="profile clearfix">
+                        <div class="profile-head row" style="margin-top:60px;background:#FFF;">
+                            <div class="profile-head row" style="margin-top:0">
+                                <div class="span2">
+                                    <img class="avatar" style="border:0 none;border-radius:100px 100px 100px 100px" src="{{static_url("images/me.jpeg")}}&amp;s=160">
+                                </div>
+                                <div class="profile-info span5" style="margin-top:35px;margin-left:50px">
+                                    <h1>{{user.username}}</h1>
+                                    <p>
+                                        
+                                            {{user.introduction}}
+                                        
+                                    </p>
+                                </div>
+                                <div class="profile-extra" style="margin-top:30px">
+                                       
+                                    <a class="btn" title="Follow" href="/follow/user/{{user.id}}">Follow me</a>
+                                        
+                                </div>
+                            </div>
+                           
 
-                    		{% block setting %}
-                    		<div class="profile-lists">
-                    			{% set gcnt = 0 %}
+                            {% block setting %}
+                            <div class="tabbable" style="margin-top:20px">
+                                  <ul class="nav nav-tabs">
+                                      <li class="active">
+                                          <a href="#tab1" data-toggle="tab">
+                                          List
+                                          </a>
+                                      </li>
+                                      <li>
+                                          <a href="#tab2" data-toggle="tab">
+                                          Following
+                                          </a>
+                                      </li>
+                                      <li>
+                                          <a href="#tab3" data-toggle="tab">
+                                          Follower
+                                          </a>
+                                      </li>
+                                  </ul>
+                                  <div class="tab-content">
+                                      <div class="tab-pane active" id="tab1">
+                                          <div class="profile-lists">
+                                {% set gcnt = 0 %}
 
-                    			{% for group in groups %}
-                    			{% set gcnt = gcnt + 1 %}
+                                {% for group in groups %}
+                                {% set gcnt = gcnt + 1 %}
 
-                    			<div class="list-widget" style="width:350px">
-                    				<a title="{{user.username}}" href="#">
-                    					<img style="float:left;width:42px;height:42px" class="avatar" src="{{static_url("images/me.jpeg")}}">
-                    				</a>
-                    				<div class="list-head">
-                    					<h3><a href="/group/{{group.id}}">{{group.group_name}}</a></h3>
-                    					<div class="list-meta">by <a href="#">{{user.username}}</a> · {{group.follower_count}} followers
-                    					</div>
-                    				</div>
-                    				<ul>
-                    					<li>
-                    						<a class="list-view" href="#">View all {{group.links_count}} clips ›</a>
-                    					</li>
-                    				</ul>
-                    			</div>
+                                <div class="list-widget" style="width:350px;height:200px;margin-bottom:55px">
+                                   
+                                        <a class="follow" style="" title="follow this group"href="/follow/group/{{group.id}}">Follow</a>
+                                    <a title="{{user.username}}" href="#">
+                                        <img style="float:left;width:42px;height:42px" class="avatar" src="{{static_url("images/me.jpeg")}}">
+                                    </a>
+                                    <div class="list-head">
+                                        <h3><a href="/group/{{group.id}}">{{group.group_name}}</a></h3>
+                                        <div class="list-meta">by <a href="#">{{user.username}}</a> · {{group.follower_count}} followers
+                                        </div>
+                                    </div>
+                                    <ul>
+                                        <li>
+                                            <a class="list-view" href="#">View all {{group.links_count}} clips ›</a>
+                                        </li>
+                                    </ul>
+                                </div>
 
-                    			{% if gcnt == 2 %}
-                    			     <div class="clearfix"></div>
-                    			     {% set gcnt = 0 %}
-                    			
-                    			     {% end %}
+                                {% if gcnt == 2 %}
+                                     <div class="clearfix"></div>
+                                     {% set gcnt = 0 %}
+                                
+                                     {% end %}
 
-                    			{% end %}
-                    		</div>
-                    		{% end %}
+                                {% end %}
+                            </div>
+                                      </div>
+                                      <div class="tab-pane active" id="tab2">
+                                        <div class="profile-lists">
+                                          {% for staff in followings %}
+                                             <div class="list-widget" style="width:350px;height:150px;margin-bottom:55px">
+                                                  <a title="{{staff.username}}" href="#">
+                                                 <img style="float:left;width:42px;height:42px" class="avatar" src="{{static_url("images/staff1.png")}}">
+                                                 </a>
+                                                 <div  class="list-head"  style="width:350px;height:40px">
+                                                     
+                                                          <a class="follow" style="padding-top:3px;top:10px;right:10px" title="follow this user" href="/follow/user/{{staff.id}}">
+                                                              Follow
+                                                          </a>
+                                                      
+                                                     <h3 style="padding-top:10px"><a href="/user/{{staff.id}}">{{staff.username}}</a></h3>
+                                                     
+                                                 </div>
+                                                 <ul><li>
+                                                  {% if staff.introduction %}
+                                                     {{staff.introduction}}
+                                                     {% else %}
+                                                     There is nothing about him/her.
+                                                     {% end %}
+                                                 </li></ul>
+                                             </div>
+                                             {% end %}
 
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                                      </div>
+                                      </div>
+                                      <div class="tab-pane" id="tab3">
+                                        <div class="profile-lists">
+                                          
+
+
+                                            {% for staff in followers %}
+
+                                            <div class="list-widget" style="width:350px;height:150px;margin-bottom:55px">
+                                             <a title="{{staff.username}}" href="#">
+                                                <img style="float:left;width:42px;height:42px" class="avatar" src="{{static_url("images/staff1.png")}}">
+                                             </a>
+                                             <div  class="list-head" style="width:350px;height:40px">
+                                              
+                                                    <a class="follow" style="padding-top:3px;top:10px;right:10px" title="follow this user" href="/follow/user/{{staff.id}}">
+                                                        Follow
+                                                    </a>
+                                                
+                                                
+                                                <h3 style="padding-top:10px"><a href="/user/{{staff.id}}">{{staff.username}}</a></h3>
+                                           </div>
+                                             
+                                                <ul>
+                                                    
+                                                    <li>
+                                                    {% if staff.introduction %}
+                                                        {{staff.introduction}}
+                                                    {% else %}
+                                                        There is nothing about him/her.
+                                                    {% end %}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            {% end %}
+                                       </div>
+                                      </div>
+                                  </div>
+                              </div>
+
+                            {% end %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% end %}

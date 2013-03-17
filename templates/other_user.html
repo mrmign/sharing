@@ -62,7 +62,7 @@
                                 <div class="list-widget" style="width:350px;height:200px">
                                    {% set following_list = [gg.group_id for gg in user.following_groups] %}
                                     {% if group.id not in following_list %}
-                                        <a class="follow" style="" title="cancel this following"href="/follow/group/{{group.id}}">Follow</a>
+                                        <a class="follow" style="" title="follow this group"href="/follow/group/{{group.id}}">Follow</a>
                                     {% else %}
                                         <a class="follow" style="" title="cancel this following"href="/unfollow/group/{{group.id}}">Following</a>
                                     {% end %}
@@ -99,7 +99,17 @@
                                                  <img style="float:left;width:42px;height:42px" class="avatar" src="{{static_url("images/staff1.png")}}">
                                                  </a>
                                                  <div  class="list-head"  style="width:350px;height:40px">
-                                                     <a class="follow" style="padding-top:3px;top:10px;right:10px" title="cancel this following"href="/me/following/unfollow/user/{{staff.id}}">Following</a>
+                                                     {% if staff.id!=user.id %}
+                                                      {% if staff.id not in following_list %}
+                                                          <a class="follow" style="padding-top:3px;top:10px;right:10px" title="follow this user" href="follow/user/{{staff.id}}">
+                                                              Follow
+                                                          </a>
+                                                      {% else %}
+                                                          <a class="follow" style="padding-top:3px;top:10px;right:10px" title="cancel this following"href="unfollow/user/{{staff.id}}">
+                                                              Following
+                                                          </a>
+                                                      {% end %}
+                                                {% end %}
                                                      <h3 style="padding-top:10px"><a href="/user/{{staff.id}}">{{staff.username}}</a></h3>
                                                      
                                                  </div>
@@ -127,14 +137,16 @@
                                                 <img style="float:left;width:42px;height:42px" class="avatar" src="{{static_url("images/staff1.png")}}">
                                              </a>
                                              <div  class="list-head" style="width:350px;height:40px">
+                                              {% if staff.id!=user.id %}
                                                 {% if staff.id not in following_list %}
-                                                    <a class="follow" style="padding-top:3px;top:10px;right:10px" title="follow this user" href="/me/follower/follow/user/{{staff.id}}">
+                                                    <a class="follow" style="padding-top:3px;top:10px;right:10px" title="follow this user" href="follow/user/{{staff.id}}">
                                                         Follow
                                                     </a>
                                                 {% else %}
-                                                    <a class="follow" style="padding-top:3px;top:10px;right:10px" title="cancel this following"href="/me/follower/unfollow/user/{{staff.id}}">
+                                                    <a class="follow" style="padding-top:3px;top:10px;right:10px" title="cancel this following"href="unfollow/user/{{staff.id}}">
                                                         Following
                                                     </a>
+                                                {% end %}
                                                 {% end %}
                                                 <h3 style="padding-top:10px"><a href="/user/{{staff.id}}">{{staff.username}}</a></h3>
                                            </div>

@@ -12,17 +12,17 @@ feed          |     1
 
 return status | identifier
 OK                 200
-NO MORE            404
+NO MORE            202
 """
 class LoadMoreHandler(BaseHandler):
     def post(self):
         request_type = self.get_argument("type")
         page = self.get_argument("page_num")
-        result, cnt, total_page = {
+        result, status_code = {
                 "1": self._get_more_feed(int(page)),
         }.get(request_type, "There is nothing to be loaded.")
 
-        ret = {"ret":result, "cnt":cnt, "total":total_page}
+        ret = {"ret":result, "status_code": status_code}
         self.write(json.dumps(ret))
 
     def _get_more_feed(self, page):
@@ -32,5 +32,8 @@ class LoadMoreHandler(BaseHandler):
         total = links.count()
         total_page = (total - 1) / NUM_FEED + 1
         l = links[10*(page - 1): 10*page]
-        
-        return self.render_string("modules/more_feed.html",links=l, ret_count=links.count(), total_page=total_page), links.count(), total_page
+        if page < total_page:
+            status_code = 200
+        else:
+            status_code = 202
+        return self.render_string("modules/more_feed.html",links=l, ret_count=links.count()), status_code
