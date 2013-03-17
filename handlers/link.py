@@ -11,7 +11,8 @@ class LinkSaveHandler(BaseHandler):
 
     @tornado.web.authenticated
     def get(self,group_id, link_id):
-
+        g=self.db.get(LinkGroup,int(group_id))
+        g.links_count +=1
         l = self.db.get(Link,int(link_id))
         group = self.db.get(LinkGroup, l.group_id)
         link = Link()
@@ -83,6 +84,8 @@ class DeleteMylinkHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self,link_id):
         link = self.db.get(Link,int(link_id))
+        group=self.db.get(LinkGroup,link.linkgroup.id)
+        group.links_count -=1
         self.db.remove(link)
         self.db.commit()
         self.redirect(self.previous)
@@ -129,14 +132,11 @@ class LinkMoveHandler(BaseHandler):
 
     @tornado.web.authenticated
     def get(self,group_id, link_id):
-        l = self.db.get(Link,int(link_id))      
-        link = Link()
-        link.title = l.title
-        link.url = l.url
-        link.url_domain = l.url_domain      
-        link.group_id = int(group_id)
-        self.db.remove(l)
-        self.db.add(link)
+        l = self.db.get(Link,int(link_id))
+        l.linkgroup.links_count -=1 
+        l.group_id=int(group_id)  
+        group = self.db.get(LinkGroup, int(group_id))
+        group.links_count +=1
         self.db.commit()
         self.redirect(self.previous)
-        
+    

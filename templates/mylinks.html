@@ -10,8 +10,8 @@
             </div>
             <div id="new-clip">
                 <form action="/me/addlink">
-                    <input type="text" placeholder="Add a link..." name="url">
-                    <select name="hd">
+                    <input style="width:450px" type="text" placeholder="Add a link..." name="url">
+                    <select style="width:150px;margin-top:10px" name="hd">
                         {% for g in user.groups %}
                         <option value="{{g.id}}">{{g.group_name}}</option>
                         {% end %}
@@ -60,7 +60,7 @@
                             </span>
                         </p>
                     </div>
-                    <ul class="pull-right" style="list-style:none;font-size:16px">
+                    <ul class="pull-right" style="list-style:none;font-size:16px;">
                         
                         <li style="width:15px;display:inline">
                             <a style="color:#848484" title="edit" href="/link/edit/{{link.id}}/%2Fme%2Fgroup%2F{{link.linkgroup.id}}">
@@ -79,12 +79,13 @@
                             
                             <ul class="dropdown-menu pull-right">
                                 {% for g in user.groups%}
+                                    {% if g.id!=link.linkgroup.id %}
                                     <li >
                                         <a href="/link/move/{{g.id}}/{{link.id}}" class="rss" title="save this link into {{g.group_name}}">
                                             {{g.group_name}}
                                         </a>
                                     </li>
-                                    
+                                    {% end %}
                                 {% end %}
                                 
                             </ul> 

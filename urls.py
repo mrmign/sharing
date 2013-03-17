@@ -23,9 +23,7 @@ from handlers.me import (FeedHandler,
                          MeHandler,
                          )
 
-from handlers.group import (GroupHandler,
-                           GroupLoginedHandler                           
-                           )
+from handlers.group import GroupHandler
 
 from handlers.link import (LinkSaveHandler,
                            CommentHandler,
@@ -39,9 +37,7 @@ from handlers.link import (LinkSaveHandler,
                            LinkMoveHandler,
                            )
 
-from handlers.setting import (ProfileHandler,SettingsProfileHandler,SettingsAccountHandler)
-
-from handlers.setting import (ProfileHandler,SettingsProfileHandler)
+from handlers.setting import (ProfileHandler,SettingsProfileHandler,SettingsAccountHandler,CancelAccountHandler)
 
 from handlers.user import UserHandler
 
@@ -86,7 +82,6 @@ url_patterns = [
         (r"/me/profile",ProfileHandler),
         (r"/me/settings/profile",SettingsProfileHandler),
         (r"/me/settings/account",SettingsAccountHandler),
-        (r"/group/logined/([0-9]+)", GroupLoginedHandler),
 
         (r"/me/comment/(?P<link_id>[^\/]+)/?(?P<previous_page>[^\/]+)?",CommentHandler),
         (r"/me/addcomment/([0-9]+)",AddCommentHandler),
@@ -111,6 +106,7 @@ url_patterns = [
         (r"/home_recent", HomeRecentHandler),
         (r"/me", MeHandler),
         (r"/link/move/(?P<group_id>[^\/]+)/?(?P<link_id>[^\/]+)?",LinkMoveHandler),
+        (r"/setting/cancel_account",CancelAccountHandler),
         ]
 
  

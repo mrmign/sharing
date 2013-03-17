@@ -45,4 +45,11 @@ class SettingsAccountHandler(BaseHandler):
             user.password = password
         self.db.commit()
         self.render("settings_account.html" ,user=self.current_user)
+
+class CancelAccountHandler(BaseHandler):
+    def get(self):
+        user = self.db.get(User,self.current_user.id)
+        self.db.remove(user)
+        self.db.commit()
+        self.redirect("/")
         

@@ -11,7 +11,6 @@ class FeedHandler(BaseHandler):
     def get(self):
         follower_id = Select(FollowingUser.follower_id,(FollowingUser.user_id==self.current_user.id))
         group_id = Select(LinkGroup.id, (LinkGroup.user_id.is_in(follower_id)))
-
         links = self.db.find(Link, Link.group_id.is_in(group_id)).order_by(Desc(Link.created))
         self.render("feed.html",links=links[:10],user=self.current_user)
 
@@ -38,7 +37,7 @@ class StaffPicksHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
         follower_id = Select(FollowingUser.follower_id, FollowingUser.user_id==self.current_user.id)
-        staffs = self.db.find(User,Not(User.id.is_in(follower_id)),User.id!=self.current_user.id)
+        staffs = self.db.find(User,Not(User.id.is_in(follower_id)),User.id!=self.current_user.id).order_by(Desc(User.follower_count))
         self.render("staff_picks.html",staffs=staffs,user=self.current_user)
 
 class PopularGroupsHandler(BaseHandler):
@@ -46,7 +45,7 @@ class PopularGroupsHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
         group_id = Select(FollowingGroup.group_id, FollowingGroup.user_id==self.current_user.id)
-        groups = self.db.find(LinkGroup, Not(LinkGroup.id.is_in(group_id)),User.id!=self.current_user.id)
+        groups = self.db.find(LinkGroup, Not(LinkGroup.id.is_in(group_id)),LinkGroup.private==0).order_by(Desc(LinkGroup.follower_count))
         self.render("popular_groups.html",groups=groups,user=self.current_user)
 
 class RecentLinksHandler(BaseHandler):
@@ -54,7 +53,7 @@ class RecentLinksHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
         group_id = Select(LinkGroup.id, (LinkGroup.user_id==self.current_user.id))
-        links = self.db.find(Link, Not(Link.group_id.is_in(group_id))).order_by(Desc(Link.updated))
+        links = self.db.find(Link, Not(Link.group_id.is_in(group_id))).group_by(Link.url).order_by(Desc(Link.updated))
         self.render("recent_links.html",links=links,user=self.current_user)
         
 

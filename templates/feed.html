@@ -3,7 +3,7 @@
 {% block option_body %}
 <div class="public-share public-list">
     <div id="clips" style="display: block;">
-        <div class="clearfix" style="height:100px;">
+        <div class="clearfix" style="height:80px;">
             <div id="list-info">
                 <h3 title="All Links" class="name">
                    My Feed
@@ -11,10 +11,12 @@
             </div>
             <div id="new-clip"></div>
         </div>
+        <hr>
         <div id="clips-container">
             <ul class="unstyled" id="clip-list" style="display: block;">
                 {% set count_link = 0 %}
                {% for link in links %}
+               {% if link.linkgroup.private==0 %}
                {% set count_link = count_link + 1 %}
                 <li class="clip">
                     <div class="clip-content">
@@ -69,6 +71,7 @@
                         </p>
                     </div>
                 </li>
+                {% end %}
                 {% end %}
             </ul>
             {% if count_link == 10 %} 
