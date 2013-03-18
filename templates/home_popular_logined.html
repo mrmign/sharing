@@ -16,7 +16,7 @@
                 {% for group in groups %}
                     {% if gcnt > 0 %}
                     {% set gcnt = gcnt - 1 %}
-                    <div class="list-widget"> 
+                    <div class="list-widget" style="height:220px"> 
                       {% set group_list = [ggg.group_id for ggg in user.following_groups] %}
                       {% if group.id in group_list %}
                         <a  class="follow" title="canel this following" href="/unfollow/group/{{group.id}}">

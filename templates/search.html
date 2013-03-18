@@ -1,90 +1,19 @@
 {% extends "me_options.html" %}
-<!-- {% block script %}
-<script type="text/javascript">
-
-function delete()
-{
-    question = confirm("Are you sure you want to delete this list? WARNING: All clips in this list will be removed")    
-    if (question != "0")
-    {
-        return true
-    }
-    else
-    {
-        return false
-    }       
-}
-</script>
-{% end %} -->
-
 {% block option_body %}
 <div id="clips" style="display: block;">
-	<div class="clearfix">
-    	<div id="list-info">
+        <div class="clearfix" style="height:100px">
+            <div id="list-info">
+                <h3 title="Search: {{text}}" class="name">
+                     Search: {{text}} 
+                </h3>
+            </div>
+        </div>
+        <div id="clips-container">
+            <ul class="unstyled" id="clip-list" style="display: block;">
+                {% for link in links %}
 
-			<h3 class="name" title="{{group.group_name}}}">
-                <a href="/group/{{group.id}}" style="color:#444" class="clip-title">
-    			{{group.group_name}}
-   				 <small>
-                    {% if group.private==0 %}
-   				 	<a href="/group/{{group.id}}" target="_blank" title="View the public list">
-   				 		Public
-   				 	</a>
-                    {% else %}
-                    <i class="icon icon-lock"></i>Private
-                    {% end %}
-   				 </small>
-			</h3>
-			<ul class="list-actions unstyled">
-    			<li class="btn-group">
-        			<a class="btn dropdown-toggle settings" data-toggle="dropdown" href="#">
-            			<i>
-            			</i>
-            			<span class="caret">
-            			</span>
-        			</a>
-        			<ul class="dropdown-menu pull-right">
-            			<li>
-            				<a href="/me/editgroup/{{group.id}}/%2Fme%2Fgroup%2F{{group.id}}" class="edit">
-            					Edit
-            				</a>
-            			</li>
-            			<li>
-            				<a href="/me/deletegroup/{{group.id}}" class="delete" onclick="return winconfirm();">
-            					Delete
-            				</a>
-            			</li>
-        			</ul>
-    			</li>
-    		</ul>
-    	</div>
-<script type="text/javascript">
 
-function winconfirm()
-{
-    if(!confirm("Are you sure you want to delete this list? WARNING: All clips in this list will be removed") ) 
-    {
-        return false;
-    }  
-
-    else
-    {
-        return true;
-    }
-    
-}
-</script>
-    	<div id="new-clip">
-            <form action="/me/addlink">
-                <input type="hidden" value="{{group.id}}" name="hd">
-                <input placeholder="Add a link..." type="text" name="url">
-            </form>
-    	</div>
-	</div>
-	<div id="clips-container">
-        <ul style="display: block;" id="clip-list" class="unstyled">
-            {% for link in links %}
-            <li data-cid="c24" class="clip ui-draggable">
+                <li data-cid="c24" class="clip ui-draggable">
                 <div class="display">
                     <div class="clip-content">
                         <span class="clip-date">
@@ -102,7 +31,7 @@ function winconfirm()
                             </span>
                             <span>
                                 · <span class="comment-count">
-                                    <a href="/me/comment/{{link.id}}/%2Fme%2Fgroup%2F{{group.id}}" title="Comment">
+                                    <a href="/me/comment/{{link.id}}/%2Fme%2Fmylinks" title="Comment">
                                         <i class="icon icon-comment">
                                         </i>
                                         Add comment
@@ -123,7 +52,7 @@ function winconfirm()
                     <ul class="pull-right" style="list-style:none;font-size:16px">
                         
                         <li style="width:15px;display:inline">
-                            <a style="color:#848484" title="edit" href="/link/edit/{{link.id}}/%2Fme%2Fgroup%2F{{group.id}}">
+                            <a style="color:#848484" title="edit" href="/link/edit/{{link.id}}/%2Fme%2Fgroup%2F{{link.linkgroup.id}}">
                                 E |
                             </a>
                         </li>
@@ -153,9 +82,18 @@ function winconfirm()
                     </ul>
                 </div>
             </li>
-            {% end %}
-        </ul>
+               {% end %}
+            </ul>
+            <div id="no-clips" style="display: none;">
+                <p><strong>Find clips to add to this list</strong>
+                    You can add links with extensions, bookmarklets and via email. <a href="/tools/">View the tools</a>
+                </p>
+                <p class="no-collaborate"><strong>Collaborate with your team.</strong> Invite people to this list and easily share useful links</p>
+                <p class="no-public"><strong>Make your list public</strong>. Share the interesting things you find and save.</p>
+            </div>
+            <div id="no-search-results" style="display: none;">No search results.</div>
+            
+        </div>
+        
     </div>
- </div>
 {% end %}
-

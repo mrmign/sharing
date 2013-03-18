@@ -11,7 +11,6 @@ class FeedHandler(BaseHandler):
     def get(self):
         follower_id = Select(FollowingUser.follower_id,(FollowingUser.user_id==self.current_user.id))
         group_id = Select(LinkGroup.id, (LinkGroup.user_id.is_in(follower_id)))
-
         links = self.db.find(Link, Link.group_id.is_in(group_id)).order_by(Desc(Link.created))
         self.render("feed.html",links=links[:10],user=self.current_user)
 
@@ -96,11 +95,12 @@ class DeleteGroupHandler(BaseHandler):
 
 class EditGroupHandler(BaseHandler):
     @tornado.web.authenticated
-    def get(self,group_id):
+    def get(self,group_id,previous_page):
+        self.set_secure_cookie("previous",url_escape(previous_page))
         group = self.db.find(LinkGroup,LinkGroup.id==int(group_id)).one()
         self.render("editgroup.html", user =self.current_user, group_name=group.group_name,group=group)
     @tornado.web.authenticated
-    def post(self,group_id):
+    def post(self,group_id,previous_page):
         group_name = self.get_argument('groupname')
         group = self.db.find(LinkGroup,LinkGroup.id==int(group_id)).one()
         group.group_name = group_name
