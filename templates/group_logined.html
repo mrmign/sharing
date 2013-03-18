@@ -57,7 +57,7 @@
                         <ul class="pull-right" style="list-style:none;font-size:16px;padding-top:30px">
                         
                         <li style="width:15px;display:inline">
-                            <a style="color:#848484" title="edit" href="/link/edit/{{link.id}}/%2Fme%2Fgroup%2F{{link.linkgroup.id}}">
+                            <a style="color:#848484" title="edit" href="/link/edit/{{link.id}}/%2Fgroup%2F{{link.linkgroup.id}}">
                                 E |
                             </a>
                         </li>
@@ -96,7 +96,7 @@
                             <span>{{ link.url_domain }}</span>
                             <span>›</span>
                             <span>added by <a title="{{ group.user.username }}" href="/user/{{ group.user_id }}">{{ group.user.username }}</a></span>
-                            <span class="comment-count"><a title="Comment" href="#"><i class="icon icon-comment"></i>
+                            <span class="comment-count"><a title="Comment" href="/me/comment/{{link.id}}/%2Fgroup%2F{{group.id}}"><i class="icon icon-comment"></i>
                             {% if link.comments_count > 0%}
                                 <strong> {{ link.comments_count }}</strong>
                             {% end %}                           
