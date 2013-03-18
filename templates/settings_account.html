@@ -102,9 +102,27 @@
 				</div>
 			</div>
 			<div class="actions">
-				<a class="delete" href="#">Cancel my account</a>
+				<a class="delete" href="/setting/cancel_account"  onclick="return winconfirm();">
+          Cancel my account
+        </a>
 				<input type="submit" class="btn" value="Save changes">
 			</div>
 		</form>
 	</div>
+  <script type="text/javascript">
+
+function winconfirm()
+{
+    if(!confirm("Are you sure you want to cancel your account ? ") ) 
+    {
+        return false;
+    }  
+
+    else
+    {
+        return true;
+    }
+    
+}
+</script>
 {% end %}

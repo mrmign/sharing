@@ -31,7 +31,7 @@
             {% for link in group.links %}
                 <li class="clip">
                 <div class="clip-content">
-                        
+                        {% if group.user.id!=user.id %}
                         <ul class="clip-save" style="list-style:none">
                             <li class="btn-group">
                                 <a title="+save" class="btn dropdown-toggle settings" data-toggle="dropdown" href="#">
@@ -53,6 +53,40 @@
                             </li>
                             
                         </ul>
+                        {%else%}
+                        <ul class="pull-right" style="list-style:none;font-size:16px;padding-top:30px">
+                        
+                        <li style="width:15px;display:inline">
+                            <a style="color:#848484" title="edit" href="/link/edit/{{link.id}}/%2Fme%2Fgroup%2F{{link.linkgroup.id}}">
+                                E |
+                            </a>
+                        </li>
+                        <li style="width:15px;display:inline">
+                            <a style="color:#848484" title="remove" href="/delete/mylink/{{link.id}}">
+                                X |
+                            </a>
+                        </li>
+                        <li class="dropdown" style="width:15px;display:inline">
+                            <a style="color:#848484" title="move" href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span>M</span>
+                            <span class="caret"></span></a>
+                            
+                            <ul class="dropdown-menu pull-right">
+                                {% for g in user.groups%}
+                                    {% if g.id!=link.linkgroup.id %}
+                                    <li >
+                                        <a href="/link/move/{{g.id}}/{{link.id}}" class="rss" title="save this link into {{g.group_name}}">
+                                            {{g.group_name}}
+                                        </a>
+                                    </li>
+                                    {% end %}
+                                {% end %}
+                                
+                            </ul> 
+                        </li>
+                        
+                    </ul>
+                        {% end %}
                         <div class="clip-save-popup"></div>
                         <span class="clip-date"><i class="icon icon-date"></i> {{ link.created }}</span>
                         <a style="width:500px" title="{{link.description}}" rel="nofollow" class="clip-title" target="_blank" href="{{ link.url }}">{{ link.title }}</a>

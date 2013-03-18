@@ -3,11 +3,12 @@ ALTER DATABASE CHARACTER SET "utf8";
 
 DROP TABLE IF EXISTS user;
 CREATE TABLE user (
-    id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    username varchar(50) NOT NULL UNIQUE,
-    email varchar(100) NOT NULL UNIQUE,
-    password varchar(100) NOT NULL ,
-    introduction varchar(300) 
+	id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	username varchar(50) NOT NULL UNIQUE,
+	email varchar(100) NOT NULL UNIQUE,
+	password varchar(100) NOT NULL ,
+	introduction varchar(300), 
+    follower_count int NOT NULL DEFAULT 0 
 );
 
 

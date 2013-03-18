@@ -7,6 +7,7 @@
         <div id="clips-container">
             <ul class="unstyled" id="clip-list" style="display: block;">
                {% for link in links %}
+               {% if link.linkgroup.private==0 %}
                 <li class="clip">
                 <div class="clip-content">
                         <ul class="clip-save" style="list-style:none">
@@ -65,7 +66,7 @@
                         </p>
                 </div>
             </li>  
-              
+              {% end %}
                {% end %}
             </ul>
             <div id="no-clips" style="display: none;">

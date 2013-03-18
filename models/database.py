@@ -10,6 +10,7 @@ class User(Storm):
 	email = Unicode()
 	password = Unicode()
 	introduction = Unicode()
+	follower_count=Int()
 
 	groups = ReferenceSet("User.id", "LinkGroup.user_id")
 	followings = ReferenceSet("User.id", "FollowingUser.user_id")
@@ -42,7 +43,7 @@ class Link(Storm):
 	description = Unicode()
 	comments_count = Int()
 	like_count = Int()
-	created = DateTime()
+	created = DateTime() 
 	updated = DateTime()
 	group_id = Int()
 

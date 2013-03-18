@@ -3,18 +3,19 @@
 <div class="padding">
     <h1>Profile</h1>
     <hr>
-    <div class="avatar">
-        <img width="200" height="200" style="display:block; min-height: 200px;" title="{{user.username}}" src="{{static_url("images/me.jpeg")}}&amp;s=200">
-        <p>Change your avatar at <a target="_blank" href="#">Gravatar.com</a></p>
-    </div>  
+    <div class="avatar" >
+        <img width="200" height="200" style="display:block; min-height: 200px;top:20px" title="{{user.username}}" src="{{static_url("images/me.jpeg")}}&amp;s=200">
+        <!-- <p>Change your avatar at <a target="_blank" href="#">Gravatar.com</a></p> -->
+    </div> 
+    <div >
     <form method="POST" action="/me/settings/profile">
-    	<div style="display:none">
+    	<!-- <div style="display:none">
     		<input type="hidden" value="l3oYcBCSFFv7tOY1ChjvGNbhRhT6jXnh" name="csrfmiddlewaretoken">
-    	</div>
+    	</div> -->
     	<div class="">
             <label for="description">Description</label>
             <div class="input">
-                <textarea name="description" cols="40" rows="10" id="id_description">
+                <textarea name="description" style="height:200px" id="id_description">
                     {{user.introduction}}
                 </textarea> 
                 <div class="footnote">
@@ -22,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <div class="">
+        <!-- <div class="">
             <label for="twitter">Twitter</label>
             <div class="input twitter">
                 <div class="input-prepend">
@@ -52,15 +53,16 @@
                     <input type="text" maxlength="255" name="dribbble" id="id_dribbble">
                 </div>   
             </div>
-        </div>  
-        <div class="">
+        </div>   -->
+        <!-- <div class="">
             <label for="website">Website</label>
             <div class="input">
                 <input type="text" maxlength="200" name="website" id="id_website">      
             </div>
-        </div>  
+        </div>   -->
         <div class="actions">
             <input type="submit" class="btn" value="Save changes">
         </div>
     </form>
+    </div> 
     {% end %}

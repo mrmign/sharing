@@ -63,7 +63,7 @@
                                                   </div>
                                                   <ul>
                                                       <li>
-                                                          <a class="list-view" href="#">View all {{group.links_count}} clips ›</a>
+                                                          <a class="list-view" href="/group/{{group.id}}">View all {{group.links_count}} clips ›</a>
                                                       </li>
                                                   </ul>
                                               </div>
@@ -83,7 +83,7 @@
                                                  </a>
                                                  <div  class="list-head"  style="width:350px;height:40px">
                                                   {% if staff.id!=user.id %}
-                                                     <a class="follow" style="padding-top:3px;top:10px;right:10px" title="cancel this following"href="/me/following/unfollow/user/{{staff.id}}">Following</a>
+                                                     <a class="follow" style="padding-top:3px;top:10px;right:10px" title="cancel this following"href="/unfollow/user/{{staff.id}}">Following</a>
                                                      {% end %}
                                                      <h3 style="padding-top:10px"><a href="/user/{{staff.id}}">{{staff.username}}</a></h3>
                                                      
@@ -114,12 +114,12 @@
                                              <div  class="list-head" style="width:350px;height:40px">
                                               {% if staff.id!=user.id %}
                                                 {% if staff.id not in following_list %}
-                                                    <a class="follow" style="padding-top:3px;top:10px;right:10px" title="follow this user" href="/me/follower/follow/user/{{staff.id}}">
+                                                    <a class="follow" style="padding-top:3px;top:10px;right:10px" title="follow this user" href="/follow/user/{{staff.id}}">
                                                         Follow
                                                     </a>
                                                 {% else %}
                                                    
-                                                    <a class="follow" style="padding-top:3px;top:10px;right:10px" title="cancel this following"href="/me/follower/unfollow/user/{{staff.id}}">
+                                                    <a class="follow" style="padding-top:3px;top:10px;right:10px" title="cancel this following"href="/unfollow/user/{{staff.id}}">
                                                         Following
                                                     </a>
                                                 {% end %}
