@@ -51,5 +51,4 @@ class UploadHandler(BaseHandler):
 
     def get_domain(self,url):
          o = urlparse(url)
-         print o.netloc
          return o.netloc

@@ -45,7 +45,8 @@ class PopularGroupsHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
         group_id = Select(FollowingGroup.group_id, FollowingGroup.user_id==self.current_user.id)
-        groups = self.db.find(LinkGroup, Not(LinkGroup.id.is_in(group_id)),LinkGroup.private==0).order_by(Desc(LinkGroup.follower_count))
+        group_id2 = Select(LinkGroup.id, LinkGroup.user_id==self.current_user.id)
+        groups = self.db.find(LinkGroup, Not(LinkGroup.id.is_in(group_id)),Not(LinkGroup.id.is_in(group_id2)),LinkGroup.private==0).order_by(Desc(LinkGroup.follower_count))
         self.render("popular_groups.html",groups=groups,user=self.current_user)
 
 class RecentLinksHandler(BaseHandler):
