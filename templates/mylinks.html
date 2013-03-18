@@ -62,17 +62,17 @@
                     </div>
                     <ul class="pull-right" style="list-style:none;font-size:16px">
                         
-                        <li style="width:15px;display:inline">
+                        <li style="width:15px;display:inline;margin:0 5px">
                             <a style="color:#848484" title="edit" href="/link/edit/{{link.id}}/%2Fme%2Fgroup%2F{{link.linkgroup.id}}">
-                                E |
+                                E 
                             </a>
-                        </li>
-                        <li style="width:15px;display:inline">
+                        </li>|
+                        <li style="width:15px;display:inline;margin:0 5px">
                             <a style="color:#848484" title="remove" href="/delete/mylink/{{link.id}}">
-                                X |
+                                X 
                             </a>
-                        </li>
-                        <li class="dropdown" style="width:15px;display:inline">
+                        </li>|
+                        <li class="dropdown" style="width:15px;display:inline;margin:0 5px">
                             <a style="color:#848484" title="move" href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <span>M</span>
                             <span class="caret"></span></a>
@@ -93,8 +93,36 @@
                     </ul>
                 </div>
             </li>
+             
                {% end %}
             </ul>
+            <div style="display:block;margin:15px 10px;text-align:center;font-size:23px" id="load-more">
+                <a class="click-load-more" href="javascript:void(0);" style="color: #848484;" onclick="getmore();">Load more!</a>
+            </div>
+
+<script type="text/javascript">
+var fetch_url = "/loadmore";
+var next_page = 2; 
+function getmore(){
+$.post(fetch_url,
+    {
+      type:2,
+      page_num:next_page
+    },
+    function(data){
+        if(200 === data.status_code)
+        {
+            $("#clip-list").append(data.ret);
+            next_page = next_page + 1;            
+        }
+        else if (202 === data.status_code)
+        {
+            $("#load-more").remove();
+        }
+    },"json");
+}
+</script>
+
             <div id="no-clips" style="display: none;">
                 <p><strong>Find clips to add to this list</strong>
                     You can add links with extensions, bookmarklets and via email. <a href="/tools/">View the tools</a>
@@ -109,3 +137,7 @@
     </div>
 {% end %}
 
+{% block tailjs %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
+{% end %}

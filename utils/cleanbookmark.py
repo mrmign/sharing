@@ -30,12 +30,12 @@ def fromName2codepoint(string):
     return string
 
 
-def cleanBookmarks(filename, newFilename = None):
+def cleanBookmarks(content, newFilename = None):
     '''Firefox bookmarks -> cleaned up bookmarks in an XHTML file'''
-    bm = file(filename, 'r')
-    bmCont = bm.read()
-    bm.close()
-
+    # bm = file(filename, 'r')
+    # bmCont = bm.read()
+    # bm.close()
+    bmCont = content
     # Correct heading levels
     bmContLines = bmCont.split('\n')
     headingLevel = 1

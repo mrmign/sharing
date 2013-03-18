@@ -22,7 +22,7 @@ class MyLinksHandler(BaseHandler):
         sub = Select(LinkGroup.id, (LinkGroup.user_id==self.current_user.id))
         links = self.db.find(Link, Link.group_id.is_in(sub)).order_by(Desc(Link.updated))     
         
-        self.render("mylinks.html",links=links,user=self.current_user)
+        self.render("mylinks.html",links=links[:10],user=self.current_user)
     
 class MeGroupHandler(BaseHandler):
 

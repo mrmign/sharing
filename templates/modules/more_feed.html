@@ -8,29 +8,12 @@
 					<span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu pull-right">
-
+						{% for g in groups %}
 						<li>
-							<a href="/link/save/22/343" class="rss" title="save this link into good">
-							good
+							<a href="/link/save/{{g.id}}/{{link.id}}" class="rss" title="save this link into good">
+							{{g.group_name}}
 							</a>
 						</li>
-						<li>
-							<a href="/link/save/23/343" class="rss" title="save this link into better">
-							better
-							</a>
-						</li>
-
-						<li>
-							<a href="/link/save/24/343" class="rss" title="save this link into best">
-							best
-							</a>
-						</li>
-
-						<li>
-							<a href="/link/save/25/343" class="rss" title="save this link into my new group">
-							my new group
-						</a>
-					</li>
 
 					</ul>
 				</li>
