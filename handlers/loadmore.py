@@ -41,7 +41,7 @@ class LoadMoreHandler(BaseHandler):
             status_code = 200
         else:
             status_code = 202
-        return self.render_string("modules/more_feed.html",links=l, ret_count=links.count()), status_code
+        return self.render_string("modules/more_feed.html",links=l,groups=self.current_user.groups, ret_count=links.count()), status_code
 
     def _get_more_mylink(self,page):
         sub = Select(LinkGroup.id, (LinkGroup.user_id==self.current_user.id))
