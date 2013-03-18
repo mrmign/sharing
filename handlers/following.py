@@ -11,8 +11,8 @@ class FollowUserHandler(BaseHandler):
 
     @tornado.web.authenticated
     def get(self,user_id):
-        u=self.db.get(User,user_id)
-        u.follower_id +=1
+        u=self.db.get(User,int(user_id))
+        u.follower_count +=1
         following_user = FollowingUser()
         following_user.user_id = self.current_user.id
         following_user.follower_id = int(user_id)
@@ -38,8 +38,8 @@ class UnfollowUserHandler(BaseHandler):
 
     @tornado.web.authenticated
     def get(self,user_id):
-        u=self.db.get(User,user_id)
-        u.follower_id -=1
+        u=self.db.get(User,int(user_id))
+        u.follower_count -=1
         following_user=self.db.find(FollowingUser, FollowingUser.follower_id==int(user_id),\
                         FollowingUser.user_id==self.current_user.id).one()       
         self.db.remove(following_user) 

@@ -21,6 +21,10 @@ class SettingsProfileHandler(BaseHandler):
         self.render("settings_profile.html" ,user=self.current_user)
 
     def post(self):
+        follower_id = Select(FollowingUser.follower_id,(FollowingUser.user_id==self.current_user.id))
+        followings = self.db.find(User, User.id.is_in(follower_id))
+        follower = Select(FollowingUser.user_id,(FollowingUser.follower_id==self.current_user.id))
+        followers = self.db.find(User, User.id.is_in(follower))
         introduction = self.get_argument('description')
         user = self.db.find(User,User.id==self.current_user.id).one()
         user.introduction = introduction
@@ -28,7 +32,7 @@ class SettingsProfileHandler(BaseHandler):
         if not introduction:
             introduction = "Add Description"
 
-        self.render("profile.html" ,user=self.current_user ,groups=self.current_user.groups,description=introduction)
+        self.render("profile.html" ,user=self.current_user ,followers=followers,followings=followings,groups=self.current_user.groups,description=introduction)
 
 class SettingsAccountHandler(BaseHandler):
     def get(self):

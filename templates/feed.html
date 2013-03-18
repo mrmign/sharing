@@ -42,6 +42,7 @@
                         </ul>
                         <div class="clip-save-popup"></div>
                         <span class="clip-date"><i class="icon icon-date"></i> {{ link.created }}</span>
+
                         <a rel="nofollow" title="{{link.description}}" style="width:450px"class="clip-title" target="_blank" href="{{ link.url }}">{{ link.title }}</a>
 
                         <p class="domain">
@@ -74,13 +75,14 @@
                 {% end %}
                 {% end %}
             </ul>
+
             {% if count_link == 10 %} 
 
             <div style="display:block;margin:15px 10px;text-align:center;font-size:23px" id="load-more">
-                <a class="click-load-more" href="javascript:void(0);" style="color: #848484;" onclick="getmore();">Click here to view more!</a>
+                <a class="click-load-more" href="javascript:void(0);" style="color: #848484;" onclick="getmore();">Load more!</a>
             </div>
             {% end %}
-           
+
 <script type="text/javascript">
 var fetch_url = "/loadmore";
 var next_page = 2; 

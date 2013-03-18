@@ -35,6 +35,7 @@ from handlers.link import (LinkSaveHandler,
                            LinkAddHandler,
                            LinkSaveEditHandler,
                            LinkMoveHandler,
+                           LinkSearchHandler,
                            )
 
 from handlers.setting import (ProfileHandler,SettingsProfileHandler,SettingsAccountHandler,CancelAccountHandler)
@@ -93,6 +94,7 @@ url_patterns = [
         (r"/unfollow/group/([0-9]+)",UnfollowGroupHandler),
 
         (r"/user/([0-9]+)",UserHandler),
+
         (r"/redirect/pre", RedirectPageHandler),
         (r"/loadmore",LoadMoreHandler),
 
@@ -106,6 +108,8 @@ url_patterns = [
         (r"/home_recent", HomeRecentHandler),
         (r"/me", MeHandler),
         (r"/link/move/(?P<group_id>[^\/]+)/?(?P<link_id>[^\/]+)?",LinkMoveHandler),
+
+        (r"/search/link",LinkSearchHandler),
         (r"/setting/cancel_account",CancelAccountHandler),
         ]
 

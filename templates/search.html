@@ -1,22 +1,11 @@
 {% extends "me_options.html" %}
 {% block option_body %}
-
-    <div id="clips" style="display: block;">
-        <div class="clearfix">
+<div id="clips" style="display: block;">
+        <div class="clearfix" style="height:100px">
             <div id="list-info">
-                <h3 title="All Links" class="name">
-                    All Links
+                <h3 title="Search: {{text}}" class="name">
+                     Search: {{text}} 
                 </h3>
-            </div>
-            <div id="new-clip">
-                <form action="/me/addlink">
-                    <input style="width:450px" type="text" placeholder="Add a link..." name="url">
-                    <select style="width:150px;margin-top:10px" name="hd">
-                        {% for g in user.groups %}
-                        <option value="{{g.id}}">{{g.group_name}}</option>
-                        {% end %}
-                    </select>
-                </form>
             </div>
         </div>
         <div id="clips-container">
@@ -60,32 +49,31 @@
                             </span>
                         </p>
                     </div>
-                    <ul class="pull-right" style="list-style:none;font-size:16px;">
+                    <ul class="pull-right" style="list-style:none;font-size:16px">
                         
-                        <li style="width:15px;display:inline;margin:0 5px">
+                        <li style="width:15px;display:inline">
                             <a style="color:#848484" title="edit" href="/link/edit/{{link.id}}/%2Fme%2Fgroup%2F{{link.linkgroup.id}}">
-                                E 
+                                E |
                             </a>
-                        </li>|
-                        <li style="width:15px;display:inline;margin:0 5px">
+                        </li>
+                        <li style="width:15px;display:inline">
                             <a style="color:#848484" title="remove" href="/delete/mylink/{{link.id}}">
-                                X 
+                                X |
                             </a>
-                        </li>|
-                        <li class="dropdown" style="width:15px;display:inline;margin:0 5px">
+                        </li>
+                        <li class="dropdown" style="width:15px;display:inline">
                             <a style="color:#848484" title="move" href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <span>M</span>
                             <span class="caret"></span></a>
                             
                             <ul class="dropdown-menu pull-right">
                                 {% for g in user.groups%}
-                                    {% if g.id!=link.linkgroup.id %}
                                     <li >
                                         <a href="/link/move/{{g.id}}/{{link.id}}" class="rss" title="save this link into {{g.group_name}}">
                                             {{g.group_name}}
                                         </a>
                                     </li>
-                                    {% end %}
+                                    
                                 {% end %}
                                 
                             </ul> 
@@ -94,36 +82,8 @@
                     </ul>
                 </div>
             </li>
-             
                {% end %}
             </ul>
-            <div style="display:block;margin:15px 10px;text-align:center;font-size:23px" id="load-more">
-                <a class="click-load-more" href="javascript:void(0);" style="color: #848484;" onclick="getmore();">Load more!</a>
-            </div>
-
-<script type="text/javascript">
-var fetch_url = "/loadmore";
-var next_page = 2; 
-function getmore(){
-$.post(fetch_url,
-    {
-      type:2,
-      page_num:next_page
-    },
-    function(data){
-        if(200 === data.status_code)
-        {
-            $("#clip-list").append(data.ret);
-            next_page = next_page + 1;            
-        }
-        else if (202 === data.status_code)
-        {
-            $("#load-more").remove();
-        }
-    },"json");
-}
-</script>
-
             <div id="no-clips" style="display: none;">
                 <p><strong>Find clips to add to this list</strong>
                     You can add links with extensions, bookmarklets and via email. <a href="/tools/">View the tools</a>
@@ -136,9 +96,4 @@ $.post(fetch_url,
         </div>
         
     </div>
-{% end %}
-
-{% block tailjs %}
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
 {% end %}

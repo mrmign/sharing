@@ -6,6 +6,7 @@ from tornado.escape import url_escape
 from base import BaseHandler
 from models.database import Link,LinkGroup,Comment
 from utils.processurl import ParseUrl
+from storm.expr import (Desc,Asc, Select, Like)
 
 class LinkSaveHandler(BaseHandler):
 
@@ -139,4 +140,13 @@ class LinkMoveHandler(BaseHandler):
         group.links_count +=1
         self.db.commit()
         self.redirect(self.previous)
-    
+
+class LinkSearchHandler(BaseHandler):
+    @tornado.web.authenticated
+    def get(self):
+        text = self.get_argument('q')
+        print text
+        sub = Select(LinkGroup.id, (LinkGroup.user_id==self.current_user.id))
+        link_id = Select(Link.id, (Link.group_id.is_in(sub)))
+        links = self.db.find(Link,Link.id.is_in(link_id),Link.title.like("%"+text+"%")).order_by(Desc(Link.updated)) 
+        self.render("search.html",user=self.current_user,links=links,text=text)
