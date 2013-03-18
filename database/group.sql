@@ -2,7 +2,6 @@ insert into linkgroup(user_id, group_name) values(1 ,  "Javascript");
 insert into linkgroup(user_id, group_name) values(2 ,  "Android links from Buffer");
 insert into linkgroup(user_id, group_name) values(3 ,  "jQuery-Plugins");
 insert into linkgroup(user_id, group_name) values(4 ,  "iOS Tools & 3rd party services");
-insert into linkgroup(user_id, group_name) values(2 ,  "Android links from Buffer");
 insert into linkgroup(user_id, group_name) values(5 ,  "Entrepreneurship");
 insert into linkgroup(user_id, group_name) values(6 ,  "Kippt API");
 insert into linkgroup(user_id, group_name) values(7 ,  "Flight");
