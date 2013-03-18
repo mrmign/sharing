@@ -7,7 +7,7 @@
         <div id="clips-container">
             <ul class="unstyled" id="clip-list" style="display: block;">
                {% for link in links %}
-               {% if link.linkgroup==0 %}
+               {% if link.linkgroup.private==0 %}
                 <li class="clip">
                 <div class="clip-content">
                         <ul class="clip-save" style="list-style:none">
