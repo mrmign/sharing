@@ -42,9 +42,9 @@ class UploadHandler(BaseHandler):
         for item in items:
             link = Link()
             link.group_id = imp.id
-            link.title = item.get_text()
-            link.url = item.get("href")
-            link.url_domain = self.get_domain(link.url)
+            link.title = unicode(item.get_text())
+            link.url = unicode(item.get("href"))
+            link.url_domain = unicode(self.get_domain(link.url))
             self.db.add(link)
             imp.link_count = imp.links_count + 1
             self.db.commit()

@@ -145,7 +145,6 @@ class LinkSearchHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
         text = self.get_argument('q')
-        print text
         sub = Select(LinkGroup.id, (LinkGroup.user_id==self.current_user.id))
         link_id = Select(Link.id, (Link.group_id.is_in(sub)))
         links = self.db.find(Link,Link.id.is_in(link_id),Link.title.like("%"+text+"%")).order_by(Desc(Link.updated)) 
