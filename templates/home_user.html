@@ -70,6 +70,22 @@
                                     </div>
                                     <ul>
                                         <li>
+                                          {% set cnt = 3 %}
+                                    {% for li in group.links %} 
+                                    {% if cnt > 0 %}
+                                    <li>
+                                     <i class="fav" style="background-image:url();"></i> 
+                                     <div> 
+                                      <a href="/group/{{ group.id }}">{{ li.title }}</a>
+                                    </div> 
+                                  </li> 
+
+                                  {% set cnt = cnt - 1 %}
+                                  {% else %}
+                                    {% break %}
+                                  {% end %}
+
+                                  {% end %}
                                             <a class="list-view" href="/group/{{group.id}}">View all {{group.links_count}} clips ›</a>
                                         </li>
                                     </ul>
