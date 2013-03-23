@@ -70,13 +70,13 @@
                                 Comment
                             </a></span>
                             <span>
-                                <a class="like  " href="#">
+                                <a class="like" href="/like/{{ link.id }}">
                                     <i class="icon icon-like"></i>
                                     <span>
                                         {% if link.like_count > 0 %}
-                                            {{ link.like_count}} likes
+                                            {{ link.like_count}} Likes
                                         {% else %}
-                                            likes
+                                            Like
                                         {% end %}
                                     </span>
                                 </a>

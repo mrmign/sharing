@@ -1,9 +1,12 @@
 {% extends "me_nocontent.html" %}
 {% block content %}
-<div id="edit-list-modal" style="display: block;"><div class="kippt-modal">
+<div id="edit-list-modal" style="display: block;">
+    <div class="kippt-modal">
     <!-- <div class="overlay"> -->
         <div class="content">
-            
+            <aside class="bar">
+                <a title="Close (Esc)" class="close button" href="/me">×</a>
+            </aside>
             <h2>Create a new list</h2>
             
             <form class="invite" action="/me/addgroup" method="POST">

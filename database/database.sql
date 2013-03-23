@@ -65,3 +65,10 @@ CREATE TABLE comment (
     link_id int NOT NULL REFERENCES link(id),
     created timestamp
 );
+
+DROP TABLE IF EXISTS linklike;
+CREATE TABLE linklike (
+    id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id int NOT NULL REFERENCES user(id),
+    link_id int NOT NULL REFERENCES link(id)
+)
