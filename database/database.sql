@@ -8,7 +8,8 @@ CREATE TABLE user (
 	email varchar(100) NOT NULL UNIQUE,
 	password varchar(100) NOT NULL ,
 	introduction varchar(300), 
-    follower_count int NOT NULL DEFAULT 0 
+    follower_count int NOT NULL DEFAULT 0,
+    KEY(follower_count)
 );
 
 
@@ -23,7 +24,8 @@ CREATE TABLE linkgroup (
     updated timestamp,
     private int NOT NULL DEFAULT 0,
     description varchar(500),
-    KEY(updated)
+    KEY(updated),
+    KEY(follower_count)
 );
 
 DROP TABLE IF EXISTS link;
@@ -52,6 +54,7 @@ CREATE TABLE following_group (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     user_id int NOT NULL REFERENCES user(id),
     group_id int NOT NULL REFERENCES linkgroup(id)
+    KEY(id)
 );
 
 DROP TABLE IF EXISTS comment;

@@ -5,7 +5,6 @@ from storm.locals import *
 
 class User(Storm):
     __storm_table__ = "user"
-
     id = Int(primary=True)
     username = Unicode()
     email = Unicode()
@@ -20,7 +19,6 @@ class User(Storm):
 
 class LinkGroup(Storm):
     __storm_table__ = "linkgroup"
-
     id = Int(primary=True)
     user_id = Int()
     group_name = Unicode()
@@ -28,6 +26,7 @@ class LinkGroup(Storm):
     follower_count = Int()
     updated = DateTime()
     links_count = Int()
+    description = Unicode()
 
     user = Reference(user_id, "User.id")
     links = ReferenceSet("LinkGroup.id", "Link.group_id")
@@ -35,7 +34,6 @@ class LinkGroup(Storm):
 
 class Link(Storm):
     __storm_table__ = "link"
-
     id = Int(primary=True)
     title = Unicode()
     url = Unicode()
@@ -55,9 +53,7 @@ class FollowingUser(Storm):
     __storm_table__ = "following_user"
     id = Int(primary=True)
     user_id = Int()
-    follower_id = Int()
-
-    # groups = ReferenceSet("Following.follower_id", "LinkGroup.user_id")
+    follower_id = Int()    
 
 
 class FollowingGroup(Storm):

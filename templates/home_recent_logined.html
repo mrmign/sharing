@@ -31,7 +31,7 @@
                             <img src="{{ static_url("images/avatar.png") }}" width="42" height="42" class="avatar" style="float:left"></a>
                              <!-- list header --> 
                              <div class="list-head"> 
-                                <h3><a href="/group/{{ group.id }}">{{ group.group_name }}</a></h3> 
+                                <h3><a title="{{group.description}}" href="/group/{{ group.id }}">{{ group.group_name }}</a></h3> 
                                 <div class="list-meta">by <a href="/user/{{group.user.id}}">{{group.user.username}}</a> - {{ group.follower_count }} followers</div>
                                  <!-- <a href="" class="list-follow btn" data-api-uri="/api/lists/130354/">Follow</a> -->
                                   </div> 
