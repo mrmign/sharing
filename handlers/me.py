@@ -15,7 +15,7 @@ class FeedHandler(BaseHandler):
             FollowingUser.user_id == self.current_user.id))
         group_id = Select(LinkGroup.id, (LinkGroup.user_id.is_in(follower_id)))
         links = self.db.find(Link, Link.group_id.is_in(
-            group_id)).order_by(Desc(Link.created))
+            group_id)).order_by(Desc(Link.updated))
         self.render("feed.html", links=links[:10], user=self.current_user)
 
 
@@ -88,12 +88,14 @@ class AddGroupHandler(BaseHandler):
     @tornado.web.authenticated
     def post(self):
         group_name = self.get_argument('groupname')
+        group_description = self.get_argument('group_description')
         group = self.db.find(
-            LinkGroup, LinkGroup.user_id == self.current_user.id, LinkGroup.group_name == group_name).one()
+            LinkGroup,LinkGroup.user_id==self.current_user.id,LinkGroup.group_name==group_name).one()
         if not group:
-            newgroup = LinkGroup()
-            newgroup.user_id = self.current_user.id
-            newgroup.group_name = group_name
+            newgroup=LinkGroup()
+            newgroup.user_id=self.current_user.id
+            newgroup.group_name=group_name
+            newgroup.description=group_description
             radio_value = self.get_argument('list-sharing')
             if radio_value == "private":
                 newgroup.private = 1
@@ -130,8 +132,10 @@ class EditGroupHandler(BaseHandler):
     @tornado.web.authenticated
     def post(self, group_id, previous_page):
         group_name = self.get_argument('groupname')
-        group = self.db.find(LinkGroup, LinkGroup.id == int(group_id)).one()
+        group_description = self.get_argument('group_description')
+        group = self.db.find(LinkGroup,LinkGroup.id==int(group_id)).one()
         group.group_name = group_name
+        group.description=group_description
         radio_value = self.get_argument('list-sharing')
         if radio_value == "private":
             group.private = 1
