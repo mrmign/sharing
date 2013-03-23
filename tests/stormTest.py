@@ -1,9 +1,11 @@
 from storm.locals import *
 
+
 class Person(object):
-	__storm_table__ = "person"
-	id = Int(primary=True)
-	name = Unicode()
+    __storm_table__ = "person"
+    id = Int(primary=True)
+    name = Unicode()
+
 
 class Company(object):
     __storm_table__ = "company"
@@ -13,25 +15,30 @@ class Company(object):
  #    	import Employee,Accountant,CompanyAccountant
  #    except:
  #    	pass
-	# employees = ReferenceSet(Company.id, Employee.company_id)
+    # employees = ReferenceSet(Company.id, Employee.company_id)
 
-	# accountants = ReferenceSet(Company.id,CompanyAccountant.company_id,\
+    # accountants = ReferenceSet(Company.id,CompanyAccountant.company_id,\
  #    							CompanyAccountant.accountant_id,Accountant.id)
-	
-    def __init__(self, name):
-       	self.name = name
-class Employee(Person):
-     __storm_table__ = "employee"
-     company_id = Int()
-     company = Reference(company_id, Company.id)
 
-     def __init__(self, name):
-         self.name = name
+    def __init__(self, name):
+        self.name = name
+
+
+class Employee(Person):
+    __storm_table__ = "employee"
+    company_id = Int()
+    company = Reference(company_id, Company.id)
+
+    def __init__(self, name):
+        self.name = name
+
 
 class Accountant(Person):
     __storm_table__ = "accountant"
+
     def __init__(self, name):
         self.name = name
+
 
 class CompanyAccountant(object):
     __storm_table__ = "company_accountant"
@@ -41,27 +48,28 @@ class CompanyAccountant(object):
 
 Company.employees = ReferenceSet(Company.id, Employee.company_id)
 
-Company.accountants = ReferenceSet(Company.id,CompanyAccountant.company_id,\
-    							CompanyAccountant.accountant_id,Accountant.id)
+Company.accountants = ReferenceSet(Company.id, CompanyAccountant.company_id,
+                                   CompanyAccountant.accountant_id, Accountant.id)
 
 debug = False
 if debug:
-	database = create_database("mysql://root:root@localhost:3306/test")
+    database = create_database("mysql://root:root@localhost:3306/test")
 else:
-	database = create_database("mysql://root:root@localhost:3306/storm")
+    database = create_database("mysql://root:root@localhost:3306/storm")
 store = Store(database)
 
 # store.execute("CREATE TABLE person (id int auto_increment PRIMARY KEY, name varchar(20))")
 # store.execute("CREATE TABLE company (id INTEGER auto_increment PRIMARY KEY, name VARCHAR(20))", noresult=True)
-# store.execute("CREATE TABLE employee (id INTEGER auto_increment PRIMARY KEY, name VARCHAR(20), company_id INTEGER)",noresult=True)
+# store.execute("CREATE TABLE employee (id INTEGER auto_increment PRIMARY
+# KEY, name VARCHAR(20), company_id INTEGER)",noresult=True)
 
 store.execute("CREATE TABLE accountant "
-               "(id INTEGER auto_increment PRIMARY KEY, name VARCHAR(20))", noresult=True)
+              "(id INTEGER auto_increment PRIMARY KEY, name VARCHAR(20))", noresult=True)
 
 
 store.execute("CREATE TABLE company_accountant "
-               "(company_id INTEGER, accountant_id INTEGER,"
-               " PRIMARY KEY (company_id, accountant_id))", noresult=True)
+              "(company_id INTEGER, accountant_id INTEGER,"
+              " PRIMARY KEY (company_id, accountant_id))", noresult=True)
 
 # joe = Person()
 # joe.name = u"Arming"

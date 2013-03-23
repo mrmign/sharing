@@ -1,7 +1,8 @@
-#encoding=utf-8
+# encoding=utf-8
 
 from tornado.escape import url_unescape
 from base import BaseHandler
+
 
 class RedirectPageHandler(BaseHandler):
     def get(self):

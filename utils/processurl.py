@@ -1,10 +1,11 @@
-#encoding=utf-8
+# encoding=utf-8
 from urlparse import urlparse
 import urllib2
 from bs4 import BeautifulSoup
 import sys
 reload(sys)
-sys.setdefaultencoding( "utf-8" )
+sys.setdefaultencoding("utf-8")
+
 
 class ParseUrl():
     def __init__(self, url):
@@ -22,5 +23,5 @@ class ParseUrl():
         return soup.title.string
 
     def get_domain(self):
-         o = urlparse(self._url)
-         return o.netloc
+        o = urlparse(self._url)
+        return o.netloc
