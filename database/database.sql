@@ -19,11 +19,11 @@ CREATE TABLE linkgroup (
     user_id int NOT NULL REFERENCES user(id),
     group_name varchar(200) NOT NULL,
     follower_count int NOT NULL DEFAULT 0 ,
-    like_count int NOT NULL DEFAULT 0,
     links_count int NOT NULL DEFAULT 0,
     updated timestamp,
-    created timestamp,
-    private int NOT NULL DEFAULT 0
+    private int NOT NULL DEFAULT 0,
+    description varchar(500),
+    KEY(updated)
 );
 
 DROP TABLE IF EXISTS link;
@@ -36,9 +36,8 @@ CREATE TABLE link (
     comments_count int NOT NULL DEFAULT 0,
     like_count int NOT NULL DEFAULT 0,
     updated timestamp,
-    created timestamp,
     group_id int NOT NULL REFERENCES linkgroup(id),
-    KEY(created)
+    KEY(updated)
 );
 
 DROP TABLE IF EXISTS following_user;

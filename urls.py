@@ -1,9 +1,9 @@
 #encoding=utf-8
-from  handlers.home import (HomeHandler,
+from handlers.home import (HomeHandler,
                             HomeRecentHandler,
                             )
 
-from  handlers.following import (FollowUserHandler,
+from handlers.following import (FollowUserHandler,
                                  FollowGroupHandler,
                                  UnfollowUserHandler,
                                  UnfollowGroupHandler,
