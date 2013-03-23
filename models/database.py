@@ -78,6 +78,11 @@ class Comment(Storm):
 	created = DateTime()
 	user = Reference(user_id, "User.id")
 
+class LinkLike(Storm):
+	__storm_table__="linklike"
+	id = Int(primary=True)
+	user_id = Int()
+	link_id = Int()
 
 
 _database = create_database("mysql://root:root@localhost:3306/share")
