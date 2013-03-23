@@ -1,8 +1,8 @@
 from models.database import (User, LinkGroup, Link, store)
-from storm.expr import (Desc,Asc, Select)
+from storm.expr import (Desc, Asc, Select)
 user = store.get(User, 22)
 for u in user.followings:
-	print u.follower_id
+    print u.follower_id
 
 # g = store.get(LinkGroup, 1)
 # for l in g.links:
@@ -34,7 +34,8 @@ for u in user.followings:
 # print type(lg.links.order_by()[:7])
 
 # link = store.get(Link, 1)
-# print link.title, link.url_domain, link.linkgroup.group_name, link.linkgroup.user.username
+# print link.title, link.url_domain, link.linkgroup.group_name,
+# link.linkgroup.user.username
 
 # link = store.find(Link, Link.group_id==1)
 # for l in link.order_by(Desc(Link.created))[:7]:

@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-#encoding=utf-8
+# encoding=utf-8
 
 # from utils.processurl import ParseUrl
 
@@ -11,7 +11,7 @@ import os
 from bs4 import BeautifulSoup
 
 from utils.cleanbookmark import cleanBookmarks
-fi =  os.path.abspath(os.path.join(os.getcwd()) + "/uploads/22.html")
+fi = os.path.abspath(os.path.join(os.getcwd()) + "/uploads/22.html")
 clean = cleanBookmarks(fi)
 print clean
 # soup = BeautifulSoup(open("bookmarks.html"))

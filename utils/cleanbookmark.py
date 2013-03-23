@@ -30,7 +30,7 @@ def fromName2codepoint(string):
     return string
 
 
-def cleanBookmarks(content, newFilename = None):
+def cleanBookmarks(content, newFilename=None):
     '''Firefox bookmarks -> cleaned up bookmarks in an XHTML file'''
     # bm = file(filename, 'r')
     # bmCont = bm.read()
@@ -45,33 +45,33 @@ def cleanBookmarks(content, newFilename = None):
         if '</DL>' in bmContLines[i]:
             headingLevel -= 1
         bmContLines[i] = \
-        bmContLines[i].replace('<H3','<h%d' % headingLevel)
+            bmContLines[i].replace('<H3', '<h%d' % headingLevel)
         bmContLines[i] = \
-        bmContLines[i].replace('</H3','</h%d' % headingLevel)
+            bmContLines[i].replace('</H3', '</h%d' % headingLevel)
     bmCont = '\n'.join(bmContLines)
 
     # Simple cleanup substitutions
     bmSubs = {'<!DOCTYPE NETSCAPE-Bookmark-file-1>': '',
-    '<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">': '',
-    '<TITLE>Bookmarks</TITLE>': '',
-    ' >': '>',
-    '<H1': '<h1',
-    '</H1': '</h1',
-    '<DL>': '',
-    '</DL>': '',
-    '<P>': '',
-    '<p>': '',
-    'updated null': '',
-    'error null': '',
-    '<DT>': '',
-    '</DT>': '',
-    '<A ': '<p><a ',
-    '</A>': '</a></p>',
-    'HREF': 'href',
-    'FEEDURL': 'feedurl',
-    '<HR>': '<hr />',
-    ' -> ': ' -&gt; '
-    }
+              '<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">': '',
+              '<TITLE>Bookmarks</TITLE>': '',
+              ' >': '>',
+              '<H1': '<h1',
+              '</H1': '</h1',
+              '<DL>': '',
+              '</DL>': '',
+              '<P>': '',
+              '<p>': '',
+              'updated null': '',
+              'error null': '',
+              '<DT>': '',
+              '</DT>': '',
+              '<A ': '<p><a ',
+              '</A>': '</a></p>',
+              'HREF': 'href',
+              'FEEDURL': 'feedurl',
+              '<HR>': '<hr />',
+              ' -> ': ' -&gt; '
+              }
 
     for sub, repl in bmSubs.iteritems():
         bmCont = bmCont.replace(sub, repl)
@@ -80,20 +80,20 @@ def cleanBookmarks(content, newFilename = None):
 
 # Cleanup substitution patterns for regexes
     reSubsInBM = {
-    '<DD>.*?\n': '',
-    ' ADD_DATE="[^"]*"': '',
-    ' LAST_MODIFIED="[^"]*"': '',
-    'PERSONAL_TOOLBAR_FOLDER="true"': '',
-    ' ID="[^"]*"': '',
-    ' LAST_VISIT="[^"]*"': '',
-    'ICON="[^"]*"': '',
-    'ICON_URI="[^"]*"': '',
-    ' LAST_CHARSET="[^"]*"': '',
-    '<script.*?</script>': '', # Esp. the JavaScript shell
-    '<style.*?</style>': '',
-    r'(no-)?(updated|error) \[.*?\]': '', # From Sage the Firefox RSS reader
-    '&(?!#)': '&amp;', # Unencoded &'s
-    '<p><a href="javascript.*?<html.*?</html>.*?</a></p>': '' # The JS Shell
+        '<DD>.*?\n': '',
+        ' ADD_DATE="[^"]*"': '',
+        ' LAST_MODIFIED="[^"]*"': '',
+        'PERSONAL_TOOLBAR_FOLDER="true"': '',
+        ' ID="[^"]*"': '',
+        ' LAST_VISIT="[^"]*"': '',
+        'ICON="[^"]*"': '',
+        'ICON_URI="[^"]*"': '',
+        ' LAST_CHARSET="[^"]*"': '',
+        '<script.*?</script>': '',  # Esp. the JavaScript shell
+        '<style.*?</style>': '',
+        r'(no-)?(updated|error) \[.*?\]': '',  # From Sage the Firefox RSS reader
+        '&(?!#)': '&amp;',  # Unencoded &'s
+        '<p><a href="javascript.*?<html.*?</html>.*?</a></p>': ''  # The JS Shell
     }
 
     for pat, repl in reSubsInBM.iteritems():

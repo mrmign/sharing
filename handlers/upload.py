@@ -1,5 +1,6 @@
-#encoding=utf-8
-import os, uuid
+# encoding=utf-8
+import os
+import uuid
 from urlparse import urlparse
 from base import BaseHandler
 from bs4 import BeautifulSoup
@@ -7,9 +8,11 @@ from models.database import LinkGroup, Link
 from utils.cleanbookmark import cleanBookmarks
 __UPLOADS__ = "uploads/"
 
+
 class UploadHandler(BaseHandler):
     def get(self):
         self.render("upload.html", user=self.current_user)
+
     def post(self):
         fileinfo = self.request.files['import_file'][0]
         # print "fileinfo is", fileinfo
@@ -34,11 +37,12 @@ class UploadHandler(BaseHandler):
         cleaned = cleanBookmarks(body)
         soup = BeautifulSoup(cleaned)
         items = soup.find_all("a")
-        imp.links_count = len( items)
+        imp.links_count = len(items)
         self.db.add(imp)
         self.db.commit()
-        # fi = os.path.abspath(os.path.join(os.getcwd()) + "/uploads/" + str(self.current_user.id) + ".html")
-        
+        # fi = os.path.abspath(os.path.join(os.getcwd()) + "/uploads/" +
+        # str(self.current_user.id) + ".html")
+
         for item in items:
             link = Link()
             link.group_id = imp.id
@@ -49,6 +53,6 @@ class UploadHandler(BaseHandler):
             imp.link_count = imp.links_count + 1
             self.db.commit()
 
-    def get_domain(self,url):
-         o = urlparse(url)
-         return o.netloc
+    def get_domain(self, url):
+        o = urlparse(url)
+        return o.netloc

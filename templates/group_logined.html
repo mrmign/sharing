@@ -88,7 +88,7 @@
                     </ul>
                         {% end %}
                         <div class="clip-save-popup"></div>
-                        <span class="clip-date"><i class="icon icon-date"></i> {{ link.created }}</span>
+                        <span class="clip-date"><i class="icon icon-date"></i> {{ link.updated }}</span>
                         <a style="width:500px" title="{{link.description}}" rel="nofollow" class="clip-title" target="_blank" href="{{ link.url }}">{{ link.title }}</a>
 
                         <p class="domain">
@@ -103,16 +103,25 @@
                                 Comment
                             </a></span>
                             <span>
-                                <a class="like  " href="#">
+                                {% set id_list = [like.user_id for like in link.likes] %}
+                                {% if not user.id in id_list %}
+                                <a class="like" href="/like/{{ link.id }}">
                                     <i class="icon icon-like"></i>
                                     <span>
                                         {% if link.like_count > 0 %}
-                                            {{ link.like_count}} likes
+                                            {{ link.like_count}} Likes
                                         {% else %}
-                                            likes
+                                            Like
                                         {% end %}
                                     </span>
                                 </a>
+                                {% else %}
+                                <a class="like" href="/cancel_like/{{ link.id }}">
+                                <i class="icon icon-like"></i>
+                                    <span>
+                                        cancel
+                                    </span>
+                                {% end %}
                             </span>
                         </p>
                 </div>
