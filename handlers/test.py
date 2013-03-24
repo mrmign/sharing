@@ -24,7 +24,7 @@ class TestHandler(BaseHandler):
             FollowingUser.user_id == self.current_user.id))
         group_id = Select(LinkGroup.id, (LinkGroup.user_id.is_in(follower_id)))
         links = self.db.find(Link, Link.group_id.is_in(
-            group_id)).order_by(Desc(Link.created))[10*(page - 1): 10*page]
+            group_id)).order_by(Desc(Link.updated))[10*(page - 1): 10*page]
         out = self.render_string(
             "modules/more_feed.html", links=links, ret_count=links.count())
 

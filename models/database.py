@@ -46,6 +46,7 @@ class Link(Storm):
 
     linkgroup = Reference(group_id, "LinkGroup.id")
     comments = ReferenceSet("Link.id", "Comment.link_id")
+    likes = ReferenceSet("Link.id","LinkLike.link_id")
 
 
 class FollowingUser(Storm):
@@ -63,13 +64,19 @@ class FollowingGroup(Storm):
 
 
 class Comment(Storm):
-    __storm_table__ = "comment"
-    id = Int(primary=True)
-    content = Unicode()
-    user_id = Int()
-    link_id = Int()
-    created = DateTime()
-    user = Reference(user_id, "User.id")
+	__storm_table__="comment"
+	id =Int(primary=True)
+	content =Unicode()
+	user_id = Int()
+	link_id = Int()
+	created = DateTime()
+	user = Reference(user_id, "User.id")
+
+class LinkLike(Storm):
+	__storm_table__="linklike"
+	id = Int(primary=True)
+	user_id = Int()
+	link_id = Int()
 
 
 _database = create_database("mysql://root:root@localhost:3306/share")

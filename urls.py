@@ -37,6 +37,8 @@ from handlers.link import (LinkSaveHandler,
                            LinkSaveEditHandler,
                            LinkMoveHandler,
                            LinkSearchHandler,
+                           LinkLikeHandler,
+                           CancelLinkLikeHandler,
                            )
 
 from handlers.setting import (
@@ -120,4 +122,7 @@ url_patterns = [
 
     (r"/search/link", LinkSearchHandler),
     (r"/setting/cancel_account", CancelAccountHandler),
+
+    (r"/like/([0-9]+)", LinkLikeHandler),
+    (r"/cancel_like/([0-9]+)",CancelLinkLikeHandler),
 ]
