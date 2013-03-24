@@ -88,7 +88,7 @@ class AddGroupHandler(BaseHandler):
     @tornado.web.authenticated
     def post(self):
         group_name = self.get_argument('groupname')
-        group_description = self.get_argument('group_description')
+        group_description = self.get_argument('group_description', u'')
         group = self.db.find(
             LinkGroup,LinkGroup.user_id==self.current_user.id,LinkGroup.group_name==group_name).one()
         if not group:
