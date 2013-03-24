@@ -27,7 +27,7 @@ class MyLinksHandler(BaseHandler):
         links = self.db.find(Link, Link.group_id.is_in(
             sub)).order_by(Desc(Link.updated))
 
-        self.render("mylinks.html", links=links[:10], user=self.current_user)
+        self.render("mylinks.html", links=links[:10], link_count=links.count(), user=self.current_user)
 
 
 class MeGroupHandler(BaseHandler):
@@ -75,7 +75,7 @@ class RecentLinksHandler(BaseHandler):
             LinkGroup.user_id == self.current_user.id))
         links = self.db.find(Link, Not(Link.group_id.is_in(
             group_id))).order_by(Desc(Link.updated))[0:15]
-        print links.count()
+        # print links.count()
         self.render("recent_links.html", links=links, user=self.current_user)
 
 

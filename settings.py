@@ -2,7 +2,6 @@
 
 import os
 
-from uimodules import *
 
 settings = dict(
     static_path=os.path.join(os.path.dirname(__file__), "static"),

@@ -112,9 +112,11 @@
              
                {% end %}
             </ul>
+            {% if link_count == 10 %}
             <div style="display:block;margin:15px 10px;text-align:center;font-size:23px" id="load-more">
                 <a class="click-load-more" href="javascript:void(0);" style="color: #848484;" onclick="getmore();">Load more!</a>
             </div>
+            {% end %}
 
 <script type="text/javascript">
 var fetch_url = "/loadmore";
