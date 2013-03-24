@@ -5,12 +5,14 @@ from storm.expr import (Desc, Asc, Select, Not)
 
 from .base import BaseHandler
 from models.database import User, FollowingUser, LinkGroup, Link
-from settings import NUM_FEED
+from settings import NUM_FEED, NUM_RECENT_LINKS
 """
-request type  | identyfier
-feed          |     1
-mylink        |     2
-return status | identifier
+request type     | identyfier
+feed             |     1
+mylink           |     2
+me recentlinks   |     3
+
+return status    | identifier
 OK                 200
 NO MORE            202
 """
@@ -24,6 +26,8 @@ class LoadMoreHandler(BaseHandler):
             result, status_code = self._get_more_feed(int(page))
         elif request_type == "2":
             result, status_code = self._get_more_mylink(int(page))
+        elif request_type == "3":
+            result, status_code = self._get_more_recent_links(int(page))
         # result, status_code = {
         #         "1": self._get_more_feed(int(page)),
         #         "2": self._get_more_mylink(int(page)),
@@ -45,7 +49,8 @@ class LoadMoreHandler(BaseHandler):
             status_code = 200
         else:
             status_code = 202
-        return self.render_string("modules/more_feed.html", links=l, groups=self.current_user.groups, ret_count=links.count()), status_code
+        return self.render_string("modules/more_feed.html", links=l, 
+            groups=self.current_user.groups, ret_count=links.count()), status_code
 
     def _get_more_mylink(self, page):
         sub = Select(LinkGroup.id, (LinkGroup.user_id == self.current_user.id))
@@ -60,4 +65,19 @@ class LoadMoreHandler(BaseHandler):
             status_code = 200
         else:
             status_code = 202
-        return self.render_string("modules/more_mylinks.html", links=l, groups=mygroups, ret_count=links.count()), status_code
+        return self.render_string("modules/more_mylinks.html", links=l, 
+            groups=mygroups, ret_count=links.count()), status_code
+
+    def _get_more_recent_links(self, page):
+        group_id = Select(LinkGroup.id, (
+            LinkGroup.user_id == self.current_user.id))
+        links = self.db.find(Link, Not(Link.group_id.is_in(
+            group_id))).order_by(Desc(Link.updated))
+        total = links.count()
+        total_page = (total - 1) / NUM_RECENT_LINKS + 1
+        l = links[NUM_RECENT_LINKS*(page - 1): NUM_RECENT_LINKS*page]
+        if page <= total_page:
+            status_code = 200
+        else:
+            status_code = 202
+        return self.render_string("modules/more_recent_links.html", links=l), status_code

@@ -1,0 +1,62 @@
+{% for link in links %}
+{% if link.linkgroup.private==0 %}
+<li class="clip">
+<div class="clip-content">
+        <ul class="clip-save" style="list-style:none">
+            <li class="btn-group">
+                <a  title="+save" class="btn dropdown-toggle settings" data-toggle="dropdown" href="#">
+                    <span><i class="icon icon-save"></i>save</span>
+                    <span class="caret">
+
+                    </span>
+                </a>
+                <ul class="dropdown-menu pull-right" >
+                    {% for g in current_user.groups%}
+                    <li >
+                        <a href="/link/save/{{g.id}}/{{link.id}}" class="rss" title="save this link into {{g.group_name}}">
+                            {{g.group_name}}
+                        </a>
+                    </li>
+                    
+                    {% end %}
+                </ul>
+            </li>
+            
+        </ul>
+        <div class="clip-save-popup"></div>
+        <span class="clip-date"><i class="icon icon-date"></i> {{ link.updated }}</span>
+        <a rel="nofollow" style="width:650px" title="{{link.description}}" class="clip-title" target="_blank" href="{{ link.url }}">{{ link.title }}</a>
+
+        <p class="domain">
+            
+            <span>{{ link.url_domain }}</span>
+            <span>›</span>
+            <span>added by <a title="{{ link.linkgroup.user.username }}" href="/user/{{ link.linkgroup.user_id }}">{{ link.linkgroup.user.username }}</a></span>
+            <span class="comment-count"><a title="Comment" href="/me/comment/{{link.id}}/%2Fme%2Frecent_links"><i class="icon icon-comment"></i>
+            {% if link.comments_count > 0%}
+                <strong> {{ link.comments_count }}</strong>
+            {% end %}                           
+                Comment
+            </a></span>
+            <span>
+                <a class="like  " href="#">
+                    <i class="icon icon-like"></i>
+                    <span>
+                        {% if link.like_count > 0 %}
+                            {{ link.like_count}} likes
+                        {% else %}
+                            likes
+                        {% end %}
+                    </span>
+                </a>
+            </span>
+            
+            <!-- <span class="s">
+                {{link.description}}
+            </span> -->
+           
+        </p>
+</div>
+</li>  
+{% end %}
+{% end %}

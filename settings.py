@@ -14,3 +14,4 @@ settings = dict(
 )
 
 NUM_FEED = 10
+NUM_RECENT_LINKS = 15

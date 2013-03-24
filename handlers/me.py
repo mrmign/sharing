@@ -49,7 +49,7 @@ class StaffPicksHandler(BaseHandler):
         follower_id = Select(
             FollowingUser.follower_id, FollowingUser.user_id == self.current_user.id)
         staffs = self.db.find(User, Not(User.id.is_in(
-            follower_id)), User.id != self.current_user.id).order_by(Desc(User.follower_count))
+            follower_id)), User.id != self.current_user.id).order_by(Desc(User.follower_count))[:16]
         self.render("staff_picks.html", staffs=staffs, user=self.current_user)
 
 
@@ -62,7 +62,7 @@ class PopularGroupsHandler(BaseHandler):
         group_id2 = Select(
             LinkGroup.id, LinkGroup.user_id == self.current_user.id)
         groups = self.db.find(LinkGroup, Not(LinkGroup.id.is_in(group_id)), Not(LinkGroup.id.is_in(
-            group_id2)), LinkGroup.private == 0).order_by(Desc(LinkGroup.follower_count))
+            group_id2)), LinkGroup.private == 0).order_by(Desc(LinkGroup.follower_count))[:12]
         self.render("popular_groups.html",
                     groups=groups, user=self.current_user)
 
@@ -74,7 +74,7 @@ class RecentLinksHandler(BaseHandler):
         group_id = Select(LinkGroup.id, (
             LinkGroup.user_id == self.current_user.id))
         links = self.db.find(Link, Not(Link.group_id.is_in(
-            group_id))).order_by(Desc(Link.updated))
+            group_id))).order_by(Desc(Link.updated))[0:15]
         print links.count()
         self.render("recent_links.html", links=links, user=self.current_user)
 
