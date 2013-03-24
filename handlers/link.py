@@ -178,7 +178,8 @@ class CancelLinkLikeHandler(BaseHandler):
     def get(self,link_id):
         l = self.db.get(Link, int(link_id))
         l.like_count -=1
-        like = self.db.find(LinkLike, LinkLike.user_id == self.current_user.id,LinkLike.link_id == int(link_id)).one()
+        like = self.db.find(LinkLike, LinkLike.user_id == self.current_user.id,
+            LinkLike.link_id == int(link_id)).one()
         self.db.remove(like)
         self.db.commit()
         self.redirect(self.previous)

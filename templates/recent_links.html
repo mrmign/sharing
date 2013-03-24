@@ -46,7 +46,7 @@
                             </a></span>
                             <span>
                                 {% set id_list = [like.user_id for like in link.likes] %}
-                                {% if not user.id in id_list %}
+                                {% if user.id  not in id_list %}
                                 <a class="like" href="/like/{{ link.id }}">
                                     <i class="icon icon-like"></i>
                                     <span>
@@ -66,9 +66,7 @@
                                 {% end %}
                             </span>
                             
-                            <!-- <span class="s">
-                                {{link.description}}
-                            </span> -->
+                       
                            
                         </p>
                 </div>

@@ -80,4 +80,5 @@ class LoadMoreHandler(BaseHandler):
             status_code = 200
         else:
             status_code = 202
-        return self.render_string("modules/more_recent_links.html", links=l), status_code
+        return self.render_string("modules/more_recent_links.html", links=l, 
+            user=self.current_user), status_code

@@ -25,13 +25,26 @@
                     </span>
                 </span>
                 <span>
-                    <a href="#" class="clip-like isOwn" rel="tooltip" title="You can't like your own clip">
-                        <i class="icon icon-like">
-                        </i>
+                   {% set id_list = [like.user_id for like in link.likes] %}
+                    {% if current_user.id not in id_list %}
+                    <a class="like" href="/like/{{ link.id }}">
+                        <i class="icon icon-like"></i>
                         <span>
-                            Like
+                            {% if link.like_count > 0 %}
+                                {{ link.like_count}} Likes
+                            {% else %}
+                                Like
+                            {% end %}
                         </span>
                     </a>
+                    {% else %}
+                    <a class="like" href="/cancel_like/{{ link.id }}">
+                    <i class="icon icon-like"></i>
+                        <span>
+                            cancel
+                        </span>
+                    {% end %}
+                </a>
                 </span>
             </p>
         </div>
