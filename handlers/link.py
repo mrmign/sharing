@@ -89,6 +89,10 @@ class DeleteMylinkHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self, link_id):
         link = self.db.get(Link, int(link_id))
+        for comment in link.comments:
+            self.db.remove(comment)
+        for like in link.likes:
+            self.db.remove(like)
         group = self.db.get(LinkGroup, link.linkgroup.id)
         group.links_count -= 1
         self.db.remove(link)
@@ -129,12 +133,12 @@ class LinkAddHandler(BaseHandler):
 class LinkSaveEditHandler(BaseHandler):
 
     @tornado.web.authenticated
-    def get(self, link_id):
+    def get(self, link_id, previous_page):
         l = self.db.get(Link, int(link_id))
         l.title = self.get_argument('link_title')
-        l.description = self.get_argument('link_description')
+        l.description = self.get_argument('link_description',u'')
         self.db.commit()
-        self.redirect(self.previous)
+        self.redirect(previous_page)
 
 
 class LinkMoveHandler(BaseHandler):

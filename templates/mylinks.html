@@ -37,8 +37,15 @@
                         <p class="domain">
                             <i class="fav" >
                             </i>
+                            
+                            {{link.url_domain}}
                             <span>
-                                {{ link.url_domain }}
+                                <span class="comment-count">
+                                    <a href="/me/group/{{link.linkgroup.id}}" title="Comment">
+                                    <strong> in</strong>
+                                    {{link.linkgroup.group_name}}
+                                    </a>
+                                </span>
                             </span>
                             <span>
                                 · <span class="comment-count">

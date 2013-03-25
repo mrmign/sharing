@@ -16,6 +16,7 @@
          {
            if (validate_required(link_title,"title must be filled out!")==false)
              {link_title.focus();return false}
+
          }
        }
     
@@ -40,7 +41,7 @@
             <img width="42" height="32" style="" src="{{static_url("images/me.jpeg")}}&amp;s=160" class="avatar inline" title="{{user.username}}">
             <div  class="notes-content">
                 <div class="comments">
-                <form class="edit-clip" action="/link/save_edit/{{link.id}}"> 
+                <form class="edit-clip" onsubmit="return validate_form(this)"  action="/link/save_edit/{{link.id}}/%2Fredirect%2Fpre"> 
                     <input style="width:500px" name="link_url" type="text" placeholder="Website url" value="{{link.url}}" class="text-url" disabled>
                     <div class="input" >                        
                         <input style="width:500px" name="link_title" type="text" placeholder="Your title goes here" class="item-title" value="{{link.title}}">
