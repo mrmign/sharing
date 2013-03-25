@@ -89,6 +89,10 @@ class DeleteMylinkHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self, link_id):
         link = self.db.get(Link, int(link_id))
+        for comment in link.comments:
+            self.db.remove(comment)
+        for like in link.likes:
+            self.db.remove(like)
         group = self.db.get(LinkGroup, link.linkgroup.id)
         group.links_count -= 1
         self.db.remove(link)

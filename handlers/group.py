@@ -53,7 +53,11 @@ class DeleteGroupHandler(BaseHandler):
     def get(self, group_id):
         link_id = Select(Link.id, (Link.group_id == int(group_id)))
         links = self.db.find(Link, Link.id.is_in(link_id))
-        for link in links:
+        for link in links:            
+            for comment in link.comments:
+                self.db.remove(comment)
+            for like in link.likes:
+                self.db.remove(like)
             self.db.remove(link)
         group = self.db.find(LinkGroup, LinkGroup.id == int(group_id)).one()
         self.db.remove(group)
