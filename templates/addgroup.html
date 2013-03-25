@@ -1,4 +1,34 @@
 {% extends "me_nocontent.html" %}
+{% block script %}
+<script type="text/javascript">
+
+function validate_required(field,alerttxt)
+{
+    with (field)
+    {
+        if (value==null||value=="")
+        {
+            alert(alerttxt);return false
+        }
+        else 
+        {
+            return true
+        }
+    }
+}
+
+function validate_form(thisform)
+{
+    with (thisform)
+    {
+        if (validate_required(groupname,"Input groupname!")==false)
+        {
+            groupname.focus();return false
+        }        
+    }
+}
+</script>
+{% end %}
 {% block content %}
 <div id="edit-list-modal" style="display: block;">
     <div class="kippt-modal">
@@ -9,7 +39,7 @@
             </aside>
             <h2>Create a new list</h2>
             
-            <form class="invite" action="/me/addgroup" method="POST">
+            <form class="invite" action="/me/addgroup" onsubmit="return validate_form(this)" method="POST">
                 <label for="list-create-name"><strong>List name <h4>{{newgroup_msg}}</h4> </strong></label>
                 <input type="text" value="" placeholder="eg. Programming" id="list-create-name" name="groupname">
                 

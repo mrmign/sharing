@@ -62,3 +62,11 @@ class LogoutHandler(BaseHandler):
         self.clear_cookie("previous")
         self.clear_cookie("common_previous")
         self.redirect("/")
+
+
+class CancelHandler(BaseHandler):
+    def get(self):
+        user = self.db.get(User, self.current_user.id)
+        self.db.remove(user)
+        self.db.commit()
+        self.redirect("/")
