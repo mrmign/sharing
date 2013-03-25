@@ -129,12 +129,12 @@ class LinkAddHandler(BaseHandler):
 class LinkSaveEditHandler(BaseHandler):
 
     @tornado.web.authenticated
-    def get(self, link_id):
+    def get(self, link_id, previous_page):
         l = self.db.get(Link, int(link_id))
         l.title = self.get_argument('link_title')
-        l.description = self.get_argument('link_description')
+        l.description = self.get_argument('link_description',u'')
         self.db.commit()
-        self.redirect(self.previous)
+        self.redirect(previous_page)
 
 
 class LinkMoveHandler(BaseHandler):

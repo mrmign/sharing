@@ -3,28 +3,30 @@ from handlers.home import (HomeHandler,
                            HomeRecentHandler,
                            )
 
-from handlers.following import (FollowUserHandler,
-                                FollowGroupHandler,
-                                UnfollowUserHandler,
-                                UnfollowGroupHandler,
-                                )
-from handlers.auth import (LoginHandler, SignupHandler, LogoutHandler)
+from handlers.follow import (FollowUserHandler,
+                             FollowGroupHandler,
+                             UnfollowUserHandler,
+                             UnfollowGroupHandler,
+                             )
+from handlers.auth import (LoginHandler,
+                           SignupHandler, 
+                           LogoutHandler,
+                           CancelHandler,
+                           )
 
 from handlers.me import (FeedHandler,
                          MyLinksHandler,
                          MeGroupHandler,
-                         StaffPicksHandler,
-                         PopularGroupsHandler,
-                         RecentLinksHandler,
-                         AddGroupHandler,
-                         DeleteGroupHandler,
-                         EditGroupHandler,
                          FollowingHandler,
                          FollowerHandler,
                          MeHandler,
                          )
 
-from handlers.group import GroupHandler
+from handlers.group import (GroupHandler,
+                            AddGroupHandler,
+                            DeleteGroupHandler,
+                            EditGroupHandler,
+                            )
 
 from handlers.link import (LinkSaveHandler,
                            CommentHandler,
@@ -41,11 +43,17 @@ from handlers.link import (LinkSaveHandler,
                            CancelLinkLikeHandler,
                            )
 
-from handlers.setting import (
-    ProfileHandler, SettingsProfileHandler, SettingsAccountHandler,
-    CancelAccountHandler)
+from handlers.profile import (ProfileHandler, 
+                              SettingsProfileHandler, 
+                              SettingsAccountHandler,
+                              )
 
 from handlers.user import UserHandler
+
+from handlers.recommend import (StaffPicksHandler,
+                                PopularGroupsHandler,
+                                RecentLinksHandler,
+                                )
 
 # test handler
 from handlers.test import TestHandler
@@ -114,14 +122,14 @@ url_patterns = [
     (r"/me/addlink", LinkAddHandler),
     (r"/test", TestHandler),
     (r"/upload", UploadHandler),
-    (r"/link/save_edit/([0-9]+)", LinkSaveEditHandler),
+    (r"/link/save_edit/(?P<link_id>[^\/]+)/?(?P<previous_page>[^\/]+)?", LinkSaveEditHandler),
     (r"/home_recent", HomeRecentHandler),
     (r"/me", MeHandler),
     (r"/link/move/(?P<group_id>[^\/]+)/?(?P<link_id>[^\/]+)?",
      LinkMoveHandler),
 
     (r"/search/link", LinkSearchHandler),
-    (r"/setting/cancel_account", CancelAccountHandler),
+    (r"/cancel", CancelHandler),
 
     (r"/like/([0-9]+)", LinkLikeHandler),
     (r"/cancel_like/([0-9]+)",CancelLinkLikeHandler),

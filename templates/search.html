@@ -30,11 +30,23 @@
                                 {{ link.url_domain }}
                             </span>
                             <span>
+                                <span class="comment-count">
+                                    <a href="/me/group/{{link.linkgroup.id}}" title="Comment">
+                                    <strong> in</strong>
+                                    {{link.linkgroup.group_name}}
+                                    </a>
+                                </span>
+                            </span>
+                            
+                            <span>
                                 · <span class="comment-count">
-                                    <a href="/me/comment/{{link.id}}/%2Fme%2Fmylinks" title="Comment">
+                                    <a href="/me/comment/{{link.id}}/%2Fme%2Fgroup%2F{{link.linkgroup.id}}" title="Comment">
                                         <i class="icon icon-comment">
                                         </i>
-                                        Add comment
+                                        {% if link.comments_count > 0%}
+                                    <strong> {{ link.comments_count }}</strong>
+                                    {% end %}
+                                         comment
                                     </a>
                                 </span>
                             </span>
@@ -43,7 +55,11 @@
                                     <i class="icon icon-like">
                                     </i>
                                     <span>
-                                        Like
+                                        {% if link.like_count > 0 %}
+                                            {{ link.like_count}} Likes
+                                        {% else %}
+                                            Like
+                                        {% end %}
                                     </span>
                                 </a>
                             </span>
