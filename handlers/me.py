@@ -132,7 +132,7 @@ class EditGroupHandler(BaseHandler):
     @tornado.web.authenticated
     def post(self, group_id, previous_page):
         group_name = self.get_argument('groupname')
-        group_description = self.get_argument('group_description')
+        group_description = self.get_argument('group_description', u'')
         group = self.db.find(LinkGroup,LinkGroup.id==int(group_id)).one()
         group.group_name = group_name
         group.description=group_description
