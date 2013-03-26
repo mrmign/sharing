@@ -47,10 +47,17 @@
                 		<i class="icon icon-date"></i>
                 		<abbr title="{{link.updated}}" class="timeago">{{link.updated}}</abbr>
                 	</span>
-                	<a class="clip-like " href="#">
+                	<!-- <a class="clip-like " href="#"> -->
                         <i class="icon icon-like"></i>
-                        <span>Like</span>
-                    </a>
+                        <span>
+                            {% if link.like_count > 0 %}
+                            {{ link.like_count}}
+                            Likes
+                            {% else %}
+                            Like
+                            {% end %}
+                        </span>
+                    <!-- </a> -->
                 </div>
             </div>
 
