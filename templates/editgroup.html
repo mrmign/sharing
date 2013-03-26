@@ -1,11 +1,41 @@
 {% extends "me_nocontent.html" %}
+{% block script %}
+<script type="text/javascript">
+
+function validate_required(field,alerttxt)
+{
+    with (field)
+    {
+        if (value==null||value=="")
+        {
+            alert(alerttxt);return false
+        }
+        else 
+        {
+            return true
+        }
+    }
+}
+
+function validate_form(thisform)
+{
+    with (thisform)
+    {
+        if (validate_required(groupname,"Input groupname!")==false)
+        {
+            groupname.focus();return false
+        }
+    }
+}
+</script>
+{% end %}
 {% block content %}
 <div id="edit-list-modal" style="display: block;"><div class="kippt-modal">
         <div class="content">
             <a class="close" href="/redirect/pre">×</a>          
             <h2>Edit Group</h2>
             
-            <form class="invite" action="/me/editgroup/{{group.id}}/%2Fme%2Fgroup%2F{{group.id}}" method="POST">
+            <form class="invite" onsubmit="return validate_form(this)"  action="/me/editgroup/{{group.id}}/%2Fme%2Fgroup%2F{{group.id}}" method="POST">
                 <label for="list-create-name"><strong>Group name</strong></label>
                 <input type="text" value="{{group_name}}" placeholder="eg. Programming" id="list-create-name" name="groupname">
                 

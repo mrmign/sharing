@@ -30,6 +30,7 @@ class BaseHandler(tornado.web.RequestHandler):
             self.previous = "/"
 
         # load more changes the previous uri, it will cause like handler not working
-        if self.request.uri != "/loadmore":
-            self.set_secure_cookie("common_previous", str(
+        if self.request.uri == "/loadmore" or self.request.uri.find("extention"):
+            return
+        self.set_secure_cookie("common_previous", str(
                         url_escape(self.request.uri)))

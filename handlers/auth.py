@@ -62,3 +62,23 @@ class LogoutHandler(BaseHandler):
         self.clear_cookie("previous")
         self.clear_cookie("common_previous")
         self.redirect("/")
+
+
+class CancelHandler(BaseHandler):
+    def get(self):
+        user = self.db.get(User, self.current_user.id)
+        for group in user.groups:
+            for link in group.links:
+                for comment in link.comments:
+                    self.db.remove(comment)
+                for like in link.likes:
+                    self.db.remove(like)
+                self.db.remove(link)
+            self.db.remove(group)
+        for follow_user in followings:
+            self.db.remove(follow_user)
+        for follow_group in following_groups:
+            self.db.remove(follow_group)
+        self.db.remove(user)
+        self.db.commit()
+        self.redirect("/")

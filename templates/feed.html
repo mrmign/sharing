@@ -22,7 +22,7 @@
                     <div class="clip-content">
                         <ul class="clip-save" style="list-style:none">
                             <li class="btn-group">
-                                <a  title="+save" class="btn dropdown-toggle settings" data-toggle="dropdown" href="#">
+                                <a title="+save" class="btn dropdown-toggle settings" data-toggle="dropdown" href="#">
                                     <span><i class="icon icon-save"></i>save</span>
                                     <span class="caret">
 
@@ -85,7 +85,7 @@
                 {% end %}
             </ul>
 
-            {% if count_link == 10 %} 
+            {% if count_link == 10 %}
 
             <div style="display:block;margin:15px 10px;text-align:center;font-size:23px" id="load-more">
                 <a class="click-load-more" href="javascript:void(0);" style="color: #848484;" onclick="getmore();">Load more!</a>
@@ -94,7 +94,7 @@
 
 <script type="text/javascript">
 var fetch_url = "/loadmore";
-var next_page = 2; 
+var next_page = 2;
 function getmore(){
 $.post(fetch_url,
     {
@@ -105,7 +105,7 @@ $.post(fetch_url,
         if(200 == data.status_code)
         {
             $("#clip-list").append(data.ret);
-            next_page = next_page + 1;            
+            next_page = next_page + 1;
         }
         else if (202 == data.status_code)
         {
@@ -117,15 +117,15 @@ $.post(fetch_url,
             <div id="no-clips" style="display: none;">
                 <p>
                     <strong>Find clips to add to this list</strong>
-                    You can add links with extensions, bookmarklets and via email. 
+                    You can add links with extensions, bookmarklets and via email.
                     <a href="/tools/">View the tools</a>
                 </p>
                 <p class="no-collaborate">
-                    <strong>Collaborate with your team.</strong> 
+                    <strong>Collaborate with your team.</strong>
                     Invite people to this list and easily share useful links
                 </p>
                 <p class="no-public">
-                    <strong>Make your list public</strong>. 
+                    <strong>Make your list public</strong>.
                     Share the interesting things you find and save.
                 </p>
             </div>
