@@ -22,15 +22,19 @@ class BaseHandler(tornado.web.RequestHandler):
         return self.db.get(User, int(user_id))
 
     def initialize(self):
+
+        # load more changes the previous uri, it will cause like handler not working
+        # import pdb
+        # pdb.set_trace()
+        if self.request.uri.find("loadmore") == 1 or self.request.uri.find("extension") == 1:
+            return
         # print self.request.uri
+
         if self.get_secure_cookie("common_previous"):
             self.previous = url_unescape(
                 self.get_secure_cookie("common_previous"))
         else:
             self.previous = "/"
 
-        # load more changes the previous uri, it will cause like handler not working
-        if self.request.uri == "/loadmore" or self.request.uri.find("extention"):
-            return
         self.set_secure_cookie("common_previous", str(
                         url_escape(self.request.uri)))
