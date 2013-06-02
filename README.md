@@ -24,6 +24,7 @@ sudo apt-get install python-storm
 
 5. Install beautifulsoup
 >sudo easy_install beautifulsoup4
+
 ## Get the code
 
 `git clone https://github.com/mrmign/sharing.git`
@@ -33,7 +34,8 @@ sudo apt-get install python-storm
 * Modify the Database connection user and password.
 
 In `models.database.py` line 84.
-`_database = create_database("mysql://root:root@localhost:3306/share")` 
+`_database = create_database("mysql://root:root@localhost:3306/share")`  
+change user:password to your own.
 
 ## Usage
 
