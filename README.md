@@ -5,8 +5,6 @@ Share your RSS and Bookmarks together, and choose what others shared that attrac
 
 this is a wonderful platform.
 
-another line!
-
 ## Install
 ### Environment:
 
@@ -26,3 +24,18 @@ sudo apt-get install python-storm
 
 5. Install beautifulsoup
 >sudo easy_install beautifulsoup4
+## Get the code
+
+`git clone https://github.com/mrmign/sharing.git`
+
+## Configuration
+
+* Modify the Database connection user and password.
+
+In `models.database.py` line 84.
+`_database = create_database("mysql://root:root@localhost:3306/share")` 
+
+## Usage
+
+Run the app with the command `python app.py`.  The default port is 8000, 
+you can change the port with `python app.py 8080` or other ports.
