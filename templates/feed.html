@@ -43,7 +43,9 @@
                         <div class="clip-save-popup"></div>
                         <span class="clip-date"><i class="icon icon-date"></i> {{ link.updated }}</span>
 
-                        <a rel="nofollow" title="{{link.description}}" style="width:450px"class="clip-title" target="_blank" href="{{ link.url }}">{{ link.title }}</a>
+                        <a rel="nofollow" title="{{link.description}}" style="width:450px"class="clip-title" target="_blank" href="{{ link.url }}">
+                            <img src="{{static_url("images/link.jpg")}}" style="width:15px;height:15px" >
+                            {{ link.title }}</a>
 
                         <p class="domain">
                             <span>{{ link.url_domain }}</span>
