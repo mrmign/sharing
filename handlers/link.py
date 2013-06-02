@@ -1,3 +1,11 @@
+"""Classes related to link.
+
+1. Save a link from others'.
+2. Comment to a link.
+3. Add a new link.
+4. Like a link.
+"""
+
 # encoding=utf-8
 
 import tornado.web

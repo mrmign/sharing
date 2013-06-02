@@ -1,3 +1,6 @@
+"""Recommendation of pelple, group, links.
+"""
+
 # encoding=utf-8
 
 from storm.expr import (Desc, Asc, Select, Not)
@@ -13,6 +16,7 @@ class StaffPicksHandler(BaseHandler):
 
     @tornado.web.authenticated
     def get(self):
+        """Recommend the popular people """
         follower_id = Select(
             FollowingUser.follower_id, FollowingUser.user_id == self.current_user.id)
         staffs = self.db.find(User, Not(User.id.is_in(
@@ -38,6 +42,7 @@ class RecentLinksHandler(BaseHandler):
 
     @tornado.web.authenticated
     def get(self):
+        """Recommend the recent links"""
         group_id = Select(LinkGroup.id, (
             LinkGroup.user_id == self.current_user.id))
         links = self.db.find(Link, Not(Link.group_id.is_in(

@@ -1,3 +1,5 @@
+"""Auth class to register, login, logout and cancel user's account.
+"""
 # coding=utf-8
 
 import tornado.web
@@ -8,11 +10,13 @@ from models.database import User
 
 class LoginHandler(BaseHandler):
     def get(self):
+        """Return the login form"""
         # if self.current_user:
         #     print self.current_user.id, self.current_user.username
         self.render("login.html", login_msg=" ")
 
     def post(self):
+        """Get user's input info and validate the account"""
         username = self.get_argument('username')
         password = self.get_argument('password')
         user = self.db.find(
@@ -33,6 +37,7 @@ class SignupHandler(BaseHandler):
         self.render("signup.html", signup_msg="")
 
     def post(self):
+        """Register request, validate the unique user."""
         username = self.get_argument('username')
         email = self.get_argument("email")
         password = self.get_argument("password")
@@ -51,13 +56,15 @@ class SignupHandler(BaseHandler):
                 "login.html", login_msg="signup successfully,please login!")
         else:
             self.render(
-                "signup.html", signup_msg="your username or email has existed,please print again")
+                "signup.html", signup_msg="your username or email has existed,\
+                please print again")
 
 
 class LogoutHandler(BaseHandler):
 
     @tornado.web.authenticated
     def get(self):
+        """Clear all the cookies when the user logs out"""
         self.clear_cookie("share_user")
         self.clear_cookie("previous")
         self.clear_cookie("common_previous")
@@ -65,7 +72,10 @@ class LogoutHandler(BaseHandler):
 
 
 class CancelHandler(BaseHandler):
+    """Delete user's account forever."""
     def get(self):
+        """Delete all user's info, includes group, links, 
+        comments, likes, followings"""
         user = self.db.get(User, self.current_user.id)
         for group in user.groups:
             for link in group.links:

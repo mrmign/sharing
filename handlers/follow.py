@@ -1,3 +1,7 @@
+"""Classes of follow or unfollow other people and group.
+All the requests must have been authenticated.
+"""
+
 # coding=utf-8
 
 from storm.expr import (Desc, Asc, Select, Not)

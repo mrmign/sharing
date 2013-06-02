@@ -1,3 +1,10 @@
+"""BaseHandler for all the handlers. Defines functions
+that all the handlers may use.
+1. get the db connection
+2. get current user
+3. do initialization before handling the request.
+"""
+
 # coding=utf-8
 
 import logging
@@ -10,8 +17,10 @@ logger = logging.getLogger('share' + __name__)
 
 
 class BaseHandler(tornado.web.RequestHandler):
+    
     @property
     def db(self):
+        """Return db connection as a property."""
         return self.application.db
 
     def get_current_user(self):
@@ -20,8 +29,12 @@ class BaseHandler(tornado.web.RequestHandler):
         if not user_id:
             return None
         return self.db.get(User, int(user_id))
-
+           
     def initialize(self):
+        """Set the previous request uri, and update it.
+        if the request is from extension or loadmore request, 
+        it will do nothing.
+        """ 
 
         # load more changes the previous uri, it will cause like handler not working
         # import pdb

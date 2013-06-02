@@ -1,3 +1,5 @@
+"""Classes related the the user.
+"""
 # encoding=utf-8
 
 from storm.expr import (Desc, Asc, Select, Not)
@@ -11,6 +13,7 @@ from tornado.escape import url_escape
 
 class FeedHandler(BaseHandler):
     def get(self):
+        """Show the links of the peoples that I following."""
         follower_id = Select(FollowingUser.follower_id, (
             FollowingUser.user_id == self.current_user.id))
         group_id = Select(LinkGroup.id, (LinkGroup.user_id.is_in(follower_id)))
@@ -24,17 +27,20 @@ class MyLinksHandler(BaseHandler):
 
     @tornado.web.authenticated
     def get(self):
+        """Go to my own links page."""
         sub = Select(LinkGroup.id, (LinkGroup.user_id == self.current_user.id))
         links = self.db.find(Link, Link.group_id.is_in(
             sub)).order_by(Desc(Link.updated))
 
-        self.render("mylinks.html", links=links[:10], link_count=links.count(), user=self.current_user)
+        self.render("mylinks.html", links=links[:10], link_count=links.count(), 
+            user=self.current_user)
 
 
 class MeGroupHandler(BaseHandler):
 
     @tornado.web.authenticated
     def get(self, groupid):
+        """Go to my own group page."""
         group = self.db.get(LinkGroup, int(groupid))
         link_id = Select(Link.id, (Link.group_id == int(group.id)))
         links = self.db.find(Link, Link.id.is_in(
@@ -46,6 +52,7 @@ class MeGroupHandler(BaseHandler):
 class FollowingHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
+        """Redirect to the following page with groups data and user data."""
         follower_id = Select(FollowingUser.follower_id, (
             FollowingUser.user_id == self.current_user.id))
         users = self.db.find(User, User.id.is_in(follower_id))
@@ -59,6 +66,9 @@ class FollowingHandler(BaseHandler):
 class FollowerHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
+        """Redirect to the follower page, which are the peoples 
+        that following me.
+        """
         user_id = Select(FollowingUser.user_id, (
             FollowingUser.follower_id == self.current_user.id))
         users = self.db.find(User, User.id.is_in(user_id))
@@ -68,4 +78,5 @@ class FollowerHandler(BaseHandler):
 class MeHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
+        """Redirect to user page."""
         self.render("me.html", user=self.current_user)

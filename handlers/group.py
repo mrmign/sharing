@@ -1,3 +1,7 @@
+"""Classes related to group.
+Add, delete, edit group. 
+"""
+
 # coding:utf-8
 from storm.expr import (Desc, Asc, Select, Not)
 import tornado.web
@@ -23,14 +27,17 @@ class AddGroupHandler(BaseHandler):
 
     @tornado.web.authenticated
     def get(self):
+        """Return group form to fillin."""
         self.render("addgroup.html", user=self.current_user, newgroup_msg="")
 
     @tornado.web.authenticated
     def post(self):
+        """Add new group to database"""
         group_name = self.get_argument('groupname')
         group_description = self.get_argument('group_description', u'')
         group = self.db.find(
-            LinkGroup,LinkGroup.user_id==self.current_user.id,LinkGroup.group_name==group_name).one()
+            LinkGroup,LinkGroup.user_id==self.current_user.id,
+            LinkGroup.group_name==group_name).one()
         if not group:
             newgroup=LinkGroup()
             newgroup.user_id=self.current_user.id
@@ -51,6 +58,7 @@ class DeleteGroupHandler(BaseHandler):
 
     @tornado.web.authenticated
     def get(self, group_id):
+        """Delete the group, and comments and likes related to it."""
         link_id = Select(Link.id, (Link.group_id == int(group_id)))
         links = self.db.find(Link, Link.id.is_in(link_id))
         for link in links:            
@@ -68,6 +76,7 @@ class DeleteGroupHandler(BaseHandler):
 class EditGroupHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self, group_id, previous_page):
+        """Get group's info"""
         self.set_secure_cookie("previous", url_escape(previous_page))
         group = self.db.find(LinkGroup, LinkGroup.id == int(group_id)).one()
         self.render("editgroup.html", user=self.current_user,
@@ -75,6 +84,7 @@ class EditGroupHandler(BaseHandler):
 
     @tornado.web.authenticated
     def post(self, group_id, previous_page):
+        """Update group's info"""
         group_name = self.get_argument('groupname')
         group_description = self.get_argument('group_description', u'')
         group = self.db.find(LinkGroup,LinkGroup.id==int(group_id)).one()

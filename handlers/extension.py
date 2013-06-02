@@ -1,3 +1,12 @@
+"""Extension class for requests from chrome extension.
+
+Contents
+
+1. User's info
+2. User's groups
+3. Add user's new link
+"""
+
 # coding=utf-8
 
 import json
@@ -12,6 +21,7 @@ class UserDataHandler(BaseHandler):
 
 class UserGroupsHandler(BaseHandler):
     def get(self):
+        """Return user's groups as json format."""
         groups = []
         for group in self.current_user.groups:
             groups.append({"id":group.id,"group_name":group.group_name})
@@ -22,6 +32,9 @@ class UserGroupsHandler(BaseHandler):
 
 class ExtensionAddLinkHandler(BaseHandler):
     def post(self):
+        """Receive user's data from extension. If there is new group, create
+        new group firstly, then add link, else add link to group directly.
+        """
         # import pdb
         # pdb.set_trace()
         link = Link()

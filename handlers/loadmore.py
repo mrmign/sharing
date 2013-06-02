@@ -1,12 +1,8 @@
-# encoding=utf-8
+"""Loadmore class to load more links.
 
-import json
-from storm.expr import (Desc, Asc, Select, Not)
+According different request type, return 
+different links. The following is the type.
 
-from .base import BaseHandler
-from models.database import User, FollowingUser, LinkGroup, Link
-from settings import NUM_FEED, NUM_RECENT_LINKS
-"""
 request type     | identyfier
 feed             |     1
 mylink           |     2
@@ -17,9 +13,22 @@ OK                 200
 NO MORE            202
 """
 
+# encoding=utf-8
+
+import json
+from storm.expr import (Desc, Asc, Select, Not)
+
+from .base import BaseHandler
+from models.database import User, FollowingUser, LinkGroup, Link
+from settings import NUM_FEED, NUM_RECENT_LINKS
+
+
 
 class LoadMoreHandler(BaseHandler):
     def post(self):
+        """Get the request type, call different 
+        functions according to the identifier.
+        """
         request_type = self.get_argument("type")
         page = self.get_argument("page_num")
         if request_type == "1":
@@ -37,6 +46,7 @@ class LoadMoreHandler(BaseHandler):
         self.write(json.dumps(ret))
 
     def _get_more_feed(self, page):
+        """Get more links in the feed catagory."""
         follower_id = Select(FollowingUser.follower_id, (
             FollowingUser.user_id == self.current_user.id))
         group_id = Select(LinkGroup.id, (LinkGroup.user_id.is_in(follower_id)))
@@ -53,6 +63,7 @@ class LoadMoreHandler(BaseHandler):
             groups=self.current_user.groups, ret_count=links.count()), status_code
 
     def _get_more_mylink(self, page):
+        """Get more links of my own"""
         sub = Select(LinkGroup.id, (LinkGroup.user_id == self.current_user.id))
         links = self.db.find(Link, Link.group_id.is_in(
             sub)).order_by(Desc(Link.updated))
@@ -69,6 +80,7 @@ class LoadMoreHandler(BaseHandler):
             groups=mygroups, ret_count=links.count()), status_code
 
     def _get_more_recent_links(self, page):
+        """Get more recent links """
         group_id = Select(LinkGroup.id, (
             LinkGroup.user_id == self.current_user.id))
         links = self.db.find(Link, Not(Link.group_id.is_in(

@@ -1,3 +1,8 @@
+"""Upload class to deal with the bookmark file 
+uploaded by user, remove useless tag and add 
+links in the file to database link table.
+"""
+
 # encoding=utf-8
 import os
 import uuid
@@ -29,6 +34,9 @@ class UploadHandler(BaseHandler):
         self.redirect("/me/mylinks")
 
     def _parse_bookmark_file(self, body):
+        """Retidy the file first, then add each link item
+        to the database.
+        """
         imp = LinkGroup()
         imp.user_id = self.current_user.id
         imp.group_name = u"Imported Bookmarks"
@@ -54,5 +62,6 @@ class UploadHandler(BaseHandler):
             self.db.commit()
 
     def get_domain(self, url):
+        """Get the link url's domain"""
         o = urlparse(url)
         return o.netloc

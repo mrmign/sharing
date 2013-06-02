@@ -1,3 +1,6 @@
+"""User's homepage.
+"""
+
 # coding=utf-8
 from storm.expr import (Desc, Asc, Select, Not)
 from .base import BaseHandler

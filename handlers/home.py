@@ -1,3 +1,6 @@
+"""Classes related to the home page.
+"""
+
 # coding=utf-8
 from storm.expr import (Desc, Asc, Select, Not)
 from .base import BaseHandler
@@ -6,6 +9,7 @@ from models.database import LinkGroup, FollowingGroup, User
 
 class HomeHandler(BaseHandler):
     def get(self):
+        """Returns the groups that appears on the home page."""
         groups = self.db.find(LinkGroup, LinkGroup.private == 0).order_by(
             Desc(LinkGroup.follower_count))
         if self.current_user:
@@ -17,6 +21,7 @@ class HomeHandler(BaseHandler):
 
 class HomeRecentHandler(BaseHandler):
     def get(self):
+        """Return recent groups."""
         follow_groups = self.db.find(FollowingGroup).group_by(
             FollowingGroup.group_id).order_by(Desc(FollowingGroup.id))
         follow_ids = [g.group_id for g in follow_groups]

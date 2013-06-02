@@ -1,3 +1,10 @@
+"""User's profile.
+
+1. User's basic info
+2. Edit user's profile
+3. User's account setting.
+"""
+
 # encoding=utf-8
 from storm.expr import (Desc, Asc, Select, Not)
 import tornado.web
@@ -8,6 +15,7 @@ from models.database import User, FollowingUser, FollowingGroup
 
 class ProfileHandler(BaseHandler):
     def get(self):
+        """user's basic infomation"""
         follower_id = Select(FollowingUser.follower_id, (
             FollowingUser.user_id == self.current_user.id))
         followings = self.db.find(User, User.id.is_in(follower_id))
@@ -46,6 +54,7 @@ class SettingsProfileHandler(BaseHandler):
 
 
 class SettingsAccountHandler(BaseHandler):
+    """User's account setting operation."""
     def get(self):
         self.render("settings_account.html", user=self.current_user)
 
