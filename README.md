@@ -8,13 +8,19 @@ this is a wonderful platform.
 ## Install
 ### Environment:
 
+Linux, Python 2.7+, MySQL 5.5
+
+### Software needed
+
 1. Install tornado. 
 >sudo easy_install tornado'
 
 2. Install storm. 
 >sudo add-apt-repository ppa:storm/ppa
-sudo apt-get update
-sudo apt-get install python-storm 
+
+>sudo apt-get update
+
+>sudo apt-get install python-storm 
 
 3. Install mysql.
 >sudo apt-get install mysql-server
@@ -34,7 +40,9 @@ sudo apt-get install python-storm
 * Modify the Database connection user and password.
 
 In `models.database.py` line 84.
+
 `_database = create_database("mysql://root:root@localhost:3306/share")`  
+
 change user:password to your own.
 
 ## Usage
