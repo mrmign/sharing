@@ -13,31 +13,38 @@ Linux, Python 2.7+, MySQL 5.5
 ### Software needed
 
 1. Install tornado. 
->sudo easy_install tornado'
+
+    sudo easy_install tornado'
 
 2. Install storm. 
->* sudo add-apt-repository ppa:storm/ppa
->* sudo apt-get update
->* sudo apt-get install python-storm 
+
+    sudo add-apt-repository ppa:storm/ppa
+    sudo apt-get update
+    sudo apt-get install python-storm 
 
 3. Install mysql.
->sudo apt-get install mysql-server
+
+    sudo apt-get install mysql-server
 
 4. Install python-mysql
->sudo apt-get install python-mysqldb
+
+    sudo apt-get install python-mysqldb
 
 5. Install beautifulsoup
->sudo easy_install beautifulsoup4
+
+    sudo easy_install beautifulsoup4
 
 ## Get the code
 
-`git clone https://github.com/mrmign/sharing.git`
+    git clone https://github.com/mrmign/sharing.git
 
 ## Configuration
 
 * Import database tables
 
-`$sh database/import.sh`. The default MySQL user and password are both root, 
+    $sh database/import.sh
+
+ The default MySQL user and password are both root, 
 if yours are not, please modify them in the `database/import.sh` file, then redo
 the command.
 
@@ -45,7 +52,7 @@ the command.
 
 In `models.database.py` line 84.
 
-`_database = create_database("mysql://root:root@localhost:3306/share")`  
+    _database = create_database("mysql://root:root@localhost:3306/share") 
 
 change user:password to your own.
 
