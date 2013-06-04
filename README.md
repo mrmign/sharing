@@ -35,6 +35,12 @@ Linux, Python 2.7+, MySQL 5.5
 
 ## Configuration
 
+* Import database tables
+
+`$sh database/import.sh`. The default MySQL user and password are both root, 
+if yours are not, please modify them in the `database/import.sh` file, then redo
+the command.
+
 * Modify the Database connection user and password.
 
 In `models.database.py` line 84.
