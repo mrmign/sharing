@@ -16,10 +16,9 @@ Linux, Python 2.7+, MySQL 5.5
 >sudo easy_install tornado'
 
 2. Install storm. 
->
-* sudo add-apt-repository ppa:storm/ppa
-* sudo apt-get update
-* sudo apt-get install python-storm 
+>* sudo add-apt-repository ppa:storm/ppa
+>* sudo apt-get update
+>* sudo apt-get install python-storm 
 
 3. Install mysql.
 >sudo apt-get install mysql-server
