@@ -14,7 +14,7 @@ Linux, Python 2.7+, MySQL 5.5
 
 1. Install tornado. 
 
-    sudo easy_install tornado'
+    sudo easy_install tornado
 
 2. Install storm. 
 
